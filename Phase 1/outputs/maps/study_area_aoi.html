@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_70a149707d90795c3ebca98e580dd611 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_70a149707d90795c3ebca98e580dd611" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_70a149707d90795c3ebca98e580dd611 = L.map(
+                "map_70a149707d90795c3ebca98e580dd611",
+                {
+                    center: [10.075, 76.35],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8f5f7d3784626230aa3fbc77f7ea4bef = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8f5f7d3784626230aa3fbc77f7ea4bef.addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+        function geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_styler(feature) {
+            switch(feature.properties.id) {
+                default:
+                    return {"color": "#d90429", "fillColor": "#d90429", "fillOpacity": 0.05, "weight": 3};
+            }
+        }
+
+        function geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_2602e7545757c84fdbcc9eb9af6d5ea3 = L.geoJson(null, {
+                onEachFeature: geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_onEachFeature,
+            
+                style: geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_styler,
+            ...{
+}
+        });
+
+        function geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_add (data) {
+            geo_json_2602e7545757c84fdbcc9eb9af6d5ea3
+                .addData(data);
+        }
+            geo_json_2602e7545757c84fdbcc9eb9af6d5ea3_add({"crs": {"properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}, "type": "name"}, "features": [{"geometry": {"coordinates": [[[76.15, 9.9], [76.55, 9.9], [76.55, 10.25], [76.15, 10.25], [76.15, 9.9]]], "type": "Polygon"}, "properties": {"area_sqkm": 1696.64, "bbox_wgs84": [76.15, 9.9, 76.55, 10.25], "district_primary": "Ernakulam", "flood_event_validated": "2018 Kerala Monsoon Flood (August 2018)", "id": "AOI_PERIYAR_LOWER_01", "key_towns": ["Aluva", "Kochi (North)", "Kalamassery", "Paravur", "Perumbavoor", "Eloor", "Nedumbassery (COK)"], "name": "Lower Periyar \u0026 Aluva-Kochi Urban Corridor Sub-Basin", "river_basin": "Periyar River Basin", "state": "Kerala"}, "type": "Feature"}], "name": "Periyar_Lower_Basin_AOI", "type": "FeatureCollection"});
+
+        
+    
+            geo_json_2602e7545757c84fdbcc9eb9af6d5ea3.addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var marker_3afcbd168f4cf8ffb04a5012e93acd78 = L.marker(
+                [10.1076, 76.3516],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_af7b88147fb9918b5be67af5b609aab8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_756a84e6c48980080b016c0931e49e6f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a04d34f3b4bd5be073c003263f093cf2 = $(`<div id="html_a04d34f3b4bd5be073c003263f093cf2" style="width: 100.0%; height: 100.0%;"><b>Aluva Town</b><br>Core Flood Zone</div>`)[0];
+                popup_756a84e6c48980080b016c0931e49e6f.setContent(html_a04d34f3b4bd5be073c003263f093cf2);
+            
+        
+
+        marker_3afcbd168f4cf8ffb04a5012e93acd78.bindPopup(popup_756a84e6c48980080b016c0931e49e6f)
+        ;
+
+        
+    
+    
+            marker_3afcbd168f4cf8ffb04a5012e93acd78.bindTooltip(
+                `<div>
+                     Aluva Town
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3afcbd168f4cf8ffb04a5012e93acd78.setIcon(icon_af7b88147fb9918b5be67af5b609aab8);
+            
+    
+            var marker_324c63833ea363806aa3c4d66f39f63f = L.marker(
+                [10.0528, 76.3264],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_4754631ae38a4069e245eddc44cf55f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f4fda7be81b46baa4e16b0f86ba2a047 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e6b89b0557932d0278312545a602128 = $(`<div id="html_6e6b89b0557932d0278312545a602128" style="width: 100.0%; height: 100.0%;"><b>Kalamassery</b><br>Industrial Hub</div>`)[0];
+                popup_f4fda7be81b46baa4e16b0f86ba2a047.setContent(html_6e6b89b0557932d0278312545a602128);
+            
+        
+
+        marker_324c63833ea363806aa3c4d66f39f63f.bindPopup(popup_f4fda7be81b46baa4e16b0f86ba2a047)
+        ;
+
+        
+    
+    
+            marker_324c63833ea363806aa3c4d66f39f63f.bindTooltip(
+                `<div>
+                     Kalamassery
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_324c63833ea363806aa3c4d66f39f63f.setIcon(icon_4754631ae38a4069e245eddc44cf55f3);
+            
+    
+            var marker_cb1d9865af41ef0012d4d170a5329005 = L.marker(
+                [10.0245, 76.3078],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_c834c53a73d4cd8399a9dd2024a67899 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_06b2a6e92a407f441f137f2e209a61de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_97ce21ba1543635a017d381b12dabedf = $(`<div id="html_97ce21ba1543635a017d381b12dabedf" style="width: 100.0%; height: 100.0%;"><b>North Kochi</b><br>Urban Commercial Zone</div>`)[0];
+                popup_06b2a6e92a407f441f137f2e209a61de.setContent(html_97ce21ba1543635a017d381b12dabedf);
+            
+        
+
+        marker_cb1d9865af41ef0012d4d170a5329005.bindPopup(popup_06b2a6e92a407f441f137f2e209a61de)
+        ;
+
+        
+    
+    
+            marker_cb1d9865af41ef0012d4d170a5329005.bindTooltip(
+                `<div>
+                     North Kochi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cb1d9865af41ef0012d4d170a5329005.setIcon(icon_c834c53a73d4cd8399a9dd2024a67899);
+            
+    
+            var marker_10a5e58622b52cf01db23297f1a150c9 = L.marker(
+                [10.1449, 76.23],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_b631acfe92c460e9522336c802657b82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bca8ae95a558cbcebef702f44a22818b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ba6b348c1415e044988758ab903a5f72 = $(`<div id="html_ba6b348c1415e044988758ab903a5f72" style="width: 100.0%; height: 100.0%;"><b>Paravur</b><br>Coastal Lowland</div>`)[0];
+                popup_bca8ae95a558cbcebef702f44a22818b.setContent(html_ba6b348c1415e044988758ab903a5f72);
+            
+        
+
+        marker_10a5e58622b52cf01db23297f1a150c9.bindPopup(popup_bca8ae95a558cbcebef702f44a22818b)
+        ;
+
+        
+    
+    
+            marker_10a5e58622b52cf01db23297f1a150c9.bindTooltip(
+                `<div>
+                     Paravur
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_10a5e58622b52cf01db23297f1a150c9.setIcon(icon_b631acfe92c460e9522336c802657b82);
+            
+    
+            var marker_94f48e3fffb981ff5ab6d26fdfce837f = L.marker(
+                [10.1147, 76.4735],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_7eb3b83a0894b27ca429fd00e529ffd6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f93aa9ff35d78c571b60e04a8f47bc4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_855b88bb7e31752ac172a68de9cac620 = $(`<div id="html_855b88bb7e31752ac172a68de9cac620" style="width: 100.0%; height: 100.0%;"><b>Perumbavoor</b><br>Upstream Basin</div>`)[0];
+                popup_9f93aa9ff35d78c571b60e04a8f47bc4.setContent(html_855b88bb7e31752ac172a68de9cac620);
+            
+        
+
+        marker_94f48e3fffb981ff5ab6d26fdfce837f.bindPopup(popup_9f93aa9ff35d78c571b60e04a8f47bc4)
+        ;
+
+        
+    
+    
+            marker_94f48e3fffb981ff5ab6d26fdfce837f.bindTooltip(
+                `<div>
+                     Perumbavoor
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_94f48e3fffb981ff5ab6d26fdfce837f.setIcon(icon_7eb3b83a0894b27ca429fd00e529ffd6);
+            
+    
+            var marker_207a2bf3c35b6453f2e20c01e2135288 = L.marker(
+                [10.0805, 76.299],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_6e27d7f6e7ea430dc3d38306f347b8f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ea4a9f23883d9d054cacf521582a1d78 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9cd9a58f0713019499ce35c1f5dd3ce1 = $(`<div id="html_9cd9a58f0713019499ce35c1f5dd3ce1" style="width: 100.0%; height: 100.0%;"><b>Eloor Island</b><br>Industrial Belt</div>`)[0];
+                popup_ea4a9f23883d9d054cacf521582a1d78.setContent(html_9cd9a58f0713019499ce35c1f5dd3ce1);
+            
+        
+
+        marker_207a2bf3c35b6453f2e20c01e2135288.bindPopup(popup_ea4a9f23883d9d054cacf521582a1d78)
+        ;
+
+        
+    
+    
+            marker_207a2bf3c35b6453f2e20c01e2135288.bindTooltip(
+                `<div>
+                     Eloor Island
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_207a2bf3c35b6453f2e20c01e2135288.setIcon(icon_6e27d7f6e7ea430dc3d38306f347b8f1);
+            
+    
+            var marker_358eb55de31bf7e7c4bcd3db4c2ea69d = L.marker(
+                [10.152, 76.4019],
+                {
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+        
+    
+            var icon_d73f342c4fb13f6d328081cf4e2ba1bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d0b3f7aa50f21b2d317299a85f9938fc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_339a763cce7ae7edfae9d6856ad14a25 = $(`<div id="html_339a763cce7ae7edfae9d6856ad14a25" style="width: 100.0%; height: 100.0%;"><b>Cochin Airport (COK)</b><br>Airport Inundation Zone</div>`)[0];
+                popup_d0b3f7aa50f21b2d317299a85f9938fc.setContent(html_339a763cce7ae7edfae9d6856ad14a25);
+            
+        
+
+        marker_358eb55de31bf7e7c4bcd3db4c2ea69d.bindPopup(popup_d0b3f7aa50f21b2d317299a85f9938fc)
+        ;
+
+        
+    
+    
+            marker_358eb55de31bf7e7c4bcd3db4c2ea69d.bindTooltip(
+                `<div>
+                     Cochin Airport (COK)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_358eb55de31bf7e7c4bcd3db4c2ea69d.setIcon(icon_d73f342c4fb13f6d328081cf4e2ba1bc);
+            
+    
+            var layer_control_7f5adcb65f1c0e8861ab1f84d2a7cc77_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_8f5f7d3784626230aa3fbc77f7ea4bef,
+                },
+                overlays :  {
+                    "Master AOI Boundary" : geo_json_2602e7545757c84fdbcc9eb9af6d5ea3,
+                },
+            };
+            let layer_control_7f5adcb65f1c0e8861ab1f84d2a7cc77 = L.control.layers(
+                layer_control_7f5adcb65f1c0e8861ab1f84d2a7cc77_layers.base_layers,
+                layer_control_7f5adcb65f1c0e8861ab1f84d2a7cc77_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_70a149707d90795c3ebca98e580dd611);
+
+        
+</script>
+</html>
