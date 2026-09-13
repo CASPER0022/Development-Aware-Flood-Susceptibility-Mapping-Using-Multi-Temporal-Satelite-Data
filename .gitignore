@@ -1,0 +1,22 @@
+# Python Virtual Environments
+venv/
+.venv/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Satellite Rasters & Cached Numpy Data
+Phase 1/data/raw/
+Phase 1/data/processed/
+Phase 1/data/validation/
+Phase 2/data/raw/
+Phase 2/data/processed/
+
+# Logs & OS System Files
+*.log
+.DS_Store
+.idea/
+.vscode/
