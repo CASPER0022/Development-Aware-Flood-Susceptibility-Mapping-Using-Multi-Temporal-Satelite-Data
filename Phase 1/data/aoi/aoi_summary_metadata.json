@@ -1,0 +1,102 @@
+{
+  "task": "Task 1 \u2014 Master AOI Boundary & ESA WorldCover Masked Urban Flood Verification",
+  "status": "COMPLETED",
+  "aoi_name": "Lower Periyar & Aluva-Kochi Urban Corridor Sub-Basin",
+  "spatial_resolution": "3,800 x 2,900 grid (~10m/pixel native res)",
+  "bounding_box_wgs84": {
+    "lon_min": 76.15,
+    "lat_min": 9.9,
+    "lon_max": 76.55,
+    "lat_max": 10.25
+  },
+  "area_sqkm": 1696.64,
+  "esa_worldcover_2021": {
+    "dataset": "ESA WorldCover 10m v200",
+    "builtup_class_50_sqkm": 190.47,
+    "builtup_class_50_percent": 11.23
+  },
+  "flood_verification": {
+    "method": "ESA WorldCover 10m Masked Dual-Criterion SAR Urban Flood Detection + 3x3 Speckle Filtering",
+    "pre_monsoon_dry_baseline": {
+      "date": "2018-03-30",
+      "orbit_pass": "Descending (00:40 UTC)",
+      "scene_id": "S1A_IW_GRDH_1SDV_20180330T004036",
+      "permanent_water_sqkm": 290.34,
+      "permanent_water_percent": 17.11
+    },
+    "peak_flood_target": {
+      "date": "2018-08-21",
+      "orbit_pass": "Descending (00:40 UTC)",
+      "scene_id": "S1A_IW_GRDH_1SDV_20180821T004044"
+    },
+    "open_land_specular_inundation": {
+      "threshold": "Non-builtup, Delta dB <= -3.0 dB and Flood dB <= -15.0 dB",
+      "sqkm": 28.77,
+      "percent": 1.7
+    },
+    "urban_double_bounce_inundation": {
+      "threshold": "ESA WorldCover Class 50 (Built-Up) AND Delta dB >= +2.0 dB surge AND Dry dB >= -14.0 dB",
+      "sqkm": 30.85,
+      "percent": 1.82,
+      "key_captured_hotspots": [
+        "Cochin International Airport (COK)",
+        "Aluva Town Center",
+        "Kalamassery Industrial Belt",
+        "Eloor Island"
+      ]
+    },
+    "total_event_inundation_sqkm": 59.62,
+    "total_event_inundation_percent": 3.51,
+    "urban_flood_percent_of_builtup": 16.2,
+    "speckle_filtering": "3x3 Spatial Median Filter on dry/flood SAR backscatter rasters",
+    "cross_image_registration": {
+      "method": "skimage.registration.phase_cross_correlation (upsample_factor=20) on 3x3-median-filtered DN intensity, both scenes independently GCP-warped onto the common AOI grid beforehand",
+      "detected_shift_row_col_px": [
+        0.3,
+        0.1
+      ],
+      "shift_magnitude_px": 0.3162,
+      "shift_magnitude_m_approx": 3.16,
+      "correlation_error": 0.270676,
+      "correction_applied": true,
+      "correction_method": "scipy.ndimage.shift(order=3, mode='nearest') applied to flood scene DN",
+      "per_class_delta_db_diagnostic": {
+        "note": "Measured medians, computed and printed by this run -- not asserted. shift_effect_db is registered-minus-unregistered per class; a small shift_effect relative to the registered median is evidence (not proof) that the registration correction is not what's driving the residual positive delta_db.",
+        "unregistered_median_db": {
+          "Tree Cover (10)": 1.1587,
+          "Built-up (50)": 1.4203,
+          "Permanent Water (80)": 0.5776,
+          "Cropland (40)": 0.9872
+        },
+        "registered_median_db": {
+          "Tree Cover (10)": 1.158,
+          "Built-up (50)": 1.4212,
+          "Permanent Water (80)": 0.5816,
+          "Cropland (40)": 0.9873
+        }
+      },
+      "radiometric_normalization": {
+        "method": "Pseudo-Invariant Feature (PIF) bias removal using WorldCover class 10 (Tree Cover) as the stable reference target",
+        "pif_median_bias_db": 1.158,
+        "caveat": "Tree-cover backscatter between a dry-season date and peak-monsoon date can itself shift due to canopy water content, not just calibration drift -- this PIF choice is not validated against that alternative. Treat pif_bias_db as a rough correction.",
+        "note": "Subtracted from delta_db AOI-wide before thresholding. See per_class_delta_db_diagnostic for the measured evidence this is based on."
+      }
+    },
+    "calibration_status": "Unified Linear Approximation Offset (sigma0_dB = 20*log10(DN) - 55.0 dB). SNAP/GEE XML calibration LUT vectors and Radiometric Terrain Correction (RTC) applied in Phase 2."
+  },
+  "files_generated": [
+    "data/aoi/periyar_study_area.geojson",
+    "data/aoi/periyar_study_area.shp",
+    "data/raw/esa_worldcover_2021_aoi.tif",
+    "data/raw/builtup_mask_10m.npy",
+    "data/raw/sentinel1_2018_dry_db.npy",
+    "data/raw/sentinel1_2018_flood_db.npy",
+    "data/raw/sentinel1_2018_delta_db.npy",
+    "data/raw/perm_water_mask_2018.npy",
+    "data/raw/open_flood_mask_2018.npy",
+    "data/raw/urban_double_bounce_mask_2018.npy",
+    "data/raw/new_flood_inundation_mask_2018.npy",
+    "data/raw/registration_diagnostics.json",
+    "outputs/maps/study_area_aoi.png"
+  ]
+}
