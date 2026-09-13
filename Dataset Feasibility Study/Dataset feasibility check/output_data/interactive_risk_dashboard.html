@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Town Planning CV Risk Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #header { background: #1e293b; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
+        #header h1 { margin: 0; font-size: 20px; }
+        #stats { font-size: 14px; background: #334155; padding: 6px 14px; border-radius: 6px; }
+        #map { height: calc(100vh - 65px); width: 100%; }
+        .legend { background: white; padding: 12px; line-height: 1.5; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .legend i { width: 14px; height: 14px; float: left; margin-right: 8px; opacity: 0.9; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>🛰️ AI-Driven Town Planning Risk & Flood Hazard System</h1>
+        <div id="stats"><b>Region:</b> Aluva / North Kochi (Periyar Basin, Kerala) | <b>High-Risk Zones Flagged:</b> 112</div>
+    </div>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([10.100000000000001, 76.35], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors | Sentinel-2 STAC | Copernicus DEM'
+        }).addTo(map);
+
+        var bounds = [[10.05, 76.3], [10.15, 76.4]];
+        L.rectangle(bounds, {color: "#3b82f6", weight: 2, fill: false}).addTo(map);
+
+        
+    L.circleMarker([10.11610, 76.34915], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12966, 76.31864], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.4 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12627, 76.31017], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13644, 76.34407], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.1 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13305, 76.32542], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.6 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 278 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12627, 76.31864], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.1 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12627, 76.31525], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12288, 76.30847], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.8 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 35 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.09237, 76.32881], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.09068, 76.33220], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13475, 76.32542], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.6 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 301 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.08559, 76.35593], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.10763, 76.33220], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.4 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.14153, 76.32712], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.8 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 350 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12797, 76.31356], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.9 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12966, 76.31356], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.2 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12966, 76.30847], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.2 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 58 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13136, 76.34576], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.3 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13814, 76.30508], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.8 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.09576, 76.32881], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.9 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12797, 76.31186], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12797, 76.31525], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.3 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12119, 76.31356], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 7.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.09576, 76.33390], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.9 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13814, 76.32712], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.3 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 347 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.11441, 76.34915], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 3.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.09407, 76.34407], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 8.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.14153, 76.34237], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.6 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 92 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13136, 76.32203], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.6 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13983, 76.34407], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 3.4 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12288, 76.31186], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12458, 76.31356], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.0 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13475, 76.34407], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 4.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.12627, 76.31695], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 5.9 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+    L.circleMarker([10.13983, 76.30508], {
+        color: '#c0392b',
+        fillColor: '#e74c3c',
+        fillOpacity: 0.85,
+        radius: 8
+    }).addTo(map).bindPopup(`
+        <div style="font-family: sans-serif; font-size: 13px;">
+            <b style="color: #c0392b;">⚠️ HIGH FLOOD RISK ZONE</b><br>
+            <b>Town:</b> Aluva / North Kochi (Periyar Basin, Kerala)<br>
+            <b>Elevation:</b> 6.5 m ASL (Copernicus DEM)<br>
+            <b>Distance to River:</b> 0 m (OSM Buffer)<br>
+            <b>Classification:</b> Unplanned Inundation Hazard<br>
+            <b>Recommendation:</b> Require drainage audit before approval.
+        </div>
+    `);
+    
+
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML += '<b>Urban Flood Risk Legend</b><br>';
+            div.innerHTML += '<i style="background: #e74c3c"></i> High Hazard (Sink + River Buffer)<br>';
+            div.innerHTML += '<i style="background: #f1c40f"></i> Moderate Risk (Watch Zone)<br>';
+            div.innerHTML += '<i style="background: #2ecc71"></i> Safe / Low Hazard<br>';
+            return div;
+        };
+        legend.addTo(map);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProFlood-Kerala Defence Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root{
+    --bg:#f2f5f8;
+    --surface:#ffffff;
+    --surface-2:#eaeff3;
+    --ink:#16212b;
+    --ink-soft:#48596a;
+    --line:#d3dde4;
+    --hydro:#1a6ea3;
+    --hydro-bright:#2b9fd6;
+    --amber:#b9781c;
+    --amber-bg:#f6ecdd;
+    --risk:#ab392c;
+    --risk-bg:#f6e5e2;
+    --safe:#26714a;
+    --safe-bg:#e2efe8;
+    --spectrum:linear-gradient(90deg,#2b5fa3 0%,#2b9fd6 30%,#e8c34a 58%,#d98a2b 78%,#b23b2e 100%);
+    --shadow:0 1px 2px rgba(20,40,55,.06),0 6px 20px rgba(20,40,55,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d151d;
+      --surface:#15212c;
+      --surface-2:#1b2a37;
+      --ink:#e7edf2;
+      --ink-soft:#9db0bf;
+      --line:#2a3b4a;
+      --hydro:#54b2e6;
+      --hydro-bright:#82cbf1;
+      --amber:#e0a445;
+      --amber-bg:#2c2416;
+      --risk:#e9796b;
+      --risk-bg:#331f1c;
+      --safe:#5cc08e;
+      --safe-bg:#152f20;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 26px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d151d;
+    --surface:#15212c;
+    --surface-2:#1b2a37;
+    --ink:#e7edf2;
+    --ink-soft:#9db0bf;
+    --line:#2a3b4a;
+    --hydro:#54b2e6;
+    --hydro-bright:#82cbf1;
+    --amber:#e0a445;
+    --amber-bg:#2c2416;
+    --risk:#e9796b;
+    --risk-bg:#331f1c;
+    --safe:#5cc08e;
+    --safe-bg:#152f20;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 26px rgba(0,0,0,.28);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Spectral",Georgia,"Times New Roman",serif;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.k-label,nav,th,.tag,.callout-h{font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  code,kbd,.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+  .col{max-width:720px;margin-left:auto;margin-right:auto}
+  main section{padding:38px 0 8px}
+  main section + section{border-top:1px solid var(--line)}
+
+  /* ---------- top bar ---------- */
+  header.top{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:saturate(1.4) blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .top-inner{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:9px 22px;max-width:940px;margin:0 auto}
+  .brandmark{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Sans";font-weight:600;font-size:14px;letter-spacing:.02em;color:var(--ink)}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:var(--spectrum);flex:none}
+  nav.toc{display:flex;gap:2px;flex-wrap:wrap;font-size:12.5px}
+  nav.toc a{
+    color:var(--ink-soft);text-decoration:none;padding:5px 8px;border-radius:6px;
+    font-weight:500;white-space:nowrap;
+  }
+  nav.toc a:hover{color:var(--ink);background:var(--surface-2)}
+  nav.toc a.active{color:var(--hydro);background:var(--surface-2)}
+  .theme-btn{
+    flex:none;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    font-family:"IBM Plex Sans";font-size:12px;font-weight:600;border-radius:7px;padding:6px 10px;cursor:pointer;
+  }
+  .theme-btn:hover{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--hydro);outline-offset:2px;border-radius:4px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:52px 0 34px}
+  .hero .spectrum-rule{height:5px;border-radius:3px;background:var(--spectrum);margin-bottom:26px;max-width:720px;margin-left:auto;margin-right:auto}
+  .eyebrow{font-family:"IBM Plex Sans";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--hydro);margin:0 0 12px}
+  h1{font-size:38px;line-height:1.12;font-weight:700;margin:0 0 16px;text-wrap:balance;letter-spacing:-.015em}
+  .hero .lede{font-size:20px;color:var(--ink);margin:0 0 22px}
+  .hero .lede b{color:var(--ink)}
+  .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:26px}
+  .meta-grid div{background:var(--surface);padding:12px 14px}
+  .meta-grid .k-label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;font-weight:600}
+  .meta-grid .v{font-family:"IBM Plex Sans";font-weight:600;font-size:14px}
+
+  h2{font-size:15px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--hydro);margin:0 0 6px}
+  .section-title{font-size:29px;font-weight:700;line-height:1.2;margin:2px 0 18px;letter-spacing:-.01em;text-wrap:balance}
+  h3{font-size:20px;font-weight:600;margin:30px 0 8px;letter-spacing:-.005em}
+  h4{font-size:15px;font-weight:600;margin:20px 0 6px}
+  p{margin:0 0 15px}
+  strong{font-weight:600}
+  a{color:var(--hydro);text-underline-offset:2px}
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .muted{color:var(--ink-soft)}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:0 0 7px}
+  hr.soft{border:0;border-top:1px solid var(--line);margin:26px 0}
+
+  /* ---------- callouts ---------- */
+  .callout{border:1px solid var(--line);border-left:4px solid var(--hydro);background:var(--surface);border-radius:8px;padding:14px 16px;margin:18px 0;box-shadow:var(--shadow)}
+  .callout .callout-h{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:0 0 6px;color:var(--hydro)}
+  .callout p:last-child{margin-bottom:0}
+  .callout.say{border-left-color:var(--safe);background:var(--safe-bg)}
+  .callout.say .callout-h{color:var(--safe)}
+  .callout.trap{border-left-color:var(--risk);background:var(--risk-bg)}
+  .callout.trap .callout-h{color:var(--risk)}
+  .callout.key{border-left-color:var(--amber);background:var(--amber-bg)}
+  .callout.key .callout-h{color:var(--amber)}
+
+  /* ---------- Q&A ---------- */
+  .qa{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface)}
+  .qa .q{font-family:"IBM Plex Sans";font-weight:600;font-size:15.5px;padding:13px 16px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .qa .q::before{content:"Q";display:inline-block;font-weight:700;color:var(--hydro);margin-right:9px}
+  .qa .a{padding:13px 16px}
+  .qa .a::before{content:"A";display:inline-block;font-family:"IBM Plex Sans";font-weight:700;color:var(--safe);margin-right:9px;float:left}
+  .qa .a > :first-child{margin-top:0}
+  .qa .a p:last-child{margin-bottom:0}
+
+  /* ---------- slide cards ---------- */
+  .slide{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:16px 0;box-shadow:var(--shadow);overflow:hidden}
+  .slide > .s-head{display:flex;gap:12px;align-items:baseline;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .slide .s-num{font-family:"IBM Plex Mono";font-size:12px;font-weight:500;color:#fff;background:var(--hydro);border-radius:5px;padding:3px 7px;flex:none}
+  .slide .s-title{font-family:"IBM Plex Sans";font-weight:600;font-size:16px}
+  .slide .s-body{padding:6px 16px 16px}
+  .slide .s-body h4{font-family:"IBM Plex Sans";font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);margin:16px 0 5px}
+  .slide .s-body p{margin:0 0 10px}
+
+  /* ---------- tables ---------- */
+  .tbl-scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:9px}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;font-family:"IBM Plex Sans"}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--surface-2);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+  tr:last-child td{border-bottom:0}
+  td.mono,th.mono{font-family:"IBM Plex Mono";font-size:13px}
+
+  .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.03em;padding:2px 7px;border-radius:5px;background:var(--surface-2);color:var(--ink-soft);border:1px solid var(--line)}
+  .tag.new{background:var(--amber-bg);color:var(--amber);border-color:transparent}
+  .tag.base{background:var(--surface-2);color:var(--hydro)}
+
+  code{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.86em}
+  .formula{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:"IBM Plex Mono";font-size:13.5px;line-height:1.7;overflow-x:auto;margin:14px 0}
+
+  .num-list{counter-reset:n;list-style:none;padding:0}
+  .num-list > li{counter-increment:n;position:relative;padding-left:40px;margin:0 0 14px}
+  .num-list > li::before{content:counter(n);position:absolute;left:0;top:1px;font-family:"IBM Plex Mono";font-size:12px;font-weight:500;color:#fff;background:var(--hydro);width:24px;height:24px;border-radius:6px;display:grid;place-items:center}
+
+  footer{padding:40px 0 60px;color:var(--ink-soft);font-size:14px;font-family:"IBM Plex Sans"}
+  footer .spectrum-rule{height:4px;border-radius:3px;background:var(--spectrum);margin-bottom:20px;max-width:720px;margin-left:auto;margin-right:auto}
+
+  @media (max-width:640px){
+    body{font-size:17px}
+    h1{font-size:30px}
+    .section-title{font-size:24px}
+    nav.toc{display:none}
+    .hero{padding:34px 0 26px}
+  }
+  @media print{
+    header.top{display:none}
+    .slide,.qa,.callout{box-shadow:none}
+    main section{padding:20px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brandmark"><span class="dot"></span> ProFlood-Kerala · Defence Brief</div>
+    <nav class="toc" id="toc" aria-label="Sections">
+      <a href="#pitch">Pitch</a>
+      <a href="#vocab">Vocabulary</a>
+      <a href="#slides">Slide&nbsp;walk-through</a>
+      <a href="#basepaper">Base&nbsp;paper</a>
+      <a href="#litreview">Literature</a>
+      <a href="#novelty">Novelty</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#datasets">Datasets</a>
+      <a href="#validation">Validation</a>
+      <a href="#experiment">Natural&nbsp;experiment</a>
+      <a href="#qbank">Question&nbsp;bank</a>
+      <a href="#limits">Limitations</a>
+      <a href="#traps">Traps</a>
+      <a href="#roles">Who&nbsp;answers</a>
+      <a href="#five">Five&nbsp;things</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">Theme</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero col">
+    <div class="spectrum-rule" role="presentation"></div>
+    <p class="eyebrow">Panel preparation · First review</p>
+    <h1>Development-Aware Flood Susceptibility Mapping — Defence Brief</h1>
+    <p class="lede">A plain-language companion to the presentation <b>“Development-Aware Flood Susceptibility Mapping Using Multi-Temporal Satellite Data.”</b> Read this and you should be able to explain every slide, defend the novelty, and answer a confusing question without contradicting a teammate.</p>
+    <p class="muted">This brief is written so that a reader who has never seen the project can follow it. The panel is grading the <b>presentation</b>, so this guide is organised around the 13 slides first, then arms you with the deeper answers behind them.</p>
+    <div class="meta-grid">
+      <div><span class="k-label">Project</span><span class="v">ProFlood-Kerala</span></div>
+      <div><span class="k-label">Study area</span><span class="v">Periyar basin, Kochi</span></div>
+      <div><span class="k-label">Base paper</span><span class="v">Mohamadiazar et&nbsp;al. 2024</span></div>
+      <div><span class="k-label">Team</span><span class="v">Team 67 · IIIT Kottayam</span></div>
+      <div><span class="k-label">Guide</span><span class="v">Dr. Rosebell Paul</span></div>
+      <div><span class="k-label">Members</span><span class="v">Albin · Niketh · Jatin · Ranjith</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================================ PITCH -->
+<section id="pitch">
+  <div class="wrap col">
+    <h2>Section 1</h2>
+    <p class="section-title">The pitch — three lengths, memorise all three</p>
+
+    <h3>The one sentence</h3>
+    <p class="lead">We predict how flood-prone a piece of land will be <em>after</em> it is built on — not just how it looks today — and we prove it against places in Kochi that were empty before the 2018 floods and have been built on since.</p>
+
+    <h3>The 30 seconds</h3>
+    <p>Every flood susceptibility map in our field is built the same way: take the land as it looks now, take where flooding was seen before, and train a model to connect the two. That answers <em>“which existing neighbourhoods flood?”</em> It does <b>not</b> answer the question a family or a planner actually has: <em>“if I build here, what happens?”</em> When you build, the plot stops absorbing water and starts shedding it, and the water it sheds lands on the plots downhill. We add three things to a standard machine-learning flood model so it can answer that: a feature that follows water downhill to measure how much paved surface drains into each spot (<span class="mono">UICA</span>), a second prediction for each plot “as if built”, and an honest test using real development that already happened.</p>
+
+    <h3>The paragraph (for the viva)</h3>
+    <div class="callout key">
+      <p class="callout-h">Say this verbatim if asked “summarise your project”</p>
+      <p>“We build a flood-susceptibility mapping framework for the Kochi / Periyar basin that answers a question existing maps cannot: what happens to a plot of land once it is built on. Existing models — including the published Kerala susceptibility map — read land cover as it stands today, treat every pixel as independent, assume anywhere flooding was not observed is safe, and validate on randomly split data that leaks neighbouring pixels between training and testing. We change all four. We route sealed surface downhill to compute how much runoff drains into each cell (UICA) and how that has grown with new construction (ΔUICA); we train under a positive-unlabeled framing that never assumes an unflooded cell is safe; we evaluate with spatial block cross-validation and a temporal hold-out across the 2018, 2019 and 2021 events, reporting the inflated conventional number alongside so the difference is visible; and we predict two susceptibility values per cell — as it is, and as it would be once developed — validating the difference against plots that were empty before 2018 and built on since. All data is free and public, and three of our four reference papers name this direction as their own stated future work.”</p>
+    </div>
+
+    <div class="callout">
+      <p class="callout-h">Why the panel should care</p>
+      <p>Kerala lost 400+ lives and evacuated 1.2&nbsp;million people in and after the 2018 floods. Kochi keeps building on low-lying land in the Periyar basin. A map that only shows <em>past</em> flooding tells that construction nothing. Ours is meant to be consulted <em>before</em> the concrete is poured.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ VOCAB -->
+<section id="vocab">
+  <div class="wrap col">
+    <h2>Section 2</h2>
+    <p class="section-title">Vocabulary you must get right</p>
+    <p>Two members using different words for the same thing is what makes a panel suspicious. Lock these down.</p>
+
+    <h3>The words that get confused</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Term</th><th>What we mean by it</th><th>Do not say…</th></tr></thead>
+        <tbody>
+          <tr><td><b>Flood susceptibility</b></td><td>The <em>relative</em> tendency of a place to flood, based on its terrain and land-cover conditions. A standing map, not tied to any one storm. <b>This is our word — use it.</b></td><td>“flood prediction” / “flood forecast” — that implies we predict a specific future event with a probability. We do not.</td></tr>
+          <tr><td><b>Flood hazard</b></td><td>The physical flood itself — depth, extent, how often. We do not model this directly.</td><td>using it interchangeably with susceptibility</td></tr>
+          <tr><td><b>Flood vulnerability</b></td><td>Strictly: exposure + sensitivity + coping capacity of people and assets. We model only the <em>terrain / land-cover</em> side and say so. The deck title uses “susceptibility” — keep to that.</td><td>claiming we do a full vulnerability assessment of people</td></tr>
+          <tr><td><b>Flood risk</b></td><td>Hazard × exposure × vulnerability, usually with people and money attached. Bigger than our scope.</td><td>“we compute flood risk”</td></tr>
+          <tr><td><b>Development-aware / prospective</b></td><td>The model can answer for land <em>as it would be once built on</em>, not only as it is now. This is the core novelty.</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The acronyms — one line each</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Term</th><th>Plain meaning</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">FSM</td><td>Flood Susceptibility Mapping — the general research area.</td></tr>
+          <tr><td class="mono">SAR</td><td>Synthetic Aperture Radar. Sentinel-1 is a radar satellite. Radar sees through cloud and works at night — vital for monsoon Kerala. Good at spotting standing water.</td></tr>
+          <tr><td class="mono">Sentinel-1 / -2</td><td>Free ESA satellites. <b>S-1</b> = radar (flood water, cloud-proof). <b>S-2</b> = optical/colour + near-infrared (land cover, buildings, vegetation). We use both.</td></tr>
+          <tr><td class="mono">DEM</td><td>Digital Elevation Model — a grid of ground heights. Tells us what is low-lying.</td></tr>
+          <tr><td class="mono">FABDEM</td><td>A 30&nbsp;m DEM with tree canopy and buildings machine-learned <em>out</em>, leaving bare earth. We use it instead of SRTM because coconut canopy over low land in Kochi corrupts ordinary DEMs.</td></tr>
+          <tr><td class="mono">CHIRPS</td><td>A free 40-year daily rainfall dataset (~5&nbsp;km). We use it as a <em>long-run statistic</em> (how many days per year exceed 10&nbsp;mm), not as a live storm input.</td></tr>
+          <tr><td class="mono">Otsu / Edge-Otsu</td><td>A standard automatic method to split a radar image into “water” and “not water” by picking the brightness cut-off. Builds our flood inventory.</td></tr>
+          <tr><td class="mono">Flood inventory</td><td>The map of where flooding actually happened, assembled from past events. It is the “answer key” the model learns from.</td></tr>
+          <tr><td class="mono">TWI</td><td>Topographic Wetness Index — a terrain formula for how much water tends to accumulate at a spot (flat + lots draining in = high).</td></tr>
+          <tr><td class="mono">HAND</td><td>Height Above Nearest Drainage — how high a cell sits above the stream it drains to. Low HAND = close to flooding. Strong predictor; none of our four papers uses it.</td></tr>
+          <tr><td class="mono">Flow accumulation</td><td>Following the downhill path of every cell and counting how many cells drain through each point. The basis of UICA.</td></tr>
+          <tr><td class="mono">UICA</td><td><b>Upslope Impervious Contributing Area.</b> Flow accumulation, but each upstream cell is weighted by how paved/sealed it is. In words: “how much paved surface sends its water down to this spot.” <b>Our feature — nobody else routes imperviousness downhill.</b></td></tr>
+          <tr><td class="mono">ΔUICA</td><td>The <em>change</em> in UICA between two years — the extra runoff loaded onto a cell purely because new construction appeared uphill.</td></tr>
+          <tr><td class="mono">Impervious surface</td><td>Paved or roofed ground that water cannot soak into — roads, roofs, yards, walls.</td></tr>
+          <tr><td class="mono">PU learning</td><td><b>Positive-Unlabeled learning.</b> We know where it <em>did</em> flood (positive). Everywhere else is “unlabeled”, not “safe” — radar misses flooding under trees and in cities, and satellites only pass every few days. PU learning handles this instead of pretending unflooded = safe.</td></tr>
+          <tr><td class="mono">Spatial block CV</td><td>Cross-validation where the test area is a whole sub-watershed kept geographically apart from training. Stops neighbouring pixels leaking between train and test.</td></tr>
+          <tr><td class="mono">Temporal hold-out</td><td>Train on the 2018 event, test on 2019 and 2021. Checks whether a model still works years after it was fitted.</td></tr>
+          <tr><td class="mono">Leak-free evaluation</td><td>Our umbrella term for spatial block CV + temporal hold-out, reported next to the ordinary random-split number so the inflation is visible.</td></tr>
+          <tr><td class="mono">LightGBM / XGBoost</td><td>Gradient-boosted decision-tree models. Fast, strong on tabular data, run on a laptop CPU. Our susceptibility model. Also what the Kerala paper found beat expert weighting.</td></tr>
+          <tr><td class="mono">SHAP</td><td>A method that says how much each factor pushed a given prediction up or down — the “why is this score high” breakdown.</td></tr>
+          <tr><td class="mono">Counterfactual</td><td>A “what would have to change” statement. Ours only moves things a builder can actually change (paved fraction, setback) and freezes what nobody can (elevation, slope).</td></tr>
+          <tr><td class="mono">DFO</td><td>Dartmouth Flood Observatory — a public archive of flood-extent maps. We use its 2018 Kerala polygon as one corroboration source (it is coarse, ~250&nbsp;m, so not the only one).</td></tr>
+          <tr><td class="mono">Copernicus EMS</td><td>The EU’s emergency rapid-mapping service; it produced flood maps for the August 2018 Kerala activation. Second corroboration source.</td></tr>
+          <tr><td class="mono">S_current / S_developed / Δ</td><td>The two predictions per cell — susceptibility as land is now, and as it would be if built on — and their difference Δ (the “uplift”). Δ is what a naive before-you-build check silently omits.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ SLIDE WALK-THROUGH -->
+<section id="slides">
+  <div class="wrap col">
+    <h2>Section 3</h2>
+    <p class="section-title">Slide-by-slide walk-through</p>
+    <p>For each slide: <b>what is on it</b>, <b>how to say it out loud</b> in plain words, and the <b>question most likely to follow</b> with a tight answer. The panel sees only these 13 slides, so every one of you should be able to speak to every slide.</p>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">01</span><span class="s-title">Title</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Project title, four team members with roll numbers, guide Dr. Rosebell Paul, IIIT Kottayam.</p>
+        <h4>Say it like this</h4>
+        <p>“Our project is <em>Development-Aware Flood Susceptibility Mapping Using Multi-Temporal Satellite Data</em>. ‘Multi-temporal’ means we use satellite images from several years — 2017 through 2024 — not a single snapshot. ‘Development-aware’ is the core idea: our map accounts for what happens when land is built on.”</p>
+        <h4>If they ask “why this title / what is new here?”</h4>
+        <p>Point straight to slide 6. One line: “existing maps tell you where it flooded before; ours estimates what building on a plot does to its flood susceptibility, including the runoff pushed onto neighbours downhill.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">02</span><span class="s-title">Introduction — the human stakes</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Floods are India’s most frequent and deadliest natural disaster. Kerala alone: 400+ lives lost since the 2018 floods, 1.2&nbsp;million people evacuated. Three photos of the 2018 flooding.</p>
+        <h4>Say it like this</h4>
+        <p>“This is not a hypothetical problem. The 2018 Kerala floods and the events that followed killed hundreds and displaced over a million people. Kochi and the Periyar basin were badly hit, and construction there has continued since.”</p>
+        <h4>If they ask “source for those numbers?”</h4>
+        <p>State/CWC and news reporting on the 2018–2021 Kerala flood seasons. If pressed for an exact citation you do not have, say “those are widely reported figures from the 2018 event and its aftermath; we will pin the exact government source in the report.” Do not invent a specific agency table.</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">03</span><span class="s-title">Introduction — the four ingredients</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Flooding is a major hazard · urbanisation is rapidly changing land use · satellite imagery lets us observe floods and land-use change over time · machine learning can analyse that spatial data · <b>this project studies the relationship between urban growth and flood susceptibility in Kerala.</b></p>
+        <h4>Say it like this</h4>
+        <p>“Four things come together here: the hazard, urban growth changing the ground, satellites that record both over years, and machine learning to connect them. Our specific question sits at the intersection — how urban growth changes flood susceptibility.”</p>
+        <h4>If they ask “isn’t satellite + ML for floods already well established?”</h4>
+        <p>“Yes — flood susceptibility mapping with satellite imagery and ML is the standard tool worldwide. We are not claiming that combination is new. What is new is asking it a question it is not normally built to answer: the effect of <em>future</em> development.” (Leads into slide 5.)</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">04</span><span class="s-title">Literature Review — the four-paper table</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Four rows: Mohamadiazar 2024 (Sentinel-1 + U-Net, Miami-Dade, AUC 0.93, F1 89.85% — needs live rainfall, no per-factor explainability); Antzoulatos 2022 (Random Forest + rule-based Hazard/Exposure/Vulnerability, F1 ≈ 0.99 — needs a calibrated 2D hydraulic model for labels); Waleed &amp; Sajjad 2025 (XGBoost/LightGBM, national Pakistan, AUC 0.81 — no land-use-change integration, self-stated gap); Kendagannaswamy 2025 (AHP + LightGBM, Kerala, LightGBM AUC 0.948 vs AHP 0.763 — random split, SRTM canopy bias).</p>
+        <h4>Say it like this</h4>
+        <p>“These four are the closest published work. Read the last column: every one names a limitation we build on. The base paper needs live rainfall and gives no reasoning. Antzoulatos needs a hydraulic model we do not have for Kerala. Waleed &amp; Sajjad explicitly say integrating land-use change is future work. The Kerala paper uses a random split and an elevation model corrupted by tree canopy, and asks for cross-validation and temporal analysis as future work.”</p>
+        <h4>If they ask “which one is your base paper and why?”</h4>
+        <p>Mohamadiazar et&nbsp;al. 2024 — see slide 11 and the Base-paper section below. Shortest answer: “it is the closest published work that fuses satellite imagery, elevation and a learning model for urban flood prediction, with strong validated results, and its own future-work section asks for exactly the multi-year direction we take.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">05</span><span class="s-title">Motivation</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Urban growth accelerates flood risk faster than climate change alone — every paved acre sheds water instead of absorbing it. Kochi / Periyar basin: dense monsoon-driven urbanisation on low terrain — a high-stakes test case. FSM with satellite + ML is the worldwide standard. <b>But existing FSM answers “where has it flooded before”, not “what happens to this land once it is built on.”</b></p>
+        <h4>Say it like this</h4>
+        <p>“The last line is our whole motivation. A standard map looks at a green plot and says ‘low risk’. Build a house, a wall and a paved yard on it and the plot now sheds water — but the map still says what it said about the empty plot. The family will live on the built plot, not the empty one.”</p>
+        <h4>If they ask “is the ‘faster than climate change’ claim yours?”</h4>
+        <p>Soften to defensible ground: “In rapidly urbanising basins, land-use change is a large and often dominant driver of increased local flood response between events. We are not ranking it against climate change globally — the point is that it is big, local, and currently unmodelled in these maps.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">06</span><span class="s-title">Key Novelty &amp; Contributions — the six-row table</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Six contributions: <b>Development-aware prediction</b> (current vs post-development susceptibility) · <b>UICA / ΔUICA</b> (upstream urbanisation → downstream runoff) · <b>Natural-experiment validation</b> (observed 2018–2021 urban growth) · <b>Leak-free evaluation</b> (spatial CV + temporal hold-out) · <b>Counterfactual recommendations</b> (actionable ways to cut vulnerability) · <b>Positive-unlabeled learning</b> (does not assume “not flooded” = “safe”).</p>
+        <h4>Say it like this</h4>
+        <p>“Three of these are the heart — the dual prediction, the UICA feature that carries the upstream effect, and validating against development that really happened. The other three are the discipline that makes the numbers trustworthy: honest evaluation, honest labels, and advice a person can act on.”</p>
+        <h4>If they ask “which of these is the real contribution — pick one”</h4>
+        <p>“Prospective, development-aware prediction: two susceptibility values per cell — as it is, and as it would be once built — and the difference between them. UICA is the feature that makes the second value meaningful. Everything else supports those two.”</p>
+        <div class="callout trap"><p class="callout-h">Trap on this slide</p><p>Do <b>not</b> claim all six are individually unpublished. Leak-free evaluation, PU learning, SHAP-style explanation and counterfactuals all exist in the literature <em>separately</em>. Our claim is the <em>combination</em>, aimed at the development question — plus UICA and the natural-experiment validation, which are genuinely not in our reference set. See the Novelty section.</p></div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">07</span><span class="s-title">Problem Statement — the gap, in words</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Existing models assess risk from the <em>current</em> state of the land. They do not adequately capture: (1) future development of currently undeveloped land, (2) upstream → downstream effects of new impervious surfaces, (3) reliable spatial and temporal validation of susceptibility predictions.</p>
+        <h4>Say it like this</h4>
+        <p>“Three concrete gaps. One: the model reads the plot as it is now, so its answer describes a place that will not exist once you build. Two: every model treats each 10&nbsp;m cell as independent — but if ten plots uphill are paved, more water arrives at your gate even though nothing changed on your land, and no model in our set can represent that. Three: these maps are usually validated on a random split, which lets a pixel’s own neighbours end up in the test set and inflates the score.”</p>
+        <h4>If they ask “are these gaps real or invented?”</h4>
+        <p>“Gaps two and three are named by the authors themselves — Waleed &amp; Sajjad on land-use change, the Kerala paper on cross-validation. Gap one follows directly from how all four build their training data.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">08</span><span class="s-title">Problem Statement — the “Today vs After Development” picture</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Left: a vegetated plot by a river — “looks safe in current models”, rainwater soaks into soil. Right: the same plot built on — impervious roof and yard, higher runoff, water flowing to downstream areas, “increased flood vulnerability downstream.” Caption: we need a development-aware approach that estimates how susceptibility changes with urban growth.</p>
+        <h4>Say it like this</h4>
+        <p>“This is the whole project in one picture. Same plot, two states. The left is what today’s models see. The right is what the family gets. The blue arrows are the second half of our contribution — the runoff does not stay on the plot, it goes downhill onto neighbours.”</p>
+        <h4>If they ask “that image looks AI-generated — is it your data?”</h4>
+        <p>“It is an illustrative diagram, not a result. The actual before/after comparison is a model output — S_current versus S_developed — which we produce in Stage 5 and validate in the natural experiment.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">09</span><span class="s-title">Objectives — the six</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <ol>
+          <li>Multi-year flood inventory for the Periyar basin from satellite data.</li>
+          <li>Identify urban growth and land-cover change across years.</li>
+          <li>Capture upstream development effects with flow-based features (UICA, ΔUICA).</li>
+          <li>Build an ML susceptibility model with reliable spatial-temporal validation.</li>
+          <li>Compare current vs post-development susceptibility to assess the impact of urban growth.</li>
+          <li>Provide explainable, actionable outputs for flood-risk planning and pre-construction decisions.</li>
+        </ol>
+        <h4>Say it like this</h4>
+        <p>“Objectives 1–2 build the evidence — where it flooded, where we built. Objective 3 is the new feature. Objective 4 is the model, done honestly. Objective 5 is the core result. Objective 6 turns it into something a planner or a citizen can use.”</p>
+        <h4>If they ask “which of these is realistically done this semester?”</h4>
+        <p>“1 through 4 plus the honest-evaluation experiment are the core deliverable and land by week 11–12. Objective 5 — the full dual prediction and its natural-experiment test — is the top-priority extension in weeks 13–14. Objective 6 is a working demo, not a deployed product. We have deliberately sequenced it so a complete, defensible result exists even if the last stage runs long.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">10</span><span class="s-title">Architecture — the six-column pipeline</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Left to right: <b>Input data</b> (Sentinel-1, Sentinel-2, DEM, CHIRPS rainfall, OSM/HydroSHEDS rivers, building footprints) → <b>Pre-processing &amp; harmonisation</b> (SAR processing, cloud/noise handling, resample to a common 10&nbsp;m grid, multi-temporal alignment) → <b>Thematic products</b> (flood inventory from Sentinel-1; land-cover / built-up change from Sentinel-2) → <b>Feature engineering, flow-coupled</b> (elevation, slope, TWI, HAND; distance to river/road; flow direction &amp; accumulation; UICA; ΔUICA) → <b>Flood susceptibility model</b> (positive-unlabeled learning; LightGBM/XGBoost; spatial block cross-validation; temporal hold-out) → <b>Dual prediction &amp; output</b> (current susceptibility, post-development susceptibility, Δ susceptibility) → <b>Explainability &amp; decision support</b> (SHAP + counterfactuals; planner &amp; citizen dashboards). A dashed line underneath: refine/validate against independent sources — DFO, Copernicus EMS, news reports.</p>
+        <h4>Say it like this</h4>
+        <p>“Read it as a factory line. Column 1 collects free data. Column 2 lines every layer onto the same grid. Column 3 makes two records — where it flooded, and where we built. Column 4 turns terrain into hydrology-aware features, including our UICA. Column 5 trains the model and — the important part — tests it honestly. Column 6 is the novelty output: two numbers per plot and their difference. Column 7 makes it explainable and usable. The dashed line is the reality check against independent flood records.”</p>
+        <h4>If they ask “where exactly is the novelty in this diagram?”</h4>
+        <p>“Three boxes. UICA/ΔUICA in column 4. The post-development susceptibility and Δ in column 6. And the pairing of spatial block CV with temporal hold-out in column 5. The rest is standard practice we adopt deliberately so our results are comparable.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">11</span><span class="s-title">Conclusion — where we are</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <p>Base paper finalised: Mohamadiazar et&nbsp;al. 2024. Research gap identified: need for development-aware flood susceptibility assessment. Proposed approach: multi-temporal data + flow-coupled features + ML. Key outcome: compare current vs post-development susceptibility. Goal: support explainable, informed urban-planning decisions.</p>
+        <h4>Say it like this</h4>
+        <p>“This slide is our status. The base paper is chosen and studied. The gap is defined and backed by the papers’ own future-work sections. The method is fixed. The outcome we are working towards is the current-versus-post-development comparison.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">12</span><span class="s-title">Conclusion — the five-phase plan</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <div class="tbl-scroll"><table><thead><tr><th>Phase</th><th>Planned work</th><th>Expected outcome</th></tr></thead><tbody>
+          <tr><td>1</td><td>Reproduce base-paper pipeline</td><td>Baseline flood prediction</td></tr>
+          <tr><td>2</td><td>Multi-year flood &amp; urban-growth analysis</td><td>Flood inventory + change maps</td></tr>
+          <tr><td>3</td><td>UICA / ΔUICA + ML modelling</td><td>Spatial &amp; temporal validation</td></tr>
+          <tr><td>4</td><td>Current vs post-development prediction</td><td>Core novelty result</td></tr>
+          <tr><td>5</td><td>Explainability + dashboard</td><td>Planner &amp; citizen decision support</td></tr>
+        </tbody></table></div>
+        <h4>Say it like this</h4>
+        <p>“Five phases. Phase 1 reproduces known work so we have a baseline and a comparison point. Phases 2–3 build the evidence and the honest model. Phase 4 is the novelty result. Phase 5 makes it usable. If time is tight, phase 4’s full version is an extension, but phases 1–3 plus the evaluation finding stand on their own.”</p>
+        <h4>If they ask “16 weeks — is this realistic?”</h4>
+        <p>“The study area is one basin, not a state. The heavy deep-learning part is confined to land-cover segmentation and can fall back to ready-made land-cover products. Everything after feature engineering is gradient boosting on a table, which trains in seconds. The genuinely new work is raster arithmetic and experimental design, not expensive computation.”</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="s-head"><span class="s-num">13</span><span class="s-title">References</span></div>
+      <div class="s-body">
+        <h4>On the slide</h4>
+        <ol>
+          <li>Mohamadiazar, Ebrahimian &amp; Hosseiny (2024). Integrating deep learning, satellite image processing, and spatial-temporal analysis for urban flood prediction. <i>Journal of Hydrology</i>, 639, 131508.</li>
+          <li>Antzoulatos et&nbsp;al. (2022). Flood hazard and risk mapping by applying an explainable ML framework using satellite imagery and GIS data. <i>Sustainability</i>, 14(6), 3251.</li>
+          <li>Waleed &amp; Sajjad (2025). High-resolution flood susceptibility mapping and exposure assessment in Pakistan. <i>IJDRR</i>, 121, 105442.</li>
+          <li>Kendagannaswamy et&nbsp;al. (2025). Multi-criteria decision analysis for regional-scale flood susceptibility mapping in Kerala state, India. <i>Discover Applied Sciences</i>, 7, 598.</li>
+        </ol>
+        <h4>Be ready to</h4>
+        <p>Say one sentence about each from memory — see the Literature section. If asked “have you read all four fully?”, the honest answer is yes for the argument that matters: their method, their headline result, and their stated limitations / future work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ BASE PAPER -->
+<section id="basepaper">
+  <div class="wrap col">
+    <h2>Section 4</h2>
+    <p class="section-title">The base paper — Mohamadiazar et&nbsp;al. 2024</p>
+
+    <h3>What the paper does</h3>
+    <p>It builds an AI system that reads satellite radar images plus map data (elevation, soil, paved-surface %, rainfall) and, soon after rain, marks which parts of a city are flooded. Tested on Miami-Dade County, Florida. The model is a <b>U-Net</b> — a deep-learning image-segmentation network. Training labels came from <b>Otsu-thresholding</b> Sentinel-1 radar to auto-mark water. Results on the test set: <b>93.73% accuracy, F1 89.85%, AUC 0.93</b>, and a “Ground Truth Index” of <b>84.05%</b> — how often predictions matched real reported flood locations (a city complaint database + geotagged tweets).</p>
+
+    <h3>Why it is our base paper</h3>
+    <ul>
+      <li>It is the closest published work that <b>fuses satellite imagery + elevation + a learning model</b> for urban flood prediction, with strong, well-validated numbers.</li>
+      <li>Its own <b>limitations and future-work section reads like our brief</b>: it flags rainfall-to-image timing uncertainty (we sidestep this entirely by not doing event-time prediction), recommends moving preprocessing to Google Earth Engine (we do), and recommends continuously feeding in new imagery to keep the tool “live” (our multi-epoch design turns that suggestion into a measurable test).</li>
+      <li>It gives us a concrete, reproducible <b>baseline and evaluation vocabulary</b> (accuracy / precision / recall / F1 / a ground-truth index) that we extend rather than replace.</li>
+    </ul>
+
+    <h3>What we keep, change, add, drop</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Move</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td><b>Keep</b></td><td>Stacking multiple aligned raster layers as model input; the SAR → dB → Edge-Otsu chain to build a flood inventory; standard segmentation and classification metrics for comparability.</td></tr>
+          <tr><td><b>Change</b></td><td>The core predictor: their U-Net water-segmentation model → our <b>LightGBM/XGBoost</b> susceptibility model on a table of terrain + land-cover + flow features. Their SRTM-type elevation → <b>FABDEM</b> (canopy and buildings removed). Their random 70/30 split → <b>spatial block CV + temporal hold-out</b>.</td></tr>
+          <tr><td><b>Add</b></td><td>Multi-year design (2017–2024); <b>UICA / ΔUICA</b> flow-routed upslope features; <b>dual prediction</b> (S_current, S_developed, Δ); <b>positive-unlabeled</b> labelling; <b>natural-experiment</b> validation; SHAP + <b>constrained counterfactual</b> advice.</td></tr>
+          <tr><td><b>Drop</b></td><td>Live/same-day rainfall as a required input and near-real-time operation — those belong to their during-storm use case. We use rainfall only as a long-run frequency (CHIRPS, days &gt; 10&nbsp;mm, 2010–2024).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout trap">
+      <p class="callout-h">The sharp question: “You’re not even using their model — how is it your base paper?”</p>
+      <p>Answer: “A base paper is the work we study closely, reproduce as a baseline, and extend — not a method we copy line for line. We reproduce its flood-inventory pipeline and its evaluation approach, we use it as our comparison baseline, and our whole direction is its own stated future work: keep feeding multi-year imagery in, move to Earth Engine, and get away from the rainfall-timing problem. We changed the final predictor because our question is different — a standing susceptibility map, not a during-storm water mask — and gradient boosting on engineered hydrological features is the right tool for that and is what the closest Kerala study also found strongest.”</p>
+    </div>
+
+    <div class="callout">
+      <p class="callout-h">If a slide/earlier draft mentioned DeepLabV3+ or a rule-based risk score</p>
+      <p>An earlier version of our plan used a DeepLabV3+ segmentation model and a hand-weighted risk score. We moved on from the hand-weighted score because <b>it was already published for Kerala and published as the weaker option</b> (Kendagannaswamy: AHP 0.763 vs LightGBM 0.948). A segmentation model (DeepLabV3+ or U-Net) still appears in our pipeline, but only to make the <b>land-cover / built-up change</b> maps in column 3 — the susceptibility model itself is now LightGBM/XGBoost under positive-unlabeled learning. If asked, say exactly that: “segmentation is a pre-processing step for land cover; the susceptibility model is gradient boosting.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ LITERATURE -->
+<section id="litreview">
+  <div class="wrap col">
+    <h2>Section 5</h2>
+    <p class="section-title">Literature — one page, four papers</p>
+    <p>The panel may pick any paper and ask “what did they do, and what do you do about their limitation?” Have this cold.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Paper</th><th>What they did</th><th>Their stated limitation / future work</th><th>What we do about it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Mohamadiazar 2024</b><br><span class="tag base">base paper</span><br>J. Hydrology</td>
+            <td>Sentinel-1 + U-Net water segmentation, Miami-Dade. AUC 0.93, F1 89.85%, Ground-Truth Index 84%.</td>
+            <td>Rainfall-to-image timing is uncertain; needs live rainfall; output is a bare flooded/not mask with no reasoning; suggests GEE preprocessing and continuous multi-year updating.</td>
+            <td>We do not do event-time prediction, so timing cannot propagate. Rainfall enters only as a 15-year frequency. We output a graded score with SHAP + a counterfactual. Stages 1–2 run in GEE. Multi-epoch design = the continuous-update idea, turned into a test.</td>
+          </tr>
+          <tr>
+            <td><b>Antzoulatos 2022</b><br>Sustainability</td>
+            <td>Random Forest + rule-based Hazard/Exposure/Vulnerability, satellite + GIS. F1 ≈ 0.99. Explainable (SHAP).</td>
+            <td>“Crucial issue: lack of annotated datasets.” Their fix needs a calibrated 2D hydraulic model. Pixel approach scales badly with resolution. Factor importance is site-specific. Future work: add social media.</td>
+            <td>No hydraulic model exists for the Periyar basin, so we attack the label gap directly with positive-unlabeled learning. We work at 10&nbsp;m over one basin, with sub-watershed blocking to bound memory. We learn factor influence from Kerala data, cross-checked against our ablation. Local news/records are kept as a third corroboration source.</td>
+          </tr>
+          <tr>
+            <td><b>Waleed &amp; Sajjad 2025</b><br>IJDRR</td>
+            <td>XGBoost/LightGBM + geospatial framework, national-scale Pakistan. AUC 0.81. Adds population/economic exposure.</td>
+            <td><b>Explicitly:</b> “land-use changes such as deforestation and urban sprawl can exacerbate flood risks… future research could integrate such variables.” Also: historical data misses evolving land-use patterns; results sensitive to class cut-offs; SHAP has context biases; GEE could not host their ML.</td>
+            <td>This is our core contribution — UICA/ΔUICA and the development-aware stage <em>are</em> that integration. Multi-epoch + temporal hold-out measures the decay they only warn about. We report threshold-free PR-AUC/ROC-AUC + a class-cutting sensitivity check. We never trust SHAP alone — every claimed factor must also show in the ablation. We adopt the same GEE-prepare / train-locally split by design.</td>
+          </tr>
+          <tr>
+            <td><b>Kendagannaswamy 2025</b><br>Discover Applied Sci.<br><span class="tag">closest to our area</span></td>
+            <td>AHP (expert weights) + LightGBM, whole Kerala. LightGBM AUC 0.948 beats AHP 0.763, under a conventional random split. SRTM DEM.</td>
+            <td><b>Future work, near-verbatim spec for us:</b> include temporal flooding dynamics; use higher-resolution DEMs; add cross-validation testing; explore more advanced ML. Limitation: SRTM canopy/building interference corrupts elevation.</td>
+            <td>Multi-epoch design + temporal hold-out = temporal dynamics. FABDEM replaces SRTM = higher-res, canopy-corrected. Spatial block CV + temporal hold-out = the cross-validation they ask for, with the naive number shown alongside. PU-LightGBM/XGBoost ensemble = the advanced ML. We reproduce both their models as leak-free baselines.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout say">
+      <p class="callout-h">The line that wins this section</p>
+      <p>“Three of our four reference papers name our direction as their own future work. We are not inventing a problem — we are executing the work these authors asked for, in the basin where it matters most.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ NOVELTY -->
+<section id="novelty">
+  <div class="wrap col">
+    <h2>Section 6</h2>
+    <p class="section-title">The novelty — defended point by point</p>
+    <p>This is where a panel probes hardest, because “new area + new UI” is not a research contribution and they know it. For each claim: what it is, why it is new against our four papers, and what to say if they push back.</p>
+
+    <ol class="num-list">
+      <li>
+        <h4 style="margin-top:2px">N1 · Prospective, development-aware prediction</h4>
+        <p><b>What:</b> two susceptibility values per cell — <span class="mono">S_current</span> (land as it is) and <span class="mono">S_developed</span> (same cell with land-cover features set to a built state and every downstream cell’s UICA updated) — plus the uplift <span class="mono">Δ = S_developed − S_current</span>.</p>
+        <p><b>Why new:</b> all four papers predict <em>only</em> for land as it currently stands. None produces a second, “as-if-built” value.</p>
+        <div class="callout trap"><p class="callout-h">If they say “you’re inventing data that doesn’t exist”</p><p>“We are not inventing observations. We take the trained model and evaluate it at a defined built-state feature vector — impervious fraction raised to the observed Kochi residential norm, vegetation reduced accordingly, downstream UICA updated. That is a counterfactual query to the model, and we test whether it is right using land that was actually built on between 2018 and 2021.”</p></div>
+      </li>
+      <li>
+        <h4>N2 · UICA and ΔUICA</h4>
+        <p><b>What:</b> <span class="mono">UICA</span> = weighted flow accumulation — for every cell, sum the impervious fraction of every upstream cell that drains into it. <span class="mono">ΔUICA</span> = its change over time. One extra raster operation, no extra data.</p>
+        <p><b>Why new:</b> all four use only <em>local</em> imperviousness or vegetation at the cell. None routes it downhill. This is the only feature in our set that lets the model say “your flooding is caused by construction uphill of you.”</p>
+        <div class="callout"><p class="callout-h">Formula, if asked</p><div class="formula">UICA(c) = Σ over all cells u draining into c of [ impervious_fraction(u) × cell_area ]
+
+computed with a weighted flow-accumulation routine (WhiteboxTools / pysheds)
+over a filled FABDEM, D8 or D-infinity flow directions.</div></div>
+      </li>
+      <li>
+        <h4>N3 · Natural-experiment validation</h4>
+        <p><b>What:</b> the <b>treatment group</b> = cells that were unbuilt before the 2018 flood and built by 2021. The <b>control group</b> = cells that stayed unbuilt, matched to the treatment cells on elevation, slope, HAND and road distance by propensity matching. Fit the model on pre-2018 data only; test whether <span class="mono">S_developed</span> predicts the treatment cells’ 2021 flood outcome better than <span class="mono">S_current</span> does.</p>
+        <p><b>Why new:</b> none of the four validates a susceptibility model against <em>observed development</em>. They validate a static map against a static flood extent.</p>
+        <div class="callout trap"><p class="callout-h">The question you should expect: “correlation, not causation”</p><p>Concede it cleanly: “It is a quasi-experiment, not a randomised one. People choose to build on flatter, better-connected land, so treatment and control cells differ systematically. Propensity matching narrows that gap; it does not close it. We will report results as <em>association under matching</em>, never as a proven causal effect. We expect this to be your sharpest question and we would rather state the limit than be caught by it.”</p></div>
+      </li>
+      <li>
+        <h4>N4 · Leak-free evaluation protocol</h4>
+        <p><b>What:</b> three evaluations reported side by side — random split (shown <em>only</em> so the inflation is visible), spatial block CV (folds are whole HydroBASINS level-12 sub-watersheds), temporal hold-out (fit 2018, test 2019 &amp; 2021).</p>
+        <p><b>Why new here:</b> all four use a conventional split. The Kerala paper lists cross-validation as future work. Random splits over raster data leak neighbouring pixels into the test set and inflate AUC by roughly 5–15%, which is why published values cluster at 0.94–0.99.</p>
+        <div class="callout key"><p class="callout-h">Reframe a “your numbers are lower” attack into a finding</p><p>“Under leak-free validation we expect lower numbers than the published 0.948, and <em>that is the finding, not a failure</em>. A defensible 0.85 under spatial block CV is worth more than an inflated 0.95 under a leaky split. Quantifying that gap for the Kerala case is contribution N4.”</p></div>
+      </li>
+      <li>
+        <h4>N5 · Constrained counterfactual recourse</h4>
+        <p><b>What:</b> features are split into <b>mutable</b> (a builder can change: impervious fraction, vegetation fraction, drainage setback, on-plot retention) and <b>immutable</b> (nobody can: elevation, slope, HAND, river distance). We search for the smallest mutable change that moves a cell into a lower class: “High → Moderate if paved cover stays under ~42% and a 3&nbsp;m drainage setback is kept.”</p>
+        <p><b>Why new:</b> the explainable-ML papers stop at SHAP attribution. Freezing the immutable features means the advice is always physically achievable — generic counterfactual methods do not guarantee that.</p>
+      </li>
+      <li>
+        <h4>N6 · Positive-unlabeled label model</h4>
+        <p><b>What:</b> flooded cells are positive; everything else is <em>unlabeled</em>, not negative. We use PU-bagging with an Elkan–Noto class-prior correction, then train the LightGBM/XGBoost ensemble.</p>
+        <p><b>Why it matters:</b> all four treat sampled non-flood points as true negatives. But radar misses flooding under tree canopy and in urban radar shadow, and satellites revisit only every few days — a place may simply never have been imaged while under water. Calling those cells “safe” teaches the model something false.</p>
+      </li>
+    </ol>
+
+    <div class="callout trap">
+      <p class="callout-h">Honesty line to keep in your pocket</p>
+      <p>“We ran a gap audit on our own earlier claims. Some did not survive — a hand-weighted score, five-class land cover, SHAP explanations and multi-year change overlays all already exist. We dropped or demoted those. What survived is N1–N6: the development-aware prediction, the flow-routed upslope feature, and validating against real development — with honest evaluation and honest labels underneath.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ ARCHITECTURE -->
+<section id="architecture">
+  <div class="wrap col">
+    <h2>Section 7</h2>
+    <p class="section-title">Architecture — what each stage actually does</p>
+
+    <h3>Stage 1 · Data acquisition &amp; harmonisation</h3>
+    <p>Pull every layer for the Kochi / Periyar study area, reproject to UTM Zone 43N, resample everything onto one shared <b>10&nbsp;m grid</b> so layers line up cell-for-cell. Coarser layers (30&nbsp;m DEM, ~5&nbsp;km rainfall) are described honestly as <em>context around a cell</em>, not 10&nbsp;m measurements. Five epochs: <b>2017</b> (pre-flood baseline), <b>2018 / 2019 / 2021</b> (flood events), <b>2024</b> (current). DEM = <b>FABDEM v1.2</b> (canopy + buildings removed).</p>
+
+    <h3>Stage 2A · Multi-epoch flood inventory (from Sentinel-1)</h3>
+    <p>For each flood event: take Sentinel-1 SAR from the flood window, run the standard chain (radiometric calibration → speckle filter → terrain correction), convert to decibels, threshold with <b>Edge-Otsu</b> to get a water mask. Subtract the <b>JRC permanent-water</b> layer so rivers and backwaters are not counted as flooding. Three independent inventories (2018/2019/2021). DFO, Copernicus EMS / UNOSAT and local records corroborate.</p>
+
+    <h3>Stage 2B · Built-up change detection (from Sentinel-2)</h3>
+    <p>Segment land cover per epoch into five classes (building, vegetation, water, impervious/road, bare land) with DeepLabV3+ or U-Net, ImageNet-pretrained, fine-tuned on Kochi tiles. ESA WorldCover and Google Dynamic World give weak labels to bootstrap; OSM/Microsoft/Google footprints give building labels. Differencing epochs gives each cell a <b>build year</b> — which produces the treatment/control groups for the natural experiment and drives ΔUICA. <b>Work is at grid-cell/cluster level, not individual buildings</b> — a house is often smaller than one 10&nbsp;m pixel.</p>
+
+    <h3>Stage 3 · Flow-coupled feature engineering</h3>
+    <p>From FABDEM: fill sinks, compute D8/D-infinity flow direction and accumulation, then elevation, slope, aspect, curvature, <b>TWI</b>, <b>HAND</b>. From vectors: distance to river, drainage line, road. From CHIRPS: rainfall frequency (days &gt; 10&nbsp;mm, 2010–2024). From Stage 2B: local built-up and vegetation fraction. Then the new features: <b>UICA</b> and <b>ΔUICA</b>.</p>
+
+    <h3>Stage 4 · PU learning with leak-free validation</h3>
+    <p>Positive = flooded cells; unlabeled = everything else. PU-bagging + Elkan–Noto prior correction → LightGBM + XGBoost ensemble. Evaluate three ways (random / spatial block CV / temporal hold-out). Every predicted cell carries a SHAP attribution, a <b>conformal prediction interval</b>, and an <b>Area-of-Applicability</b> flag that greys out cells whose features fall outside what the model learned from.</p>
+
+    <h3>Stage 5 · Prospective dual prediction (the research core)</h3>
+    <p>Produce <span class="mono">S_current</span> and <span class="mono">S_developed</span> for every cell; report <span class="mono">Δ</span> per parcel, per ward, and as a cumulative build-out scenario. Validate by the natural experiment (Section 8 below).</p>
+
+    <h3>Stage 6 · Counterfactual recourse &amp; dual dashboard</h3>
+    <p><b>Planner view:</b> ward-level susceptibility with the Area-of-Applicability mask, a ΔUICA hotspot map, the build-out simulator, and a ranked list of parcels where new construction would hurt neighbours most. <b>Citizen view:</b> search any location including empty land → current class, the uplift Δ if built on, the main factors in plain words, the confidence interval, and the top three actions that lower the class.</p>
+
+    <h3>Tools &amp; compute</h3>
+    <p>Google Earth Engine (data prep, SAR, compositing — free tier, minutes) · WhiteboxTools / pysheds (flow routing, UICA, HAND, TWI — CPU) · PyTorch + segmentation-models-pytorch (Stage 2B — one free Colab/Kaggle GPU) · LightGBM / XGBoost / scikit-learn (CPU) · MAPIE (conformal) · SHAP + DiCE (explanation) · Streamlit/Flask + Leaflet/Folium (dashboard). Total data &lt; 5&nbsp;GB.</p>
+  </div>
+</section>
+
+<!-- ============================================ DATASETS -->
+<section id="datasets">
+  <div class="wrap col">
+    <h2>Section 8</h2>
+    <p class="section-title">Datasets — every layer is free, public, and India-covered</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Layer</th><th>Dataset</th><th>Res.</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>Optical imagery</td><td>Sentinel-2 L2A (GEE / AWS Earth Search)</td><td>10&nbsp;m</td><td>Land-cover segmentation, change detection</td></tr>
+          <tr><td>Radar imagery</td><td>Sentinel-1 GRD (VV+VH)</td><td>10&nbsp;m</td><td>Flood inventory; cloud-proof cross-check</td></tr>
+          <tr><td>Elevation (primary)</td><td>FABDEM v1.2 — bare earth</td><td>30&nbsp;m</td><td>Terrain, flow routing; removes canopy bias</td></tr>
+          <tr><td>Elevation (fallback)</td><td>Copernicus GLO-30</td><td>30&nbsp;m</td><td>Used if FABDEM licence is a problem</td></tr>
+          <tr><td>Rainfall</td><td>CHIRPS Daily</td><td>~5&nbsp;km</td><td>Long-run frequency, not event input</td></tr>
+          <tr><td>Land cover (weak labels)</td><td>Google Dynamic World / ESA WorldCover</td><td>10&nbsp;m</td><td>Bootstrap segmentation training</td></tr>
+          <tr><td>Permanent water</td><td>JRC Global Surface Water</td><td>30&nbsp;m</td><td>Remove rivers from the flood inventory</td></tr>
+          <tr><td>Sub-watershed blocks</td><td>HydroBASINS level 12</td><td>vector</td><td>Spatial cross-validation folds</td></tr>
+          <tr><td>Rivers / roads</td><td>HydroRIVERS + OpenStreetMap</td><td>vector</td><td>Distance features</td></tr>
+          <tr><td>Building footprints</td><td>Microsoft Global ML + Google Open Buildings v3 + OSM</td><td>vector</td><td>Segmentation labels; build-year detection</td></tr>
+          <tr><td>Flood evidence 1</td><td>Dartmouth Flood Observatory — 2018 Kerala</td><td>~250&nbsp;m</td><td>Corroboration (coarse — one of several)</td></tr>
+          <tr><td>Flood evidence 2</td><td>Copernicus EMS / UNOSAT — Aug 2018</td><td>vector</td><td>Corroboration</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Why the data is solid — the four points</h3>
+    <ol>
+      <li><b>Free and public</b> — no paid licence, no data-request-to-an-agency. Most of it is directly inside Google Earth Engine.</li>
+      <li><b>Verified live</b> — we ran scripts that actually connect to each source and confirm real data returns for our exact bounding box (real Sentinel-2 scene IDs and band URLs for 2019 and 2024, real elevation values, real OSM river and building geometry).</li>
+      <li><b>Used in published research</b> — Sentinel-1/2 and Copernicus DEM are the current academic standard for this work.</li>
+      <li><b>Provenance-tracked</b> — the pipeline logs whether each run used live data or a fallback, so we never present synthetic data as real.</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-h">The one genuine go / no-go check (be honest about this)</p>
+      <p>Sentinel-1 scene availability during the August 2018 flood peak. Sentinel-1 revisits every ~6 days and the 2018 flooding lasted ~2 weeks, so at least two passes are expected — but we verify it in Week 1 before building anything. If scenes are unusable, we fall back to the DFO and Copernicus EMS polygons as the 2018 inventory and lean more on the 2019 and 2021 events.</p>
+    </div>
+
+    <div class="callout trap">
+      <p class="callout-h">If asked “why not one ready-made dataset?”</p>
+      <p>“No single free dataset provides satellite imagery, elevation, hydrography and building footprints together at usable resolution for an Indian basin. Combining verified, independently sourced datasets is standard practice in urban remote sensing — it is what the published work in this space does — and using two independent building datasets plus OSM gives us cross-checked labels.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ VALIDATION -->
+<section id="validation">
+  <div class="wrap col">
+    <h2>Section 9</h2>
+    <p class="section-title">Validation &amp; why our numbers may look lower</p>
+
+    <h3>How we check the model is right</h3>
+    <p>We overlay our susceptibility map on the same grid as the combined flood-evidence layer (Sentinel-1 inventory + DFO + Copernicus EMS + local records). For each cell, “did this location fall inside documented flood extent” is a yes/no label. We compare against our score with:</p>
+    <ul>
+      <li><b>PR-AUC</b> — our primary metric, because flooded cells are a minority class and PR-AUC is more informative than ROC-AUC under that imbalance.</li>
+      <li><b>ROC-AUC</b> — threshold-free separability, reported for comparability with the literature.</li>
+      <li><b>Risk Validation Rate</b> — the direct structural equivalent of the base paper’s 84% Ground-Truth Index: of the cells we flag High / Very-High, what fraction fall inside documented flood extent.</li>
+      <li><b>Brier score</b> (calibration) and <b>conformal interval coverage</b> (does the stated uncertainty hold up).</li>
+    </ul>
+
+    <h3>The baseline comparison table (the most important table in the final report)</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Model</th><th>Validation</th><th>Expectation</th></tr></thead>
+        <tbody>
+          <tr><td>AHP weighted sum (reproduces Kendagannaswamy)</td><td>Random split</td><td>≈ 0.763 published</td></tr>
+          <tr><td>LightGBM, standard factors (reproduces Kendagannaswamy)</td><td>Random split</td><td>≈ 0.948 published</td></tr>
+          <tr><td>LightGBM, standard factors</td><td>Spatial block CV</td><td>Drops — this <em>is</em> finding E1</td></tr>
+          <tr><td>LightGBM + HAND + UICA</td><td>Spatial block CV</td><td>Finding E2 — does spillover add signal?</td></tr>
+          <tr><td>LightGBM + HAND + UICA + ΔUICA</td><td>Spatial block CV</td><td>Finding E2</td></tr>
+          <tr><td>PU-LightGBM/XGBoost + UICA + ΔUICA</td><td>Spatial block CV</td><td>Proposed model</td></tr>
+          <tr><td>PU-LightGBM/XGBoost + UICA + ΔUICA</td><td>Temporal hold-out 2018 → 2021</td><td>Hardest test; lowest, most honest number</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout say">
+      <p class="callout-h">Say this if a panellist frames lower AUC as failure</p>
+      <p>“We are not trying to beat 0.948. Published flood-susceptibility AUCs cluster at 0.94–0.99 partly because a random split lets a pixel’s own neighbours into the test set. Under spatial block cross-validation we expect lower — and measuring how much lower, for the Kerala case, is one of our results. A defensible 0.85 that holds on unseen ground is more useful to a planner than an inflated 0.95 that does not.”</p>
+    </div>
+
+    <h3>The four novelty experiments</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Tests</th><th>Headline number</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">E1</td><td>How much published accuracy survives honest evaluation</td><td>AUC drop, random split → spatial block CV</td></tr>
+          <tr><td class="mono">E2</td><td>Whether upslope sealed surface adds signal beyond local sealed surface</td><td>PR-AUC gain from adding UICA (+ permutation test)</td></tr>
+          <tr><td class="mono">E3</td><td>Is a pre-construction lookup systematically wrong? (natural experiment)</td><td>Under-estimation in susceptibility points; % of cells that shift class</td></tr>
+          <tr><td class="mono">E4</td><td>Is the dashboard’s advice actually achievable</td><td>% of high-risk parcels with a feasible counterfactual</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ NATURAL EXPERIMENT -->
+<section id="experiment">
+  <div class="wrap col">
+    <h2>Section 10</h2>
+    <p class="section-title">The natural experiment — expect the hardest question here</p>
+
+    <h3>The idea in one breath</h3>
+    <p>We can test the development-aware claim against reality because the development already happened. Kerala’s recent history <em>is</em> the experiment: plots that were empty before the 2018 flood and have since been built on.</p>
+
+    <h3>The setup</h3>
+    <ul>
+      <li><b>Treatment cells:</b> unbuilt before the 2018 event, built by 2021 (identified by Stage 2B build-year detection).</li>
+      <li><b>Control cells:</b> stayed unbuilt, <em>matched</em> to treatment cells on elevation, slope, HAND and distance to road (propensity matching).</li>
+      <li><b>The test:</b> fit the model on pre-2018 data only. For the treatment cells, does <span class="mono">S_developed</span> predict their <em>post-construction</em> 2021 flood outcome better than <span class="mono">S_current</span> does? Report the ROC-AUC / PR-AUC difference and the % of cells that shift vulnerability class.</li>
+    </ul>
+
+    <div class="callout trap">
+      <p class="callout-h">Answer ready before they ask it</p>
+      <p>“This is a quasi-experimental design, not a randomised one. People choose to build on flatter, more accessible land, so treatment and control cells differ systematically. Propensity matching reduces that but does not remove it. We will describe results as <em>association under matching</em>, never as a proven causal effect — and we say so in the report and here, rather than waiting to be caught on it.”</p>
+    </div>
+
+    <div class="callout">
+      <p class="callout-h">If the treatment group turns out too small</p>
+      <p>Widen the window to 2016–2024, widen the study area to the full Periyar basin, and report a power analysis rather than a weak result. This risk is in our plan with that mitigation already written down.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ QUESTION BANK -->
+<section id="qbank">
+  <div class="wrap col">
+    <h2>Section 11</h2>
+    <p class="section-title">Question bank — likely, tricky, and confusing</p>
+
+    <h4>Concept &amp; framing</h4>
+
+    <div class="qa"><div class="q">Explain your project to someone who knows nothing about it.</div><div class="a"><p>“Flood maps today are built from where flooding has already happened, on land as it looks now. If you build a house on a green plot, that plot stops soaking up rain and starts shedding it onto the plots downhill — but the map never updated. We add features and a second prediction so the map can say what a plot <em>becomes</em> once it is built on, and we test that against plots in Kochi that were actually built on after 2018.”</p></div></div>
+
+    <div class="qa"><div class="q">Is this flood prediction or flood susceptibility? They are different.</div><div class="a"><p>“Susceptibility. We produce a standing map of relative tendency to flood, based on terrain and land cover. We do not forecast a specific storm or attach a probability to a future event. That is deliberate — it sidesteps the rainfall-timing error the base paper flags.”</p></div></div>
+
+    <div class="qa"><div class="q">Your title says “multi-temporal” but your base paper is single-snapshot. Contradiction?</div><div class="a"><p>“No — that is one of the things we change. The base paper predicts per image date. We build the full data stack for five years (2017–2024) so we can detect build years, compute ΔUICA, and run a temporal hold-out. Multi-temporal is our extension of their single-snapshot design, and it is exactly what their future-work section recommends.”</p></div></div>
+
+    <div class="qa"><div class="q">How is your “spatial-temporal analysis” different from the base paper’s — they claim the same phrase?</div><div class="a"><p>“Theirs is spatial-temporal in the sense of matching each SAR image to same-day rainfall. Ours is spatial-temporal in a different sense: multi-year epochs to measure change (ΔUICA) and to test whether a model fitted on 2018 still works in 2021. Same phrase, different mechanism.”</p></div></div>
+
+    <div class="qa"><div class="q">What is the single most novel thing here?</div><div class="a"><p>“Predicting two susceptibility values per plot — as it is, and as it would be once built — and validating the difference against development that really happened. UICA is the feature that makes the second value meaningful.”</p></div></div>
+
+    <h4>Method</h4>
+
+    <div class="qa"><div class="q">Define UICA. Give me the formula.</div><div class="a"><p>“Upslope Impervious Contributing Area. Take flow accumulation — follow every cell downhill and count what drains through each point — but weight each upstream cell by how paved it is. Formula: UICA(c) = sum over all cells u draining into c of impervious_fraction(u) × cell_area. It is one weighted flow-accumulation pass over the filled DEM. ΔUICA is its change between two years.”</p></div></div>
+
+    <div class="qa"><div class="q">How do you get flood labels without a hydraulic model?</div><div class="a"><p>“Two ways. We build a flood inventory directly from Sentinel-1 radar using the standard SAR → decibel → Edge-Otsu water-detection chain for the 2018, 2019 and 2021 events, minus the JRC permanent-water layer, corroborated by DFO and Copernicus EMS. And we train under positive-unlabeled learning, so we only need confirmed flooded locations — we never have to label anywhere ‘safe’.”</p></div></div>
+
+    <div class="qa"><div class="q">Positive-unlabeled learning — explain simply.</div><div class="a"><p>“We know where it flooded. We do not know that everywhere else is safe — radar misses water under trees and between buildings, and satellites pass only every few days, so a place might just never have been photographed while flooded. So we treat flooded cells as positive and everything else as ‘unlabeled’, and use a method that estimates the true positive rate and corrects for it, instead of calling unlabeled cells negative.”</p></div></div>
+
+    <div class="qa"><div class="q">How can you predict post-development susceptibility for land that hasn’t been developed?</div><div class="a"><p>“We query the trained model at a built-state feature vector: impervious fraction raised to the observed Kochi residential norm, vegetation reduced to match, and the UICA of every downstream cell updated for the new sealed surface. It is a counterfactual evaluation of the model, and we check it is right using the natural experiment on plots built between 2018 and 2021.”</p></div></div>
+
+    <div class="qa"><div class="q">Why LightGBM / XGBoost and not deep learning like your base paper?</div><div class="a"><p>“Our problem is tabular — for each cell we have ~15 engineered hydrological features and a yes/no flood label. Gradient boosting is the strongest, fastest tool for that, it runs on a laptop CPU, and it works cleanly with SHAP and with positive-unlabeled bagging. The closest Kerala study found LightGBM beat expert weighting 0.948 to 0.763. Deep learning still appears in our pipeline — but for the land-cover segmentation step, not the susceptibility model.”</p></div></div>
+
+    <div class="qa"><div class="q">What is HAND, and why does it matter that your papers don’t use it?</div><div class="a"><p>“Height Above Nearest Drainage — how far above the stream it drains to a cell sits, vertically. It is one of the strongest single flood predictors known, and none of our four reference papers includes it. Adding it is a low-cost, well-justified improvement.”</p></div></div>
+
+    <div class="qa"><div class="q">Why FABDEM instead of SRTM or plain Copernicus DEM?</div><div class="a"><p>“SRTM and raw Copernicus DEM include tree canopy and building tops in the ‘ground’ height. In a green, densely built district like Kochi, a coconut canopy over low land makes that land look higher than it is and puts it in the wrong flood class. FABDEM is the same Copernicus DEM with canopy and buildings machine-learned out. The Kerala paper names SRTM canopy interference as a limitation — FABDEM removes it.”</p></div></div>
+
+    <div class="qa"><div class="q">Spatial block cross-validation — why, in one line?</div><div class="a"><p>“Neighbouring raster cells are almost identical, so a random split effectively puts test data into the training set and inflates the score. We make each fold a whole sub-watershed so training and testing areas never touch.”</p></div></div>
+
+    <h4>Data</h4>
+
+    <div class="qa"><div class="q">Kerala is cloudy in the monsoon — how do you get optical imagery?</div><div class="a"><p>“Three ways: Sentinel-1 radar sees through cloud and is our flood-inventory source anyway; for land cover we use dry-season (December–February) median composites; and Google Dynamic World / ESA WorldCover provide ready-made land cover as a fallback. Cloud cover is a known constraint we designed around, not an afterthought.”</p></div></div>
+
+    <div class="qa"><div class="q">10 m pixels — can you really assess a single building?</div><div class="a"><p>“No, and we do not claim to. A single house is often smaller than one Sentinel-2 pixel. We score at grid-cell / building-cluster level and say so explicitly in every output. That honesty is a deliberate methodology point.”</p></div></div>
+
+    <div class="qa"><div class="q">Are Microsoft/Google building footprints reliable?</div><div class="a"><p>“They are AI-detected, not surveyed, so they have known noise in dense or informal settlements. We cross-check across three independent sources — Microsoft, Google, OSM — and manually spot-check a sample against the raw imagery before trusting them as ground truth.”</p></div></div>
+
+    <div class="qa"><div class="q">What if a data source goes down or rate-limits you?</div><div class="a"><p>“Every module has a documented fallback and logs when it uses one. For heavy needs like building footprints we already plan to move from live API calls to one-time bulk downloads, and we cache everything locally so re-running does not re-fetch.”</p></div></div>
+
+    <h4>Novelty pressure</h4>
+
+    <div class="qa"><div class="q">Isn’t AHP + LightGBM for Kerala already done — Kendagannaswamy 2025?</div><div class="a"><p>“Yes, and we reproduce both their models as baselines. That is the point of comparison, not our contribution. Our contribution is what they list as their <em>own</em> future work: temporal dynamics, cross-validation, a higher-resolution canopy-corrected DEM, and more advanced ML — plus development-aware prediction and UICA, which they do not touch at all.”</p></div></div>
+
+    <div class="qa"><div class="q">Explainable ML for floods already exists. So does change detection. What’s left?</div><div class="a"><p>“Both true — and we dropped those as standalone claims after auditing them. What is left and genuinely not in our reference set: the flow-routed upslope feature (UICA), the two-value prospective prediction with the uplift Δ, and validating a susceptibility model against observed development. Explainability and change detection are supporting tools here, not the headline.”</p></div></div>
+
+    <div class="qa"><div class="q">Isn’t this just applying an existing method to a new area?</div><div class="a"><p>“A new area and a new dashboard would not be a research contribution and we would not present them as one. The contribution is a question none of the four papers answers — does a plot’s flood susceptibility change once it is built on, by how much, and can that be predicted beforehand, including the runoff pushed onto neighbours downhill.”</p></div></div>
+
+    <div class="qa"><div class="q">Your expected AUC is lower than published work. Why is that acceptable?</div><div class="a"><p>“Because the published numbers are inflated by leaky validation. We report the leaky number and the leak-free number side by side; the gap between them is a result. A model that holds up on ground it has never seen is the one a planner should use.”</p></div></div>
+
+    <h4>Scope, feasibility, use</h4>
+
+    <div class="qa"><div class="q">Who actually uses this, and is it a certified flood model?</div><div class="a"><p>“Two users: a ward planner watching where growth is loading risk, and a citizen checking a plot before building. It is an <em>advisory</em> decision-support indicator — relative vulnerability with a stated confidence — not a statutory hydraulic model, and we label it that way everywhere.”</p></div></div>
+
+    <div class="qa"><div class="q">Can you finish this in one semester?</div><div class="a"><p>“The core deliverable — flood inventory, change detection, flow-coupled features, PU model, leak-free validation, and experiments E1 and E2 — lands by week 12. The full dual prediction and its natural-experiment test is the top extension for weeks 13–14. We sequenced it so a complete, defensible result exists even if the last stage runs long. E1 alone is a publishable finding about validation honesty for Kerala.”</p></div></div>
+
+    <div class="qa"><div class="q">Where does rainfall enter if you don’t use live storms?</div><div class="a"><p>“As a long-run climate statistic: the number of days per year above 10 mm from CHIRPS over 2010–2024. It tells the model how wet a place’s climate is without tying any prediction to a specific storm date.”</p></div></div>
+
+    <div class="qa"><div class="q">What does success look like — give a number.</div><div class="a"><p>“A defensible PR-AUC / ROC-AUC under spatial block CV — we would be satisfied around 0.82–0.88 — plus a measurable, significant PR-AUC gain from adding UICA (E2), and a measurable, honestly-reported under-estimation from the naive current-state lookup (E3). Beating 0.948 is not the goal.”</p></div></div>
+
+    <div class="qa"><div class="q">What is your explainability, concretely?</div><div class="a"><p>“Every scored cell gets a SHAP breakdown — which factors pushed the score up or down — and a constrained counterfactual: the smallest change in things a builder can control (paved fraction, setback, on-plot retention) that moves the cell to a lower class, with elevation and slope frozen so the advice is always physically achievable.”</p></div></div>
+
+    <div class="qa"><div class="q">What is your single biggest risk?</div><div class="a"><p>“Time, not data. GIS and CV debugging — alignment, resampling, model convergence — always takes longer than estimated. We built slack in and prioritised a working end-to-end pipeline early over perfecting any one stage. The one true data risk is Sentinel-1 coverage at the 2018 flood peak, which we check in Week 1 with a written fallback.”</p></div></div>
+
+    <div class="qa"><div class="q">If you had to cut scope tomorrow, what goes?</div><div class="a"><p>“The citizen dashboard and the conformal-uncertainty layer go first — they are extensions 3 and 4. Coastal and tidal flooding and climate-change scenarios are already declared out of scope. The core model, the UICA experiment and the leak-free evaluation stay — those are the contribution.”</p></div></div>
+  </div>
+</section>
+
+<!-- ============================================ LIMITATIONS -->
+<section id="limits">
+  <div class="wrap col">
+    <h2>Section 12</h2>
+    <p class="section-title">Limitations — volunteer these before you’re asked</p>
+    <p>A panel trusts a team that names its own limits. Work one or two of these into the talk unprompted.</p>
+    <ul>
+      <li><b>Resolution.</b> Sentinel-2 is 10 m — smaller than many houses. We score at grid-cell / cluster level, never per building.</li>
+      <li><b>DEM.</b> A 30 m DEM gives terrain context around a cluster, not exact per-building height.</li>
+      <li><b>The natural experiment is quasi-experimental.</b> People choose where to build; matching narrows but does not close the gap. Results are “association under matching”, not proven causation.</li>
+      <li><b>Counterfactuals are what-if statements under our model</b>, not engineering guarantees. “High → Moderate if paved cover stays under 42%” describes the model’s response, not a certified hydraulic outcome.</li>
+      <li><b>S_developed uses a typical built density</b>, not a specific building plan. A given plot may be built more or less densely.</li>
+      <li><b>UICA is a runoff proxy, not a drainage model.</b> It follows terrain flow paths and ignores stormwater pipes, culverts and pumping. In a serviced urban area the real routing can differ.</li>
+      <li><b>Rainfall is a long-run frequency, not an event.</b> The cost of sidestepping the timing problem is that our map cannot speak to any specific storm.</li>
+      <li><b>Flood risk is multi-causal.</b> River discharge, tides, soil permeability and drainage maintenance all matter and are outside our data. We model the terrain / land-cover side and say so.</li>
+      <li><b>DFO is coarse (~250 m)</b> and not building-level ground truth — used as one of several evidence sources, not sole proof.</li>
+      <li><b>Change detection can misfire</b> on clouds, shadows, seasonal vegetation, or construction materials — mitigated by manual sample verification, not treated as error-free.</li>
+      <li><b>Ethics.</b> A public vulnerability map can be misused — to depress land prices or justify unequal services. Mitigations: publish the Area-of-Applicability mask, report confidence intervals not bare classes, use relative-vulnerability language, and state the output is advisory, not a statutory survey.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================ TRAPS -->
+<section id="traps">
+  <div class="wrap col">
+    <h2>Section 13</h2>
+    <p class="section-title">Traps — do not dig these holes</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Do not say</th><th>Say instead</th></tr></thead>
+        <tbody>
+          <tr><td>“We predict floods / forecast flooding.”</td><td>“We map flood <em>susceptibility</em> — relative tendency, not a forecast of a specific event.”</td></tr>
+          <tr><td>“We assess each building’s risk.”</td><td>“We work at grid-cell / building-cluster level — Sentinel-2’s 10 m resolution does not support per-building claims.”</td></tr>
+          <tr><td>“The natural experiment proves development causes flooding.”</td><td>“It shows association under propensity matching — it is quasi-experimental, not causal proof.”</td></tr>
+          <tr><td>“We’ll beat the state-of-the-art AUC.”</td><td>“Under leak-free validation we expect lower numbers than the inflated published ones — quantifying that gap is a result.”</td></tr>
+          <tr><td>“Our risk score is scientifically calibrated.”</td><td>“It is an explainable, advisory decision-support indicator — not a certified engineering flood model.”</td></tr>
+          <tr><td>“We handle coastal flooding and climate-change scenarios too.”</td><td>“Those are explicitly out of scope for one semester and listed as future work — the Kerala paper names them too.”</td></tr>
+          <tr><td>“All six contributions are individually unpublished.”</td><td>“UICA, the dual prediction and natural-experiment validation are new to our reference set; the rest is a deliberate, disciplined combination.”</td></tr>
+          <tr><td>“We use the base paper’s U-Net model.”</td><td>“We reproduce its flood-inventory pipeline and use it as a baseline; our susceptibility model is gradient boosting, which suits a standing map.”</td></tr>
+          <tr><td>Guessing a citation you don’t have.</td><td>“That is a widely reported figure from the 2018 event — we’ll pin the exact government source in the report.”</td></tr>
+          <tr><td>Two members giving different scope answers.</td><td>Core = phases 1–3 + E1/E2 by week 12. Dual prediction (phase 4 full) = extension, weeks 13–14. Same words from everyone.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ ROLES -->
+<section id="roles">
+  <div class="wrap col">
+    <h2>Section 14</h2>
+    <p class="section-title">Who answers what — a suggested split</p>
+    <p>Agree this beforehand so nobody talks over anyone and no question lands in silence. Every member should still be able to cover the pitch and the slide they are presenting.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Area</th><th>Lead answerer</th><th>Backup</th></tr></thead>
+        <tbody>
+          <tr><td>Motivation, problem statement, literature, base paper</td><td>Member A</td><td>Member B</td></tr>
+          <tr><td>Data — sources, verification, cloud cover, resolution honesty</td><td>Member B</td><td>Member C</td></tr>
+          <tr><td>Architecture, features (UICA / ΔUICA / HAND / TWI), flow routing</td><td>Member C</td><td>Member D</td></tr>
+          <tr><td>Model, PU learning, leak-free validation, the experiments, natural experiment</td><td>Member D</td><td>Member A</td></tr>
+          <tr><td>Novelty framing &amp; “is this really new” pushback</td><td>whoever is presenting slide 6</td><td>all</td></tr>
+          <tr><td>Scope, timeline, feasibility, risks</td><td>Member A</td><td>Member D</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Assign the letters to Albin / Niketh / Jatin / Ranjith by who knows each area best. If a question comes and the lead is unsure, the backup steps in — do not leave a gap, and do not all answer at once.</p>
+  </div>
+</section>
+
+<!-- ============================================ FIVE THINGS -->
+<section id="five">
+  <div class="wrap col">
+    <h2>Section 15</h2>
+    <p class="section-title">If you remember only five things</p>
+    <ol class="num-list">
+      <li><b>The one-liner.</b> “We predict how flood-prone land will be <em>after</em> it is built on — not just how it looks today — and we test it against plots in Kochi that were built on after 2018.”</li>
+      <li><b>The word is “susceptibility.”</b> Not prediction, not forecast, not risk. A standing map of relative tendency to flood.</li>
+      <li><b>Three things are genuinely new</b> against our four papers: UICA (paved surface routed downhill), the dual prediction (S_current, S_developed, Δ), and natural-experiment validation. The rest is disciplined method — honest evaluation, honest labels, actionable advice.</li>
+      <li><b>Lower AUC is a finding, not a failure.</b> Published 0.94–0.99 values are inflated by leaky random splits. We report the leaky and leak-free numbers side by side.</li>
+      <li><b>Name your limits first.</b> Cluster-level not per-building; quasi-experiment not causal proof; advisory indicator not a certified flood model; terrain/land-cover side only. Saying it first is the strongest move you have.</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap col">
+    <div class="spectrum-rule" role="presentation"></div>
+    <p><b>ProFlood-Kerala · Defence Brief.</b> Companion to “Development-Aware Flood Susceptibility Mapping Using Multi-Temporal Satellite Data.” Team 67, IIIT Kottayam — Albin John, Niketh B Nath, Jatin Nath, R Ranjith Kumar. Guide: Dr. Rosebell Paul.</p>
+    <p class="muted">Built from the first-review presentation and the project’s base-paper, dataset, and implementation-plan (v3) documents. Where an earlier draft and the v3 plan differ, this brief follows v3 — the design the presentation shows.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var btn=document.getElementById('themeBtn');
+  var order=['system','light','dark'];
+  var i=0;
+  try{var saved=localStorage.getItem('pfk-theme');if(saved){i=order.indexOf(saved);if(i<0)i=0;}}catch(e){}
+  apply();
+  btn.addEventListener('click',function(){i=(i+1)%order.length;apply();try{localStorage.setItem('pfk-theme',order[i]);}catch(e){}});
+  function apply(){
+    var m=order[i];
+    if(m==='system'){root.removeAttribute('data-theme');btn.textContent='Theme: auto';}
+    else{root.setAttribute('data-theme',m);btn.textContent='Theme: '+m;}
+  }
+
+  // scrollspy
+  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var map={};
+  links.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)map[id]=a;});
+  var ids=Object.keys(map);
+  function spy(){
+    var y=window.scrollY+140;var cur=ids[0];
+    ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.offsetTop<=y)cur=id;});
+    links.forEach(function(a){a.classList.remove('active');});
+    if(map[cur])map[cur].classList.add('active');
+  }
+  var t;
+  window.addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;spy();},120);},{passive:true});
+  spy();
+})();
+</script>
+
+</body>
+</html>
