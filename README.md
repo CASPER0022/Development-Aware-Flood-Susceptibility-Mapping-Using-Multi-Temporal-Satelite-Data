@@ -9,12 +9,18 @@ A development-aware flood susceptibility and risk mapping framework for the **Lo
 BTP/
 ├── README.md                                # Root repository documentation
 ├── .gitignore                              # Root Git ignore rules
+├── requirements.txt                         # Python environment dependencies
 ├── Implementation Plans/                   # Project implementation plans & review roadmaps
 ├── Review 1/                               # Review 1 presentations & materials
 │
 ├── Phase 1/                                # Phase 1: Base Paper Reproduction & SAR Verification
 │   ├── Task1_Summary.html                  # Plain-language HTML report for Phase 1 & NRSC validation
 │   ├── Phase1_Implementation_Plan_Oct_Review.md# Phase 1 review roadmap
+│   │
+│   ├── docs/                               # Environment & Setup Documentation
+│   │   └── environment_setup.md            # Verified GEE & environment setup specification
+│   │
+│   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
 │   ├── scripts/                            # Production Pipeline Scripts
 │   │   ├── 01_define_aoi_and_validate_flood.py # Master Phase 1 entry-point pipeline script
@@ -29,17 +35,18 @@ BTP/
 │   │       ├── periyar_study_area.shp      # Master AOI Shapefile (EPSG:4326 / EPSG:32643)
 │   │       └── aoi_summary_metadata.json   # Precision JSON metadata report
 │   │
-│   └── outputs/                            # Output Deliverables & Maps
-│       └── maps/
-│           ├── study_area_aoi.png          # Publication-quality static flood inundation map
-│           └── study_area_aoi.html         # Interactive HTML map with landmarks & AOI overlay
+│   └── outputs/                            # Output Deliverables, Maps & Trained Models
+│       ├── maps/                           # Publication PNG maps & interactive HTML maps
+│       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
 └── Phase 2/                                # Phase 2: Feature Extraction & Novel Model Training (Upcoming)
 ```
 
 ---
 
-## 🎯 Key Empirical Results (Phase 1 Task 1)
+## 🎯 Empirical Progress Summary
+
+### Phase 1 Task 1: AOI & Flood Verification
 - **Master AOI Bounds**: `[76.15°E, 9.90°N, 76.55°E, 10.25°N]` (**1,696.64 km²**, UTM Zone 43N).
 - **Spatial Resolution**: Native $3,800 \times 2,900$ grid ($\approx 10\text{m}/\text{pixel}$).
 - **Built-Up Land (Class 50)**: $190.47\text{ km}^2$ ($11.23\%$ of AOI).
@@ -50,10 +57,18 @@ BTP/
   - **Cochin International Airport (COK)**: 2,711 double-bounce flood pixels ($20.09\%$ of precinct built-up land).
   - **Aluva Town Center**: 5,925 double-bounce flood pixels ($21.47\%$ of precinct built-up land).
 
+### Phase 1 Step 2: Environment & GEE Authentication
+- **Python Virtual Environment**: Configured Python 3.13 venv (`geopandas`, `rasterio`, `lightgbm`, `xgboost`, `shap`, `scikit-learn`).
+- **Google Earth Engine (GEE)**: Authenticated and linked to Cloud Project **`btp-flood`**. Verified live API access for USGS SRTM DEM & ESA WorldCover 2021.
+- **QGIS Setup**: GIS viewer setup for spatial visual QA.
+
 ---
 
 ## 🛠️ Quick Start
 ```bash
+# Install dependencies
+pip install -r requirements.txt
+
 # Run Phase 1 master pipeline script
 python "Phase 1/scripts/01_define_aoi_and_validate_flood.py"
 ```
