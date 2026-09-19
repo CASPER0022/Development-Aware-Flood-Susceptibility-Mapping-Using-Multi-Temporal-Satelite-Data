@@ -1,0 +1,207 @@
+{
+  "aoi_bbox_wgs84": [
+    76.15,
+    9.9,
+    76.55,
+    10.25
+  ],
+  "n_ok": 10,
+  "n_warn": 0,
+  "n_fail": 0,
+  "datasets": [
+    {
+      "dataset": "FABDEM 30m DEM",
+      "path": "data/raw/fabdem_30m_aoi.tif",
+      "type": "raster",
+      "status": "OK",
+      "bands": 1,
+      "shape": [
+        1300,
+        1486
+      ],
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.14973747716978,
+        9.899883588639186,
+        76.55020643083026,
+        10.2502265494458
+      ],
+      "intersects_aoi": true,
+      "valid_data_fraction": 1.0,
+      "size_bytes": 3021392
+    },
+    {
+      "dataset": "CHIRPS daily time series 2017-2023",
+      "path": "data/raw/chirps_daily_timeseries_2017_2023.csv",
+      "type": "csv",
+      "status": "OK",
+      "n_rows": 2556,
+      "columns": [
+        "date",
+        "aoi_mean_precip_mm"
+      ],
+      "size_bytes": 63889
+    },
+    {
+      "dataset": "CHIRPS monsoon JJAS total by year",
+      "path": "data/raw/chirps_monsoon_jjas_total_by_year_2017_2023.tif",
+      "type": "raster",
+      "status": "OK",
+      "bands": 7,
+      "shape": [
+        8,
+        9
+      ],
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.10034810284888,
+        9.850045056676235,
+        76.55035016127572,
+        10.250046886388976
+      ],
+      "intersects_aoi": true,
+      "valid_data_fraction": 1.0,
+      "size_bytes": 6689
+    },
+    {
+      "dataset": "CHIRPS mean annual rainfall",
+      "path": "data/raw/chirps_mean_annual_rainfall_2017_2023.tif",
+      "type": "raster",
+      "status": "OK",
+      "bands": 1,
+      "shape": [
+        8,
+        9
+      ],
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.10034810284888,
+        9.850045056676235,
+        76.55035016127572,
+        10.250046886388976
+      ],
+      "intersects_aoi": true,
+      "valid_data_fraction": 1.0,
+      "size_bytes": 1454
+    },
+    {
+      "dataset": "HydroRIVERS (clipped)",
+      "path": "data/raw/hydrosheds/periyar_rivers_clip.gpkg",
+      "type": "vector",
+      "layer": null,
+      "status": "OK",
+      "n_features": 595,
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.11874999999972,
+        9.8,
+        76.64999999999999,
+        10.35
+      ],
+      "intersects_aoi": true,
+      "size_bytes": 262144
+    },
+    {
+      "dataset": "HydroBASINS level-06 (clipped)",
+      "path": "data/raw/hydrosheds/periyar_basins_lev06_clip.gpkg",
+      "type": "vector",
+      "layer": null,
+      "status": "OK",
+      "n_features": 3,
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.10817003911542,
+        9.8,
+        76.64999999999999,
+        10.35
+      ],
+      "intersects_aoi": true,
+      "size_bytes": 110592
+    },
+    {
+      "dataset": "OSM road edges",
+      "path": "data/raw/osm_roads_aoi.gpkg",
+      "type": "vector",
+      "layer": "edges",
+      "status": "OK",
+      "n_features": 155985,
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.1495635,
+        9.8999512,
+        76.5500071,
+        10.2530549
+      ],
+      "intersects_aoi": true,
+      "size_bytes": 53354496
+    },
+    {
+      "dataset": "OSM road nodes",
+      "path": "data/raw/osm_roads_aoi.gpkg",
+      "type": "vector",
+      "layer": "nodes",
+      "status": "OK",
+      "n_features": 65828,
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.1501757,
+        9.9000085,
+        76.5499575,
+        10.2499954
+      ],
+      "intersects_aoi": true,
+      "size_bytes": 53354496
+    },
+    {
+      "dataset": "ESA WorldCover 2021 10m",
+      "path": "data/raw/esa_worldcover_2021_aoi.tif",
+      "type": "raster",
+      "status": "OK",
+      "bands": 1,
+      "shape": [
+        2900,
+        3800
+      ],
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.15,
+        10.008333333333333,
+        76.46666666666667,
+        10.25
+      ],
+      "intersects_aoi": true,
+      "valid_data_fraction": 1.0,
+      "size_bytes": 11029078
+    },
+    {
+      "dataset": "OpenLandMap USDA soil texture class",
+      "path": "data/raw/soil_openlandmap_texture_class_aoi.tif",
+      "type": "raster",
+      "status": "OK",
+      "bands": 1,
+      "shape": [
+        157,
+        180
+      ],
+      "crs": "EPSG:4326",
+      "crs_ok": true,
+      "bounds": [
+        76.14794084660154,
+        9.899434430997127,
+        76.55218272445532,
+        10.252023180014039
+      ],
+      "intersects_aoi": true,
+      "valid_data_fraction": 1.0,
+      "size_bytes": 3916
+    }
+  ]
+}
