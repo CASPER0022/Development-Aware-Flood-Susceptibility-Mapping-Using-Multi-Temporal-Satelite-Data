@@ -24,16 +24,23 @@ BTP/
 │   │
 │   ├── scripts/                            # Production Pipeline Scripts
 │   │   ├── 01_define_aoi_and_validate_flood.py # Master Phase 1 entry-point pipeline script
+│   │   ├── 02_fetch_fabdem_dem.py          # FABDEM 30m forest/building-removed elevation downloader
+│   │   ├── 03_fetch_chirps_rainfall.py     # CHIRPS daily precipitation time-series (2017-2023 via GEE)
+│   │   ├── 04_fetch_hydrosheds_rivers_basins.py# HydroRIVERS stream network & HydroBASINS extractor
+│   │   ├── 05_fetch_osm_roads.py           # OSM road network & junction nodes extractor (osmnx)
+│   │   ├── 06_fetch_soil_data.py           # OpenLandMap USDA soil texture class loader
+│   │   ├── 07_dataset_acquisition_checkpoint.py# Automated Step 3 dataset verification checkpoint
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
 │   │   └── validate_against_ndem.py        # ISRO/NRSC NDEM ground truth validation engine
 │   │
 │   ├── data/                               # Structured Data Assets
-│   │   └── aoi/                            # Master Boundary Datasets & Precision Metadata
+│   │   └── aoi/                            # Master Boundaries, Precision Metadata & Checkpoint Reports
 │   │       ├── periyar_study_area.geojson  # Master AOI GeoJSON (1,696.64 km²)
 │   │       ├── periyar_study_area.shp      # Master AOI Shapefile (EPSG:4326 / EPSG:32643)
-│   │       └── aoi_summary_metadata.json   # Precision JSON metadata report
+│   │       ├── aoi_summary_metadata.json   # Precision JSON metadata report
+│   │       └── step3_dataset_acquisition_checkpoint.json# Automated 10/10 dataset audit report
 │   │
 │   └── outputs/                            # Output Deliverables, Maps & Trained Models
 │       ├── maps/                           # Publication PNG maps & interactive HTML maps
@@ -60,7 +67,14 @@ BTP/
 ### Phase 1 Step 2: Environment & GEE Authentication
 - **Python Virtual Environment**: Configured Python 3.13 venv (`geopandas`, `rasterio`, `lightgbm`, `xgboost`, `shap`, `scikit-learn`).
 - **Google Earth Engine (GEE)**: Authenticated and linked to Cloud Project **`btp-flood`**. Verified live API access for USGS SRTM DEM & ESA WorldCover 2021.
-- **QGIS Setup**: GIS viewer setup for spatial visual QA.
+
+### Phase 1 Step 3: Flood-Influencing Datasets Acquisition (**10/10 PASS RATE**)
+- **FABDEM 30m DEM**: Forest/building-removed bare-earth elevation data (`data/raw/fabdem_30m_aoi.tif`).
+- **CHIRPS Daily Precipitation**: 2,556 daily records (2017–2023) + monsoon seasonal totals via GEE API (`data/raw/chirps_*`).
+- **HydroSHEDS Drainage**: 595 HydroRIVERS segments + 3 HydroBASINS sub-basin polygons (`data/raw/hydrosheds_*`).
+- **OSM Transport Network**: 155,985 road edges + 65,828 junction nodes via `osmnx` (`data/raw/osm_roads_aoi.gpkg`).
+- **ESA WorldCover 10m LULC**: Native 10m land cover raster (`data/raw/esa_worldcover_2021_aoi.tif`).
+- **OpenLandMap Soil Texture**: USDA soil texture class raster (`data/raw/soil_texture_openlandmap_aoi.tif`).
 
 ---
 
@@ -71,6 +85,9 @@ pip install -r requirements.txt
 
 # Run Phase 1 master pipeline script
 python "Phase 1/scripts/01_define_aoi_and_validate_flood.py"
+
+# Run Step 3 dataset acquisition verification checkpoint
+python "Phase 1/scripts/07_dataset_acquisition_checkpoint.py"
 ```
 
 ---
