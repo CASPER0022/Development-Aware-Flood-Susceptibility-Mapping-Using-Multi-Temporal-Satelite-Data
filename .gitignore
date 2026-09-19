@@ -20,3 +20,8 @@ Phase 2/data/processed/
 .DS_Store
 .idea/
 .vscode/
+
+# OSMnx Overpass response cache
+cache/
+Phase 1/cache/
+Phase 2/cache/
