@@ -25,3 +25,8 @@ Phase 2/data/processed/
 cache/
 Phase 1/cache/
 Phase 2/cache/
+
+# Windows reserved artifact cleanup
+Phase 1/nul
+nul
+
