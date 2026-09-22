@@ -18,7 +18,9 @@ BTP/
 │   ├── Phase1_Implementation_Plan_Oct_Review.md# Phase 1 review roadmap
 │   │
 │   ├── docs/                               # Environment & Setup Documentation
-│   │   └── environment_setup.md            # Verified GEE & environment setup specification
+│   │   ├── environment_setup.md            # Verified GEE & environment setup specification
+│   │   ├── dataset_acquisition.md          # Step 3 flood-influencing dataset acquisition log
+│   │   └── sentinel1_acquisition.md        # Step 4 Sentinel-1 SAR acquisition log
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -30,6 +32,7 @@ BTP/
 │   │   ├── 05_fetch_osm_roads.py           # OSM road network & junction nodes extractor (osmnx)
 │   │   ├── 06_fetch_soil_data.py           # OpenLandMap USDA soil texture class loader
 │   │   ├── 07_dataset_acquisition_checkpoint.py# Automated Step 3 dataset verification checkpoint
+│   │   ├── 08_fetch_sentinel1_sar.py       # Step 4: Sentinel-1 GRD VV acquisition (2018/2019/2021 flood + dry refs, GEE)
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -76,6 +79,12 @@ BTP/
 - **ESA WorldCover 10m LULC**: Native 10m land cover raster (`data/raw/esa_worldcover_2021_aoi.tif`).
 - **OpenLandMap Soil Texture**: USDA soil texture class raster (`data/raw/soil_texture_openlandmap_aoi.tif`).
 
+### Phase 1 Step 4: Sentinel-1 SAR Imagery Acquisition (3/3 Flood Events)
+- **Source**: GEE `COPERNICUS/S1_GRD` (IW mode, VV polarization, terrain-corrected sigma0 in dB).
+- **Flood events acquired**: Aug 2018 (2018-08-21), Aug 2019 (2019-08-10), Oct 2021 (2021-10-16) — each cross-checked as applicable to this AOI via its own CHIRPS rainfall record, not just news reports.
+- **Dry references**: one pre-monsoon scene per year, each an exact `relativeOrbitNumber` match (orbit 165, descending) to that year's flood scene — identical imaging geometry, no incidence-angle correction needed.
+- **Output**: `data/raw/sentinel1_gee/*.tif` (6 GeoTIFFs) + `data/raw/sentinel1_gee_metadata.json`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -88,6 +97,9 @@ python "Phase 1/scripts/01_define_aoi_and_validate_flood.py"
 
 # Run Step 3 dataset acquisition verification checkpoint
 python "Phase 1/scripts/07_dataset_acquisition_checkpoint.py"
+
+# Run Step 4 Sentinel-1 SAR acquisition (2018/2019/2021 flood + dry refs)
+python "Phase 1/scripts/08_fetch_sentinel1_sar.py"
 ```
 
 ---
