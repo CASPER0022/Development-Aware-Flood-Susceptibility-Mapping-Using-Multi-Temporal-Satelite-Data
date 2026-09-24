@@ -20,7 +20,8 @@ BTP/
 │   ├── docs/                               # Environment & Setup Documentation
 │   │   ├── environment_setup.md            # Verified GEE & environment setup specification
 │   │   ├── dataset_acquisition.md          # Step 3 flood-influencing dataset acquisition log
-│   │   └── sentinel1_acquisition.md        # Step 4 Sentinel-1 SAR acquisition log
+│   │   ├── sentinel1_acquisition.md        # Step 4 Sentinel-1 SAR acquisition log
+│   │   └── flood_inventory_otsu.md         # Step 5 Otsu flood inventory & visual validation
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -33,6 +34,7 @@ BTP/
 │   │   ├── 06_fetch_soil_data.py           # OpenLandMap USDA soil texture class loader
 │   │   ├── 07_dataset_acquisition_checkpoint.py# Automated Step 3 dataset verification checkpoint
 │   │   ├── 08_fetch_sentinel1_sar.py       # Step 4: Sentinel-1 GRD VV acquisition (2018/2019/2021 flood + dry refs, GEE)
+│   │   ├── 09_build_flood_inventory_otsu.py# Step 5: Otsu flood inventory (Eq. 1 dB, Lee filter, change vs dry ref) + validation maps
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -85,6 +87,14 @@ BTP/
 - **Dry references**: one pre-monsoon scene per year, each an exact `relativeOrbitNumber` match (orbit 165, descending) to that year's flood scene — identical imaging geometry, no incidence-angle correction needed.
 - **Output**: `data/raw/sentinel1_gee/*.tif` (6 GeoTIFFs) + `data/raw/sentinel1_gee_metadata.json`.
 
+### Phase 1 Step 5: Flood Inventory via Otsu Thresholding
+- **Method**: GEE σ⁰ verified already in dB → Lee 5×5 speckle filter on linear intensity → back to dB via base-paper Eq. 1 → per-image Otsu on VV → flood = water(flood date) AND NOT water(same-orbit dry ref), minus slope > 5° and specks < 5 px.
+- **Otsu thresholds** (all in the bimodal valley): 2018 −13.66 dB · 2019 −13.83 dB · 2021 −13.44 dB.
+- **Flood extent**: 2018-08-21 **23.5 km²** (1.39%) · 2019-08-10 **28.9 km²** (1.70%) · 2021-10-16 8.9 km² (0.52%).
+- **Visual check (Aug 2018)**: flood patches concentrate on the northern Periyar floodplain (Puthenvelikkara/Chengamanad/Aluva) and align with NRSC/ISRO NDEM same-day polygons; Kochi city control stays clean. Known misses: airport runway (dark in both scenes), urban double-bounce water; scene is ~5 days post-peak.
+- **Usability**: 2018 and 2019 usable as inventories; 2021 is noise-dominated (NDEM < 1 km² in AOI) and should not be used as positive labels.
+- **Output**: `data/processed/flood_inventory/*.tif` + `outputs/maps/step5_flood_inventory_*` (overview PNGs, 2018 site-check PNG, 2018 interactive HTML). Details: `Phase 1/docs/flood_inventory_otsu.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -100,6 +110,9 @@ python "Phase 1/scripts/07_dataset_acquisition_checkpoint.py"
 
 # Run Step 4 Sentinel-1 SAR acquisition (2018/2019/2021 flood + dry refs)
 python "Phase 1/scripts/08_fetch_sentinel1_sar.py"
+
+# Run Step 5 Otsu flood inventory + visual validation maps
+python "Phase 1/scripts/09_build_flood_inventory_otsu.py"
 ```
 
 ---
