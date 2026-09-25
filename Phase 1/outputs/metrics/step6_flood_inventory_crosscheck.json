@@ -1,0 +1,254 @@
+{
+  "task": "Step 6 - Independent cross-check of the Otsu flood inventory",
+  "gti_definition": "share of our flood pixels (or patches) confirmed by the reference extent; base paper Ground Truth Index = 84.05 %",
+  "tolerance_m": 40,
+  "min_patch_eval_px": 10,
+  "sources": {
+    "copernicus_ems": {
+      "usable": false,
+      "reason": "No EMSR Rapid Mapping activation for the Aug-2018 Kerala floods; the event was covered by International Charter activation 582, whose Indian products are NRSC/ISRO NDEM maps (used here as source A)."
+    },
+    "dfo_global_flood_database": {
+      "usable": false,
+      "gee_asset": "GLOBAL_FLOOD_DB/MODIS_EVENTS/V1",
+      "events_over_aoi": 24,
+      "latest_event_date_over_aoi": "2016-07-07",
+      "india_events_in_2018": 0,
+      "reason": "No 2018/2019/2021 event over the AOI; also MODIS 250 m. DFO archive website returns HTTP 410 Gone."
+    },
+    "A_ndem": {
+      "usable": true,
+      "file": "data/validation/NDEM_KL_Floods_Inundation.parquet",
+      "provider": "NRSC/ISRO National Database for Emergency Management (see data/validation/SOURCE.md)"
+    },
+    "B_sentinel2_mndwi": {
+      "usable": false,
+      "asset": "COPERNICUS/S2_HARMONIZED + COPERNICUS/S2_CLOUD_PROBABILITY",
+      "events": [
+        "2018_flood"
+      ],
+      "note": "Aug 2019 S2 tiles 73-100 % cloudy; 2021 not attempted (near-null event)"
+    }
+  },
+  "events": {
+    "2018_flood": {
+      "A1_ndem_same_day": {
+        "ndem_dates": [
+          "21-08-2018"
+        ],
+        "n_polygons": 1284,
+        "domain_km2": 1398.92,
+        "ours_km2": 23.54,
+        "reference_km2": 11.52,
+        "TP": 12144,
+        "FP": 48050,
+        "FN": 17316,
+        "TN": 3498617,
+        "GTI_px": 0.2017,
+        "GTI_px_40m": 0.3968,
+        "GTI_patch": 0.193,
+        "n_patches_evaluated": 658,
+        "n_patches_confirmed": 127,
+        "random_baseline": 0.0082,
+        "random_baseline_40m": 0.0198,
+        "lift_px": 24.49,
+        "lift_px_40m": 20.0533,
+        "POD": 0.4122,
+        "FAR": 0.7983,
+        "CSI": 0.1567,
+        "F1": 0.2709,
+        "OA": 0.9817,
+        "kappa": 0.2628,
+        "area_bias": 2.0432
+      },
+      "A2_ndem_event_envelope": {
+        "ndem_dates": [
+          "17-08-2018",
+          "18-08-2018",
+          "21-08-2018",
+          "24-08-2018",
+          "27-08-2018",
+          "28-08-2018"
+        ],
+        "n_polygons": 15000,
+        "domain_km2": 1398.92,
+        "ours_km2": 23.54,
+        "reference_km2": 75.07,
+        "TP": 22076,
+        "FP": 38118,
+        "FN": 169837,
+        "TN": 3346096,
+        "GTI_px": 0.3667,
+        "GTI_px_40m": 0.5844,
+        "GTI_patch": 0.386,
+        "n_patches_evaluated": 658,
+        "n_patches_confirmed": 254,
+        "random_baseline": 0.0537,
+        "random_baseline_40m": 0.1333,
+        "lift_px": 6.834,
+        "lift_px_40m": 4.3844,
+        "POD": 0.115,
+        "FAR": 0.6333,
+        "CSI": 0.096,
+        "F1": 0.1751,
+        "OA": 0.9418,
+        "kappa": 0.1534,
+        "area_bias": 0.3137
+      },
+      "B_sentinel2_mndwi": {
+        "s2_date": "2018-08-22",
+        "clear_share_of_domain": 0.0002,
+        "status": "rejected",
+        "reason": "only 0.0% of the domain is cloud/shadow-free (< 20% minimum)"
+      },
+      "diagnostic_unconfirmed_vs_envelope": {
+        "unconfirmed_km2": 9.78,
+        "share_within_60m_of_reference_water": 0.5318,
+        "share_of_domain_within_60m_of_reference_water": 0.0486,
+        "GTI_px_40m_excluding_60m_water_edge": 0.7421
+      }
+    },
+    "2019_flood": {
+      "A1_ndem_same_day": {
+        "ndem_dates": [
+          "10-08-2019"
+        ],
+        "n_polygons": 780,
+        "domain_km2": 1402.45,
+        "ours_km2": 28.9,
+        "reference_km2": 32.25,
+        "TP": 16354,
+        "FP": 57530,
+        "FN": 66107,
+        "TN": 3445153,
+        "GTI_px": 0.2213,
+        "GTI_px_40m": 0.3671,
+        "GTI_patch": 0.2571,
+        "n_patches_evaluated": 1019,
+        "n_patches_confirmed": 262,
+        "random_baseline": 0.023,
+        "random_baseline_40m": 0.0445,
+        "lift_px": 9.6235,
+        "lift_px_40m": 8.2577,
+        "POD": 0.1983,
+        "FAR": 0.7787,
+        "CSI": 0.1168,
+        "F1": 0.2092,
+        "OA": 0.9655,
+        "kappa": 0.1916,
+        "area_bias": 0.896
+      },
+      "A2_ndem_event_envelope": {
+        "ndem_dates": [
+          "10-08-2019",
+          "12-08-2019"
+        ],
+        "n_polygons": 840,
+        "domain_km2": 1402.45,
+        "ours_km2": 28.9,
+        "reference_km2": 32.6,
+        "TP": 16809,
+        "FP": 57075,
+        "FN": 66544,
+        "TN": 3444716,
+        "GTI_px": 0.2275,
+        "GTI_px_40m": 0.3715,
+        "GTI_patch": 0.2571,
+        "n_patches_evaluated": 1019,
+        "n_patches_confirmed": 262,
+        "random_baseline": 0.0232,
+        "random_baseline_40m": 0.0446,
+        "lift_px": 9.7854,
+        "lift_px_40m": 8.3267,
+        "POD": 0.2017,
+        "FAR": 0.7725,
+        "CSI": 0.1197,
+        "F1": 0.2138,
+        "OA": 0.9655,
+        "kappa": 0.1962,
+        "area_bias": 0.8864
+      },
+      "diagnostic_unconfirmed_vs_envelope": {
+        "unconfirmed_km2": 18.16,
+        "share_within_60m_of_reference_water": 0.411,
+        "share_of_domain_within_60m_of_reference_water": 0.0483,
+        "GTI_px_40m_excluding_60m_water_edge": 0.4884
+      }
+    },
+    "2021_flood": {
+      "A1_ndem_same_day": {
+        "ndem_dates": [
+          "16-10-2021"
+        ],
+        "n_polygons": 51,
+        "domain_km2": 1404.57,
+        "ours_km2": 8.86,
+        "reference_km2": 0.94,
+        "TP": 1149,
+        "FP": 21513,
+        "FN": 1254,
+        "TN": 3566663,
+        "GTI_px": 0.0507,
+        "GTI_px_40m": 0.0665,
+        "GTI_patch": 0.0419,
+        "n_patches_evaluated": 692,
+        "n_patches_confirmed": 29,
+        "random_baseline": 0.0007,
+        "random_baseline_40m": 0.002,
+        "lift_px": 75.7587,
+        "lift_px_40m": 33.9098,
+        "POD": 0.4782,
+        "FAR": 0.9493,
+        "CSI": 0.048,
+        "F1": 0.0917,
+        "OA": 0.9937,
+        "kappa": 0.0906,
+        "area_bias": 9.4307
+      },
+      "A2_ndem_event_envelope": {
+        "ndem_dates": [
+          "16-10-2021",
+          "19-10-2021"
+        ],
+        "n_polygons": 92,
+        "domain_km2": 1404.57,
+        "ours_km2": 8.86,
+        "reference_km2": 4.12,
+        "TP": 2986,
+        "FP": 19676,
+        "FN": 7557,
+        "TN": 3560360,
+        "GTI_px": 0.1318,
+        "GTI_px_40m": 0.1522,
+        "GTI_patch": 0.0809,
+        "n_patches_evaluated": 692,
+        "n_patches_confirmed": 56,
+        "random_baseline": 0.0029,
+        "random_baseline_40m": 0.0058,
+        "lift_px": 44.8737,
+        "lift_px_40m": 26.3342,
+        "POD": 0.2832,
+        "FAR": 0.8682,
+        "CSI": 0.0988,
+        "F1": 0.1799,
+        "OA": 0.9924,
+        "kappa": 0.1766,
+        "area_bias": 2.1495
+      },
+      "diagnostic_unconfirmed_vs_envelope": {
+        "unconfirmed_km2": 7.52,
+        "share_within_60m_of_reference_water": 0.7999,
+        "share_of_domain_within_60m_of_reference_water": 0.0469,
+        "GTI_px_40m_excluding_60m_water_edge": 0.4534
+      }
+    }
+  },
+  "headline": {
+    "metric": "GTI analogue (2018, vs official NDEM event envelope, 40 m tolerance)",
+    "value_pct": 58.4,
+    "strict_pixel_pct": 36.7,
+    "patch_pct": 38.6,
+    "random_baseline_pct": 13.3,
+    "base_paper_gti_pct": 84.05
+  }
+}
