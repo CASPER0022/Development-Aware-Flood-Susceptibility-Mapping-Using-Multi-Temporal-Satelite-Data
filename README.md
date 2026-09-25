@@ -21,7 +21,8 @@ BTP/
 │   │   ├── environment_setup.md            # Verified GEE & environment setup specification
 │   │   ├── dataset_acquisition.md          # Step 3 flood-influencing dataset acquisition log
 │   │   ├── sentinel1_acquisition.md        # Step 4 Sentinel-1 SAR acquisition log
-│   │   └── flood_inventory_otsu.md         # Step 5 Otsu flood inventory & visual validation
+│   │   ├── flood_inventory_otsu.md         # Step 5 Otsu flood inventory & visual validation
+│   │   └── flood_inventory_crosscheck.md   # Step 6 independent cross-check (NDEM) & GTI analogue
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -35,6 +36,7 @@ BTP/
 │   │   ├── 07_dataset_acquisition_checkpoint.py# Automated Step 3 dataset verification checkpoint
 │   │   ├── 08_fetch_sentinel1_sar.py       # Step 4: Sentinel-1 GRD VV acquisition (2018/2019/2021 flood + dry refs, GEE)
 │   │   ├── 09_build_flood_inventory_otsu.py# Step 5: Otsu flood inventory (Eq. 1 dB, Lee filter, change vs dry ref) + validation maps
+│   │   ├── 10_crosscheck_flood_inventory.py# Step 6: cross-check vs NRSC/ISRO NDEM (EMS/DFO/S2 availability checked) + GTI analogue
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -49,6 +51,7 @@ BTP/
 │   │
 │   └── outputs/                            # Output Deliverables, Maps & Trained Models
 │       ├── maps/                           # Publication PNG maps & interactive HTML maps
+│       ├── metrics/                        # Evaluation numbers (JSON), e.g. Step 6 cross-check
 │       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
 └── Phase 2/                                # Phase 2: Feature Extraction & Novel Model Training (Upcoming)
@@ -95,6 +98,14 @@ BTP/
 - **Usability**: 2018 and 2019 usable as inventories; 2021 is noise-dominated (NDEM < 1 km² in AOI) and should not be used as positive labels.
 - **Output**: `data/processed/flood_inventory/*.tif` + `outputs/maps/step5_flood_inventory_*` (overview PNGs, 2018 site-check PNG, 2018 interactive HTML). Details: `Phase 1/docs/flood_inventory_otsu.md`.
 
+### Phase 1 Step 6: Independent Cross-check of the Flood Inventory
+- **Sources checked**: Copernicus EMS has no Rapid Mapping activation for Kerala Aug 2018 (it was mapped via International Charter 582 / NDEM). The DFO Global Flood Database has no 2018 India event (latest over the AOI: 2016). Sentinel-2 on 22 Aug 2018 is about 82% cloud over the AOI, with 0% of land comparable, so it was rejected automatically.
+- **Reference used**: official NRSC/ISRO **NDEM** flood polygons, both same-day and the event envelope (all passes 17–28 Aug 2018).
+- **Headline (GTI analogue)**: **58.4%** of our 2018 Otsu flood pixels are confirmed by NDEM within 40 m (36.7% strict per-pixel). A random map would score 13.3%, so this is 4.4× lift. Base paper GTI: 84.05%.
+- **Other events**: 2019 37.1% (8.3× chance). 2021 15.2%, which confirms it is unusable as positive labels.
+- **Where it disagrees**: 53% of the unconfirmed 2018 area lies within 60 m of permanent water (river/backwater fringe). Away from that belt, GTI is 74.2%. NDEM's 17–18 Aug maps are near-peak, while our 21 Aug scene shows residual water, so recall against the envelope is low by construction.
+- **Output**: `outputs/metrics/step6_flood_inventory_crosscheck.json` + `outputs/maps/step6_crosscheck_*`. Details: `Phase 1/docs/flood_inventory_crosscheck.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -113,6 +124,9 @@ python "Phase 1/scripts/08_fetch_sentinel1_sar.py"
 
 # Run Step 5 Otsu flood inventory + visual validation maps
 python "Phase 1/scripts/09_build_flood_inventory_otsu.py"
+
+# Run Step 6 independent cross-check (NDEM) + GTI analogue
+python "Phase 1/scripts/10_crosscheck_flood_inventory.py"
 ```
 
 ---

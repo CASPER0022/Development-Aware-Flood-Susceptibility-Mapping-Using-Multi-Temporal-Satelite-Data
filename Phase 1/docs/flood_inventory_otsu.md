@@ -75,7 +75,7 @@ What the 2018 map shows:
 - **Timing caveat.** The nearest orbit-165 pass is 2018-08-21, ~4–6 days
   after the 15–17 Aug peak, so this is *residual* flooding, not peak extent.
 
-Quick same-day agreement with NDEM (sanity only; the formal cross-check is Step 6):
+Quick same-day agreement with NDEM (sanity only; the formal cross-check is Step 6, see `flood_inventory_crosscheck.md`):
 
 | Event | NDEM area (outside ref. water) | POD | FAR | CSI |
 |---|---|---|---|---|
