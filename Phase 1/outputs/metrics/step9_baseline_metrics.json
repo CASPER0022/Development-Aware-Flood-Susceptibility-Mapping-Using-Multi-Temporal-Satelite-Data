@@ -1,0 +1,554 @@
+{
+  "step": 9,
+  "generated": "2026-09-28 22:55:51",
+  "data": {
+    "path": "data/processed/training/training_samples_2018.csv",
+    "n": 30568,
+    "features": [
+      "elevation_m",
+      "slope_deg",
+      "aspect_deg",
+      "curvature_plan",
+      "curvature_profile",
+      "twi",
+      "dist_to_river_m",
+      "dist_to_major_river_m",
+      "dist_to_road_m",
+      "drainage_density_km_km2",
+      "rainfall_mean_annual_mm"
+    ],
+    "n_train": 21397,
+    "n_test": 9171
+  },
+  "split": {
+    "method": "random stratified 70/30 (plan 9.1, naive on purpose)",
+    "seed": 42
+  },
+  "model": {
+    "type": "LightGBM gbdt",
+    "lightgbm_version": "4.7.0",
+    "params": {
+      "objective": "binary",
+      "metric": "auc",
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "min_data_in_leaf": 20,
+      "feature_fraction": 0.9,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 1,
+      "lambda_l2": 1.0,
+      "seed": 42,
+      "deterministic": true,
+      "force_row_wise": true,
+      "num_threads": 4,
+      "verbose": -1
+    },
+    "num_boost_round": 648,
+    "rounds_selection": "5-fold stratified CV on the training part, early stopping 100 on AUC",
+    "threshold": 0.5,
+    "path": "outputs/models/step9_lightgbm_baseline.txt",
+    "cv_auc_on_train_part": 0.9993
+  },
+  "headline_test_metrics": {
+    "accuracy": 0.9906,
+    "precision": 0.9849,
+    "recall": 0.9965,
+    "f1": 0.9907,
+    "auc": 0.9993,
+    "specificity": 0.9847,
+    "confusion": {
+      "TN": 4516,
+      "FP": 70,
+      "FN": 16,
+      "TP": 4569
+    }
+  },
+  "train_metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "auc": 1.0,
+    "specificity": 1.0,
+    "confusion": {
+      "TN": 10698,
+      "FP": 0,
+      "FN": 0,
+      "TP": 10699
+    }
+  },
+  "random_5fold_cv": {
+    "accuracy": {
+      "mean": 0.9918,
+      "sd": 0.0011
+    },
+    "precision": {
+      "mean": 0.9869,
+      "sd": 0.0024
+    },
+    "recall": {
+      "mean": 0.9969,
+      "sd": 0.0003
+    },
+    "f1": {
+      "mean": 0.9918,
+      "sd": 0.0011
+    },
+    "auc": {
+      "mean": 0.9995,
+      "sd": 0.0002
+    },
+    "specificity": {
+      "mean": 0.9867,
+      "sd": 0.0024
+    }
+  },
+  "supplementary_spatial_block_cv": {
+    "method": "StratifiedGroupKFold(5) over square UTM blocks; whole blocks held out",
+    "reported_block_size_m": 10000,
+    "by_block_size": {
+      "2km": {
+        "n_blocks": 398,
+        "per_fold_mean_sd": {
+          "accuracy": {
+            "mean": 0.9353,
+            "sd": 0.0282
+          },
+          "precision": {
+            "mean": 0.9829,
+            "sd": 0.0045
+          },
+          "recall": {
+            "mean": 0.886,
+            "sd": 0.0563
+          },
+          "f1": {
+            "mean": 0.931,
+            "sd": 0.0316
+          },
+          "auc": {
+            "mean": 0.9934,
+            "sd": 0.0028
+          },
+          "specificity": {
+            "mean": 0.9846,
+            "sd": 0.0041
+          }
+        },
+        "pooled_out_of_fold": {
+          "accuracy": 0.9353,
+          "precision": 0.9829,
+          "recall": 0.886,
+          "f1": 0.9319,
+          "auc": 0.9935,
+          "specificity": 0.9846,
+          "confusion": {
+            "TN": 15048,
+            "FP": 236,
+            "FN": 1742,
+            "TP": 13542
+          }
+        }
+      },
+      "5km": {
+        "n_blocks": 73,
+        "per_fold_mean_sd": {
+          "accuracy": {
+            "mean": 0.8982,
+            "sd": 0.0756
+          },
+          "precision": {
+            "mean": 0.9725,
+            "sd": 0.0158
+          },
+          "recall": {
+            "mean": 0.8148,
+            "sd": 0.1483
+          },
+          "f1": {
+            "mean": 0.8796,
+            "sd": 0.1048
+          },
+          "auc": {
+            "mean": 0.9863,
+            "sd": 0.0118
+          },
+          "specificity": {
+            "mean": 0.9788,
+            "sd": 0.008
+          }
+        },
+        "pooled_out_of_fold": {
+          "accuracy": 0.9,
+          "precision": 0.9751,
+          "recall": 0.8211,
+          "f1": 0.8915,
+          "auc": 0.9857,
+          "specificity": 0.979,
+          "confusion": {
+            "TN": 14963,
+            "FP": 321,
+            "FN": 2735,
+            "TP": 12549
+          }
+        }
+      },
+      "10km": {
+        "n_blocks": 22,
+        "per_fold_mean_sd": {
+          "accuracy": {
+            "mean": 0.8849,
+            "sd": 0.095
+          },
+          "precision": {
+            "mean": 0.9524,
+            "sd": 0.0516
+          },
+          "recall": {
+            "mean": 0.785,
+            "sd": 0.1898
+          },
+          "f1": {
+            "mean": 0.8445,
+            "sd": 0.1333
+          },
+          "auc": {
+            "mean": 0.9788,
+            "sd": 0.0161
+          },
+          "specificity": {
+            "mean": 0.9775,
+            "sd": 0.0198
+          }
+        },
+        "pooled_out_of_fold": {
+          "accuracy": 0.8721,
+          "precision": 0.972,
+          "recall": 0.7664,
+          "f1": 0.857,
+          "auc": 0.9747,
+          "specificity": 0.9779,
+          "confusion": {
+            "TN": 14946,
+            "FP": 338,
+            "FN": 3571,
+            "TP": 11713
+          }
+        }
+      }
+    },
+    "floodplain_only_subset": {
+      "rule": "elevation <= 5.67 m (flood p95) and slope <= 2 deg",
+      "n": 18559,
+      "flood_share": 0.7668,
+      "spatial_10km_out_of_fold": {
+        "accuracy": 0.81,
+        "precision": 0.973,
+        "recall": 0.7737,
+        "f1": 0.862,
+        "auc": 0.9346,
+        "specificity": 0.9293,
+        "confusion": {
+          "TN": 4022,
+          "FP": 306,
+          "FN": 3220,
+          "TP": 11011
+        }
+      },
+      "elevation_only_auc": 0.7639
+    }
+  },
+  "diagnostics": {
+    "spatial_proximity_of_random_split": {
+      "test_with_train_sample_in_adjacent_cell_share": 0.5271,
+      "flood_test_share": 0.9871,
+      "nonflood_test_share": 0.0672,
+      "median_distance_test_to_nearest_train_m": {
+        "flood": 29.0,
+        "nonflood": 152.8
+      }
+    },
+    "flags": {
+      "test_auc_suspiciously_perfect": true,
+      "train_test_auc_gap": 0.0007,
+      "random_minus_spatial_auc": 0.0205
+    },
+    "leakage_by_construction": "no Sentinel-1-derived feature; coordinates/ids/label fractions excluded"
+  },
+  "importance": [
+    {
+      "feature": "elevation_m",
+      "gain_pct": 42.12842,
+      "split_count": 2574,
+      "perm_auc_drop": 0.13715,
+      "perm_auc_drop_sd": 0.00154
+    },
+    {
+      "feature": "twi",
+      "gain_pct": 15.44708,
+      "split_count": 1318,
+      "perm_auc_drop": 0.00146,
+      "perm_auc_drop_sd": 0.00022
+    },
+    {
+      "feature": "dist_to_road_m",
+      "gain_pct": 12.90134,
+      "split_count": 1486,
+      "perm_auc_drop": 0.00364,
+      "perm_auc_drop_sd": 0.0002
+    },
+    {
+      "feature": "rainfall_mean_annual_mm",
+      "gain_pct": 11.76026,
+      "split_count": 3456,
+      "perm_auc_drop": 0.02087,
+      "perm_auc_drop_sd": 0.00084
+    },
+    {
+      "feature": "dist_to_major_river_m",
+      "gain_pct": 9.27213,
+      "split_count": 2523,
+      "perm_auc_drop": 0.00959,
+      "perm_auc_drop_sd": 0.00028
+    },
+    {
+      "feature": "drainage_density_km_km2",
+      "gain_pct": 3.59578,
+      "split_count": 2347,
+      "perm_auc_drop": 0.00177,
+      "perm_auc_drop_sd": 0.00015
+    },
+    {
+      "feature": "dist_to_river_m",
+      "gain_pct": 2.9491,
+      "split_count": 1702,
+      "perm_auc_drop": 0.00059,
+      "perm_auc_drop_sd": 5e-05
+    },
+    {
+      "feature": "curvature_plan",
+      "gain_pct": 0.62058,
+      "split_count": 1076,
+      "perm_auc_drop": 8e-05,
+      "perm_auc_drop_sd": 4e-05
+    },
+    {
+      "feature": "curvature_profile",
+      "gain_pct": 0.45618,
+      "split_count": 939,
+      "perm_auc_drop": 0.00013,
+      "perm_auc_drop_sd": 2e-05
+    },
+    {
+      "feature": "slope_deg",
+      "gain_pct": 0.4471,
+      "split_count": 932,
+      "perm_auc_drop": 0.00012,
+      "perm_auc_drop_sd": 4e-05
+    },
+    {
+      "feature": "aspect_deg",
+      "gain_pct": 0.42203,
+      "split_count": 1087,
+      "perm_auc_drop": 0.0001,
+      "perm_auc_drop_sd": 2e-05
+    }
+  ],
+  "ablation_table4_analogue": [
+    {
+      "inputs": "All 11 features",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.9906,
+      "precision": 0.9849,
+      "recall": 0.9965,
+      "f1": 0.9907,
+      "auc": 0.9993,
+      "specificity": 0.9847,
+      "spatial_10km_auc_mean": 0.9788,
+      "spatial_10km_auc_sd": 0.0161,
+      "spatial_10km_accuracy_mean": 0.8849
+    },
+    {
+      "inputs": "Plan minimum set (elev, slope, TWI, d-river, d-road, rain)",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_road_m",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.984,
+      "precision": 0.9766,
+      "recall": 0.9917,
+      "f1": 0.9841,
+      "auc": 0.9981,
+      "specificity": 0.9762,
+      "spatial_10km_auc_mean": 0.9764,
+      "spatial_10km_auc_sd": 0.0201,
+      "spatial_10km_accuracy_mean": 0.8678
+    },
+    {
+      "inputs": "Without terrain (elev, slope, aspect, curvatures)",
+      "features": [
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.9811,
+      "precision": 0.9732,
+      "recall": 0.9895,
+      "f1": 0.9813,
+      "auc": 0.998,
+      "specificity": 0.9727,
+      "spatial_10km_auc_mean": 0.938,
+      "spatial_10km_auc_sd": 0.0567,
+      "spatial_10km_accuracy_mean": 0.7892
+    },
+    {
+      "inputs": "Without hydrology (TWI, river distances, drainage dens.)",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "dist_to_road_m",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.9782,
+      "precision": 0.9716,
+      "recall": 0.9852,
+      "f1": 0.9783,
+      "auc": 0.9968,
+      "specificity": 0.9712,
+      "spatial_10km_auc_mean": 0.9668,
+      "spatial_10km_auc_sd": 0.022,
+      "spatial_10km_accuracy_mean": 0.865
+    },
+    {
+      "inputs": "Without distance to road",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "drainage_density_km_km2",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.9917,
+      "precision": 0.9866,
+      "recall": 0.9969,
+      "f1": 0.9918,
+      "auc": 0.9994,
+      "specificity": 0.9865,
+      "spatial_10km_auc_mean": 0.9613,
+      "spatial_10km_auc_sd": 0.0331,
+      "spatial_10km_accuracy_mean": 0.8686
+    },
+    {
+      "inputs": "Without rainfall",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2"
+      ],
+      "accuracy": 0.9818,
+      "precision": 0.9702,
+      "recall": 0.9941,
+      "f1": 0.982,
+      "auc": 0.9973,
+      "specificity": 0.9695,
+      "spatial_10km_auc_mean": 0.983,
+      "spatial_10km_auc_sd": 0.0087,
+      "spatial_10km_accuracy_mean": 0.8973
+    },
+    {
+      "inputs": "Slope + rainfall (base-paper row analogue)",
+      "features": [
+        "slope_deg",
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.8345,
+      "precision": 0.8096,
+      "recall": 0.8746,
+      "f1": 0.8408,
+      "auc": 0.9107,
+      "specificity": 0.7944,
+      "spatial_10km_auc_mean": 0.7292,
+      "spatial_10km_auc_sd": 0.159,
+      "spatial_10km_accuracy_mean": 0.6487
+    },
+    {
+      "inputs": "Rainfall only (base-paper last row)",
+      "features": [
+        "rainfall_mean_annual_mm"
+      ],
+      "accuracy": 0.7391,
+      "precision": 0.7163,
+      "recall": 0.7915,
+      "f1": 0.752,
+      "auc": 0.8158,
+      "specificity": 0.6867,
+      "spatial_10km_auc_mean": 0.5753,
+      "spatial_10km_auc_sd": 0.2187,
+      "spatial_10km_accuracy_mean": 0.5506
+    }
+  ],
+  "base_paper": {
+    "table3_testing": {
+      "precision": 94.07,
+      "recall": 86.0,
+      "f1": 89.85,
+      "accuracy": 93.73
+    },
+    "auc": 0.93,
+    "table4_all_inputs": "slope + HSG + imperviousness + rainfall: P 94.07, R 86.00, F1 89.85, OA 93.73",
+    "table4_rainfall_only": "rainfall: P 90.03, R 83.27, F1 86.52, OA 91.57",
+    "table4_ranges": {
+      "precision": [
+        90.03,
+        94.07
+      ],
+      "recall": [
+        83.27,
+        86.0
+      ],
+      "f1": [
+        86.52,
+        89.85
+      ],
+      "accuracy": [
+        91.57,
+        93.73
+      ]
+    },
+    "ground_truth_index": 84.05
+  }
+}
