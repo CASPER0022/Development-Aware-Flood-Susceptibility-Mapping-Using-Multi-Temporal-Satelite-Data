@@ -1,0 +1,317 @@
+{
+  "step": 8,
+  "generated": "2026-09-28 15:25:49",
+  "event": "2018-08-21",
+  "inputs": {
+    "inventory": "data/processed/flood_inventory/water_classes_2018_20180821.tif",
+    "ndem": "data/validation/NDEM_KL_Floods_Inundation.parquet",
+    "ndem_envelope_dates": [
+      "17-08-2018",
+      "18-08-2018",
+      "21-08-2018",
+      "24-08-2018",
+      "27-08-2018",
+      "28-08-2018"
+    ],
+    "features": "data/processed/features/feature_stack.tif",
+    "domain": "data/processed/features/analysis_domain.tif"
+  },
+  "rules": {
+    "grid": "Step 7 feature grid (FABDEM 1 arcsec); labels aggregated exactly from the 20 m inventory",
+    "flood": ">= 50% of cell = Otsu flood in patches >= 10 px, NDEM-envelope confirmed within 40 m",
+    "nonflood": "no Otsu flood within 60 m, outside NDEM envelope (+40 m), > 60 m from reference water",
+    "sampling": "all flood-pool cells + equal number of non-flood cells, uniform random, seed 42",
+    "block_id": "2000 m UTM blocks (EPSG:32643) for Phase 2 spatial CV"
+  },
+  "pools": {
+    "otsu_flood_cells_ge50pct": 24789,
+    "flood_pool_cells": 15284,
+    "flood_pool_km2": 13.45,
+    "unconfirmed_or_small_patch_flood_cells_excluded": 9505,
+    "nonflood_pool_cells": 1241604,
+    "nonflood_pool_km2": 1092.82,
+    "land_cells": 1640815,
+    "land_excluded_from_both_pools_km2": 337.91,
+    "excluded_by_ndem_envelope_km2": 174.25,
+    "excluded_by_water_fringe_km2": 84.61
+  },
+  "dataset": {
+    "path": "data/processed/training/training_samples_2018.csv",
+    "n_rows": 30568,
+    "class_counts": {
+      "1": 15284,
+      "0": 15284
+    },
+    "feature_columns": [
+      "elevation_m",
+      "slope_deg",
+      "aspect_deg",
+      "curvature_plan",
+      "curvature_profile",
+      "twi",
+      "dist_to_river_m",
+      "dist_to_major_river_m",
+      "dist_to_road_m",
+      "drainage_density_km_km2",
+      "rainfall_mean_annual_mm"
+    ],
+    "metadata_columns": [
+      "sample_id",
+      "label",
+      "row",
+      "col",
+      "lon",
+      "lat",
+      "x_utm",
+      "y_utm",
+      "block_id",
+      "otsu_flood_frac",
+      "confirmed_flood_frac"
+    ],
+    "n_blocks": 398,
+    "n_blocks_with_flood": 98
+  },
+  "quality": {
+    "checks": {
+      "no_missing_values": true,
+      "all_finite": true,
+      "no_negative_distances": true,
+      "no_negative_slope_twi_density": true,
+      "aspect_in_range": true,
+      "within_step7_layer_ranges": true,
+      "classes_balanced": true,
+      "no_duplicate_cells": true,
+      "all_samples_on_land": true,
+      "labels_match_pools": true
+    },
+    "all_pass": true,
+    "missing_per_feature": {
+      "elevation_m": 0,
+      "slope_deg": 0,
+      "aspect_deg": 0,
+      "curvature_plan": 0,
+      "curvature_profile": 0,
+      "twi": 0,
+      "dist_to_river_m": 0,
+      "dist_to_major_river_m": 0,
+      "dist_to_road_m": 0,
+      "drainage_density_km_km2": 0,
+      "rainfall_mean_annual_mm": 0
+    },
+    "out_of_step7_range": {
+      "elevation_m": 0,
+      "slope_deg": 0,
+      "aspect_deg": 0,
+      "curvature_plan": 0,
+      "curvature_profile": 0,
+      "twi": 0,
+      "dist_to_river_m": 0,
+      "dist_to_major_river_m": 0,
+      "dist_to_road_m": 0,
+      "drainage_density_km_km2": 0,
+      "rainfall_mean_annual_mm": 0
+    },
+    "per_class_summary": {
+      "elevation_m": {
+        "label_0": {
+          "median": 12.335,
+          "p10": 2.9,
+          "p90": 38.36
+        },
+        "label_1": {
+          "median": 2.03,
+          "p10": 1.09,
+          "p90": 4.9
+        }
+      },
+      "slope_deg": {
+        "label_0": {
+          "median": 1.112,
+          "p10": 0.115,
+          "p90": 6.77
+        },
+        "label_1": {
+          "median": 0.152,
+          "p10": 0.034,
+          "p90": 0.697
+        }
+      },
+      "aspect_deg": {
+        "label_0": {
+          "median": 192.564,
+          "p10": 39.435,
+          "p90": 316.639
+        },
+        "label_1": {
+          "median": 193.832,
+          "p10": 33.526,
+          "p90": 323.43
+        }
+      },
+      "curvature_plan": {
+        "label_0": {
+          "median": -0.0,
+          "p10": -0.132,
+          "p90": 0.169
+        },
+        "label_1": {
+          "median": -0.001,
+          "p10": -0.011,
+          "p90": 0.008
+        }
+      },
+      "curvature_profile": {
+        "label_0": {
+          "median": -0.003,
+          "p10": -0.227,
+          "p90": 0.197
+        },
+        "label_1": {
+          "median": -0.003,
+          "p10": -0.045,
+          "p90": 0.005
+        }
+      },
+      "twi": {
+        "label_0": {
+          "median": 8.991,
+          "p10": 6.545,
+          "p90": 12.785
+        },
+        "label_1": {
+          "median": 13.402,
+          "p10": 10.964,
+          "p90": 16.814
+        }
+      },
+      "dist_to_river_m": {
+        "label_0": {
+          "median": 724.422,
+          "p10": 171.527,
+          "p90": 1462.39
+        },
+        "label_1": {
+          "median": 209.987,
+          "p10": 34.395,
+          "p90": 873.9
+        }
+      },
+      "dist_to_major_river_m": {
+        "label_0": {
+          "median": 4353.17,
+          "p10": 949.369,
+          "p90": 8391.205
+        },
+        "label_1": {
+          "median": 1476.47,
+          "p10": 167.688,
+          "p90": 3625.269
+        }
+      },
+      "dist_to_road_m": {
+        "label_0": {
+          "median": 42.161,
+          "p10": 6.768,
+          "p90": 163.437
+        },
+        "label_1": {
+          "median": 162.25,
+          "p10": 59.175,
+          "p90": 293.654
+        }
+      },
+      "drainage_density_km_km2": {
+        "label_0": {
+          "median": 0.37,
+          "p10": 0.095,
+          "p90": 0.719
+        },
+        "label_1": {
+          "median": 0.537,
+          "p10": 0.295,
+          "p90": 0.833
+        }
+      },
+      "rainfall_mean_annual_mm": {
+        "label_0": {
+          "median": 3742.985,
+          "p10": 3588.759,
+          "p90": 3830.957
+        },
+        "label_1": {
+          "median": 3641.39,
+          "p10": 3585.82,
+          "p90": 3829.645
+        }
+      }
+    },
+    "single_feature_auc": {
+      "elevation_m": {
+        "auc": 0.0848,
+        "separability": 0.9152,
+        "higher_in": "non-flood"
+      },
+      "slope_deg": {
+        "auc": 0.1831,
+        "separability": 0.8169,
+        "higher_in": "non-flood"
+      },
+      "aspect_deg": {
+        "auc": 0.5095,
+        "separability": 0.5095,
+        "higher_in": "flood"
+      },
+      "curvature_plan": {
+        "auc": 0.4783,
+        "separability": 0.5217,
+        "higher_in": "non-flood"
+      },
+      "curvature_profile": {
+        "auc": 0.4762,
+        "separability": 0.5238,
+        "higher_in": "non-flood"
+      },
+      "twi": {
+        "auc": 0.896,
+        "separability": 0.896,
+        "higher_in": "flood"
+      },
+      "dist_to_river_m": {
+        "auc": 0.2188,
+        "separability": 0.7812,
+        "higher_in": "non-flood"
+      },
+      "dist_to_major_river_m": {
+        "auc": 0.1991,
+        "separability": 0.8009,
+        "higher_in": "non-flood"
+      },
+      "dist_to_road_m": {
+        "auc": 0.8315,
+        "separability": 0.8315,
+        "higher_in": "flood"
+      },
+      "drainage_density_km_km2": {
+        "auc": 0.6916,
+        "separability": 0.6916,
+        "higher_in": "flood"
+      },
+      "rainfall_mean_annual_mm": {
+        "auc": 0.347,
+        "separability": 0.653,
+        "higher_in": "non-flood"
+      }
+    },
+    "suspicious_features": [],
+    "nearest_same_class_neighbour": {
+      "label_0": {
+        "median_m": 126.6,
+        "share_with_neighbour_within_45m": 0.0906
+      },
+      "label_1": {
+        "median_m": 29.0,
+        "share_with_neighbour_within_45m": 0.9982
+      }
+    }
+  }
+}

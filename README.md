@@ -23,7 +23,8 @@ BTP/
 │   │   ├── sentinel1_acquisition.md        # Step 4 Sentinel-1 SAR acquisition log
 │   │   ├── flood_inventory_otsu.md         # Step 5 Otsu flood inventory & visual validation
 │   │   ├── flood_inventory_crosscheck.md   # Step 6 independent cross-check (NDEM) & GTI analogue
-│   │   └── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
+│   │   ├── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
+│   │   └── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -39,6 +40,7 @@ BTP/
 │   │   ├── 09_build_flood_inventory_otsu.py# Step 5: Otsu flood inventory (Eq. 1 dB, Lee filter, change vs dry ref) + validation maps
 │   │   ├── 10_crosscheck_flood_inventory.py# Step 6: cross-check vs NRSC/ISRO NDEM (EMS/DFO/S2 availability checked) + GTI analogue
 │   │   ├── 11_build_terrain_hydro_features.py# Step 7: slope/aspect/curvature, TWI, distances, drainage density, rainfall + stack checkpoint
+│   │   ├── 12_build_training_dataset.py    # Step 8: balanced flood/non-flood samples (NDEM-confirmed) + 11 features + QA
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -120,6 +122,16 @@ BTP/
   - Max VIF is 2.4. General curvature was dropped from the stack because it equals plan + profile exactly.
 - **Output**: `data/processed/features/*.tif` + `outputs/metrics/step7_feature_stack_checkpoint.json` + `outputs/maps/step7_*`. Details: `Phase 1/docs/terrain_hydro_features.md`.
 
+### Phase 1 Step 8: Training / Testing Dataset (**Quality pass PASS**)
+- **Labels**: the Aug 2018 inventory, aggregated exactly from the 20 m to the 30 m feature grid (the grids differ by exactly 1.5× with a half-pixel offset).
+  - **Flood**: cells that are ≥ 50% Otsu flood in patches ≥ 10 px and confirmed by NDEM within 40 m.
+  - **Non-flood**: no Otsu flood within 60 m, outside the NDEM 2018 envelope, and > 60 m from permanent water.
+- **Dataset**: **15,284 flood + 15,284 non-flood = 30,568 samples** (class-balanced, seed 42), 11 features, plus a 2 km `block_id` for Phase 2 spatial CV.
+- **Quality**: 0 missing values, 0 negative distances, 0 duplicates, all values within Step 7 ranges.
+- **Single-feature AUC**: elevation 0.92, TWI 0.90, distance to road 0.83, slope 0.82. None is above 0.95, and no feature is derived from Sentinel-1.
+- **Caveats for Step 9**: flood samples are spatially clustered (median spacing 29 m), so the random 70/30 split will be optimistic. Distance-to-road partly reflects SAR's blindness to urban flooding.
+- **Output**: `data/processed/training/training_samples_2018.csv` + `outputs/metrics/step8_training_dataset_summary.json` + `outputs/maps/step8_*`. Details: `Phase 1/docs/training_dataset.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -144,6 +156,9 @@ python "Phase 1/scripts/10_crosscheck_flood_inventory.py"
 
 # Run Step 7 terrain/hydrology feature stack + alignment checkpoint
 python "Phase 1/scripts/11_build_terrain_hydro_features.py"
+
+# Run Step 8 balanced training dataset + data-quality pass
+python "Phase 1/scripts/12_build_training_dataset.py"
 ```
 
 ---
