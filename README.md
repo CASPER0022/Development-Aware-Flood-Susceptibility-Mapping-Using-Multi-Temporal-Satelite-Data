@@ -24,7 +24,8 @@ BTP/
 │   │   ├── flood_inventory_otsu.md         # Step 5 Otsu flood inventory & visual validation
 │   │   ├── flood_inventory_crosscheck.md   # Step 6 independent cross-check (NDEM) & GTI analogue
 │   │   ├── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
-│   │   └── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
+│   │   ├── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
+│   │   └── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -41,6 +42,7 @@ BTP/
 │   │   ├── 10_crosscheck_flood_inventory.py# Step 6: cross-check vs NRSC/ISRO NDEM (EMS/DFO/S2 availability checked) + GTI analogue
 │   │   ├── 11_build_terrain_hydro_features.py# Step 7: slope/aspect/curvature, TWI, distances, drainage density, rainfall + stack checkpoint
 │   │   ├── 12_build_training_dataset.py    # Step 8: balanced flood/non-flood samples (NDEM-confirmed) + 11 features + QA
+│   │   ├── 13_train_baseline_lightgbm.py   # Step 9: LightGBM, random 70/30 + spatial-block check, importance, ablation
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -132,6 +134,17 @@ BTP/
 - **Caveats for Step 9**: flood samples are spatially clustered (median spacing 29 m), so the random 70/30 split will be optimistic. Distance-to-road partly reflects SAR's blindness to urban flooding.
 - **Output**: `data/processed/training/training_samples_2018.csv` + `outputs/metrics/step8_training_dataset_summary.json` + `outputs/maps/step8_*`. Details: `Phase 1/docs/training_dataset.md`.
 
+### Phase 1 Step 9: Baseline LightGBM Model
+- **Set-up**: random stratified 70/30 split, as the plan specifies for comparability. LightGBM uses fixed settings, and its 648 trees were chosen by CV inside the training part only.
+- **Test (random split)**: **Accuracy 99.06% · Precision 98.49% · Recall 99.65% · F1 99.07% · AUC 0.999**. Base paper U-Net: 93.73 / 94.07 / 86.00 / 89.85 / 0.93.
+- **Leakage check (plan checkpoint)**: not feature leakage, but spatial autocorrelation. 98.7% of flood test pixels have a training pixel in the adjacent cell.
+  - **Unseen 10 km regions**: **accuracy 88.5%, F1 84.5%, AUC 0.979**. This is the honest number, comparable to the base paper.
+  - **Hard floodplain-only subset**: AUC 0.935, accuracy 81.0%.
+- **Importance**: elevation dominates (42% gain), then TWI, distance to road, rainfall and distance to major river.
+  - Rainfall is a location proxy: AUC 0.58 on unseen regions, and dropping it improves transfer.
+  - The base paper's Table 4 is an input ablation, not a feature ranking, so an equivalent ablation is reported.
+- **Output**: `outputs/models/step9_lightgbm_baseline.txt` + `outputs/metrics/step9_baseline_metrics.json` + `outputs/maps/step9_*`. Details: `Phase 1/docs/baseline_model.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -159,6 +172,9 @@ python "Phase 1/scripts/11_build_terrain_hydro_features.py"
 
 # Run Step 8 balanced training dataset + data-quality pass
 python "Phase 1/scripts/12_build_training_dataset.py"
+
+# Run Step 9 baseline LightGBM model (metrics, spatial check, importance, ablation)
+python "Phase 1/scripts/13_train_baseline_lightgbm.py"
 ```
 
 ---
