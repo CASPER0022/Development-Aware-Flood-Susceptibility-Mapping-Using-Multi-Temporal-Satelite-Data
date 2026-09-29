@@ -10,8 +10,7 @@ BTP/
 ├── README.md                                # Root repository documentation
 ├── .gitignore                              # Root Git ignore rules
 ├── requirements.txt                         # Python environment dependencies
-├── Implementation Plans/                   # Project implementation plans & review roadmaps
-├── References/                             # Papers "1."–"15." (1–13 = Review 1 IEEE refs, 1 = base paper) + "docs - " Review 1 materials
+├── References/                             # Papers "1."–"15." (1–13 = Review 1 IEEE refs, 1 = base paper) + "docs - " project docs (plans, justifications, Review 1 deck)
 │
 ├── Phase 1/                                # Phase 1: Base Paper Reproduction & SAR Verification
 │   ├── Task1_Summary.html                  # Plain-language HTML report for Phase 1 & NRSC validation
