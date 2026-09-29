@@ -13,7 +13,6 @@ BTP/
 ├── References/                             # Papers "1."–"15." (1–13 = Review 1 IEEE refs, 1 = base paper) + "docs - " project docs (plans, justifications, Review 1 deck)
 │
 ├── Phase 1/                                # Phase 1: Base Paper Reproduction & SAR Verification
-│   ├── Task1_Summary.html                  # Plain-language HTML report for Phase 1 & NRSC validation
 │   ├── Phase1_Implementation_Plan_Oct_Review.md# Phase 1 review roadmap
 │   │
 │   ├── docs/                               # Environment & Setup Documentation
@@ -62,7 +61,7 @@ BTP/
 │   └── outputs/                            # Output Deliverables, Maps & Trained Models
 │       ├── maps/                           # Publication PNG maps & interactive HTML maps
 │       ├── metrics/                        # Evaluation numbers (JSON), e.g. Step 6 cross-check, Step 7 checkpoint
-│       ├── presentation/                   # Review 2 slide deck (.pptx) + logo asset
+│       ├── presentation/                   # Review 2 slide deck (.pptx), study notebook (.html) + logo asset
 │       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
 └── Phase 2/                                # Phase 2: Feature Extraction & Novel Model Training (Upcoming)
@@ -173,6 +172,7 @@ BTP/
 
 ### Phase 1 Step 12: Review 2 Materials
 - **Deck**: `Phase 1/outputs/presentation/BTP_Review2_Phase1_Team67.pptx`, 15 slides in the Review 1 style, with speaker notes on every slide. Every number is read from the step metrics JSONs.
+- **Study notebook**: `Phase 1/outputs/presentation/Periyar_Flood_Study_Notebook.html`, a self-contained page to open in any browser. It covers the theory behind every step, each result figure explained, the codebase file by file, and 108 panel questions with answers. It has a light/dark switch.
 - **Architecture**: the Review 1 system architecture redrawn with every block marked **Done (12) / Partial (4) / Planned for Phase 2 (8)**.
 - **Result slides**: AOI map, flood inventory, metrics table vs base paper (random split, unseen regions, U-Net), feature importance + Table 4-style ablation, and the susceptibility map with 2019 validation.
 - **Panel Q&A**: a backup slide, plus 10 prepared answers in `Phase 1/docs/review2_materials.md`.
