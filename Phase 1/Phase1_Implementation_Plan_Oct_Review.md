@@ -27,7 +27,7 @@ U-Net / deep learning can be revisited in a later phase once the pipeline and da
 1.2. Export the boundary as a shapefile/GeoJSON. This is your master AOI (Area of Interest) used in every later step.
 1.3. Confirm the boundary against the 2018 Kerala flood extent — make sure your AOI actually contains flooded area, or your flood inventory will be empty.
 
-**[CHECKPOINT]** Share the AOI map before proceeding — a wrong boundary invalidates everything downstream.
+**[CHECKPOINT]** Share the AOI map before proceeding — a wrong boundary invalidates everything downstream..
 
 ### 2. Set up the working environment
 2.1. Set up Google Earth Engine (GEE) account (needed for Sentinel-1/2 and CHIRPS access without downloading huge files manually).
