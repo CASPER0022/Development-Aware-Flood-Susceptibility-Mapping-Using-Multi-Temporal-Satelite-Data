@@ -25,7 +25,8 @@ BTP/
 │   │   ├── flood_inventory_crosscheck.md   # Step 6 independent cross-check (NDEM) & GTI analogue
 │   │   ├── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
 │   │   ├── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
-│   │   └── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
+│   │   ├── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
+│   │   └── susceptibility_map.md           # Step 10 susceptibility map, quantile classes, 2019 validation
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -43,6 +44,7 @@ BTP/
 │   │   ├── 11_build_terrain_hydro_features.py# Step 7: slope/aspect/curvature, TWI, distances, drainage density, rainfall + stack checkpoint
 │   │   ├── 12_build_training_dataset.py    # Step 8: balanced flood/non-flood samples (NDEM-confirmed) + 11 features + QA
 │   │   ├── 13_train_baseline_lightgbm.py   # Step 9: LightGBM, random 70/30 + spatial-block check, importance, ablation
+│   │   ├── 14_susceptibility_map.py        # Step 10: full-AOI susceptibility, 5 quantile classes, maps, 2019 validation
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
