@@ -26,7 +26,8 @@ BTP/
 │   │   ├── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
 │   │   ├── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
 │   │   ├── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
-│   │   └── susceptibility_map.md           # Step 10 susceptibility map, quantile classes, 2019 validation
+│   │   ├── susceptibility_map.md           # Step 10 susceptibility map, quantile classes, 2019 validation
+│   │   └── limitations.md                  # Step 11 known limitations of the baseline & Phase 2 remedies
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -156,6 +157,17 @@ BTP/
   - Scores are a relative index, not probabilities: the model trained on balanced samples, and 87% of land scores < 0.01. Only Very High is strongly predictive; High is at chance.
   - Rainfall imprints 5.5 km CHIRPS cells: hills in the NE come out as susceptible. Without rainfall, high/steep ground rated High/Very High halves (23% → 13%) at a small cost (2019 AUC 0.83 → 0.80).
 - **Output**: `outputs/maps/step10_*` + `outputs/metrics/step10_susceptibility_summary.json` + `outputs/models/step10_lightgbm_no_rainfall.txt`. Details: `Phase 1/docs/susceptibility_map.md`.
+
+### Phase 1 Step 11: Known Limitations
+- **Planned scope limits** (plan 11.1), each with its measured effect and its Phase 2 remedy:
+  - random split instead of spatial CV (99.1% vs 88.5% on unseen regions);
+  - no PU-learning (urban floods unobserved by SAR);
+  - no land-use / imperviousness (UICA/ΔUICA);
+  - one post-peak flood event;
+  - LightGBM instead of U-Net.
+- **Also listed**: limitations found along the way, covering the flood inventory, features, training data, model and map.
+- **Also included**: a headline-vs-honest numbers table, a limitation → Phase 2 remedy table, and short answers for likely panel questions.
+- Details: `Phase 1/docs/limitations.md`.
 
 ---
 
