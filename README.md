@@ -187,6 +187,9 @@ python "Phase 1/scripts/12_build_training_dataset.py"
 
 # Run Step 9 baseline LightGBM model (metrics, spatial check, importance, ablation)
 python "Phase 1/scripts/13_train_baseline_lightgbm.py"
+
+# Run Step 10 full-AOI susceptibility map + 2019 validation
+python "Phase 1/scripts/14_susceptibility_map.py"
 ```
 
 ---
