@@ -64,7 +64,8 @@ BTP/
 │       ├── presentation/                   # Review 2 slide deck (.pptx), study notebook (.html) + logo asset
 │       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
-└── Phase 2/                                # Phase 2: Feature Extraction & Novel Model Training (Upcoming)
+└── Phase 2/                                # Phase 2: development-aware model (UICA/ΔUICA, PU-learning, dual prediction), Oct 22 – Nov 30
+    └── Phase2_Implementation_Plan_Oct22_Nov30.md # Phase 2 step-by-step plan with checkpoints (Phase 3 follows)
 ```
 
 ---
