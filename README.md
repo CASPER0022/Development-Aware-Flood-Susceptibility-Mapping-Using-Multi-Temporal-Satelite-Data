@@ -176,7 +176,7 @@ BTP/
 - **Study notebook**: `Phase 1/outputs/presentation/Periyar_Flood_Study_Notebook.html`, a self-contained page to open in any browser. It covers the theory behind every step, each result figure explained, the codebase file by file, and 108 panel questions with answers. It has a light/dark switch.
 - **Architecture**: the Review 1 system architecture redrawn with every block marked **Done (12) / Partial (4) / Planned for Phase 2 (8)**.
 - **Result slides**: AOI map, flood inventory, metrics table vs base paper (random split, unseen regions, U-Net), feature importance + Table 4-style ablation, and the susceptibility map with 2019 validation.
-- **Panel Q&A**: a backup slide, plus 10 prepared answers in `Phase 1/docs/review2_materials.md`.
+- **Panel Q&A**: a backup slide, plus 10 prepared answers in `Phase 1/docs/review2_materials.md`..
 
 ---
 
