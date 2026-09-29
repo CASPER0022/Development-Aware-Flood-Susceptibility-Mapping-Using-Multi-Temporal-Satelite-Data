@@ -147,6 +147,16 @@ BTP/
   - The base paper's Table 4 is an input ablation, not a feature ranking, so an equivalent ablation is reported.
 - **Output**: `outputs/models/step9_lightgbm_baseline.txt` + `outputs/metrics/step9_baseline_metrics.json` + `outputs/maps/step9_*`. Details: `Phase 1/docs/baseline_model.md`.
 
+### Phase 1 Step 10: Flood Susceptibility Map
+- **Map**: the Step 9 model applied to all 1.64 M land pixels (~30 m), then 5 quantile classes (Very Low → Very High, 20% of land each). The publication map has a legend, scale bar and north arrow, drawn at true scale. A no-rainfall variant is mapped alongside.
+- **Independent validation on the Aug 2019 flood** (never used in training):
+  - **83.8%** of the NDEM 2019 flood falls in High/Very High (40% of land), and Very High holds **3.5×** its area share. AUC **0.83**.
+  - For 2019 floods outside the entire 2018 envelope, AUC is still 0.78.
+- **Findings**:
+  - Scores are a relative index, not probabilities: the model trained on balanced samples, and 87% of land scores < 0.01. Only Very High is strongly predictive; High is at chance.
+  - Rainfall imprints 5.5 km CHIRPS cells: hills in the NE come out as susceptible. Without rainfall, high/steep ground rated High/Very High halves (23% → 13%) at a small cost (2019 AUC 0.83 → 0.80).
+- **Output**: `outputs/maps/step10_*` + `outputs/metrics/step10_susceptibility_summary.json` + `outputs/models/step10_lightgbm_no_rainfall.txt`. Details: `Phase 1/docs/susceptibility_map.md`.
+
 ---
 
 ## 🛠️ Quick Start
