@@ -1,0 +1,534 @@
+{
+  "step": 10,
+  "generated": "2026-09-29 22:53:40",
+  "models": {
+    "all": {
+      "path": "outputs/models/step9_lightgbm_baseline.txt",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2",
+        "rainfall_mean_annual_mm"
+      ],
+      "note": "Step 9 baseline (headline)"
+    },
+    "no_rainfall": {
+      "path": "outputs/models/step10_lightgbm_no_rainfall.txt",
+      "features": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "twi",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2"
+      ],
+      "trees": 648,
+      "random_split_test": {
+        "auc": 0.9973,
+        "accuracy": 0.9818,
+        "f1": 0.982
+      },
+      "note": "same split/params/trees as Step 9, rainfall removed"
+    }
+  },
+  "prediction": {
+    "land_pixels": 1640815,
+    "land_km2": 1444.17,
+    "probability_stats": {
+      "all": {
+        "min": 0.0,
+        "median": 2e-05,
+        "max": 1.0,
+        "share_above_0.5": 0.0696
+      },
+      "no_rainfall": {
+        "min": 0.0,
+        "median": 3e-05,
+        "max": 0.99999,
+        "share_above_0.5": 0.0894
+      }
+    }
+  },
+  "classification": {
+    "method": "quantile breaks at 20/40/60/80 % of land pixels",
+    "breaks": {
+      "all": [
+        2.188e-06,
+        7.379e-06,
+        3.752e-05,
+        0.0008573
+      ],
+      "no_rainfall": [
+        3.437e-06,
+        1.38e-05,
+        8.297e-05,
+        0.003861
+      ]
+    },
+    "classes": {
+      "all": [
+        {
+          "class": 1,
+          "name": "Very Low",
+          "p_range": [
+            0.0,
+            2.188e-06
+          ],
+          "area_km2": 288.86,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 2,
+          "name": "Low",
+          "p_range": [
+            2.188e-06,
+            7.379e-06
+          ],
+          "area_km2": 288.84,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 3,
+          "name": "Moderate",
+          "p_range": [
+            7.379e-06,
+            3.752e-05
+          ],
+          "area_km2": 288.83,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 4,
+          "name": "High",
+          "p_range": [
+            3.752e-05,
+            0.0008573
+          ],
+          "area_km2": 288.83,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 5,
+          "name": "Very High",
+          "p_range": [
+            0.0008573,
+            1.0
+          ],
+          "area_km2": 288.82,
+          "share_of_land": 0.2
+        }
+      ],
+      "no_rainfall": [
+        {
+          "class": 1,
+          "name": "Very Low",
+          "p_range": [
+            0.0,
+            3.437e-06
+          ],
+          "area_km2": 288.84,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 2,
+          "name": "Low",
+          "p_range": [
+            3.437e-06,
+            1.38e-05
+          ],
+          "area_km2": 288.84,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 3,
+          "name": "Moderate",
+          "p_range": [
+            1.38e-05,
+            8.297e-05
+          ],
+          "area_km2": 288.84,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 4,
+          "name": "High",
+          "p_range": [
+            8.297e-05,
+            0.003861
+          ],
+          "area_km2": 288.83,
+          "share_of_land": 0.2
+        },
+        {
+          "class": 5,
+          "name": "Very High",
+          "p_range": [
+            0.003861,
+            1.0
+          ],
+          "area_km2": 288.82,
+          "share_of_land": 0.2
+        }
+      ]
+    }
+  },
+  "model_agreement": {
+    "same_class_share": 0.6377,
+    "within_one_class_share": 0.9747,
+    "spearman_probability": 0.923
+  },
+  "validation_2019": {
+    "domain": "land minus 2019 dry-season reference water",
+    "domain_km2": 1393.55,
+    "models": {
+      "all": {
+        "ndem_2019": {
+          "flood_km2": 32.68,
+          "auc": 0.8298,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.014,
+              "frequency_ratio": 0.067
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.048,
+              "frequency_ratio": 0.232
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2064,
+              "flood_share": 0.1,
+              "frequency_ratio": 0.485
+            },
+            {
+              "class": "High",
+              "area_share": 0.1981,
+              "flood_share": 0.197,
+              "frequency_ratio": 0.994
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1811,
+              "flood_share": 0.6411,
+              "frequency_ratio": 3.54
+            }
+          ],
+          "share_in_high_or_very_high": 0.8381
+        },
+        "otsu_2019": {
+          "flood_km2": 26.79,
+          "auc": 0.9623,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0003,
+              "frequency_ratio": 0.002
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0014,
+              "frequency_ratio": 0.007
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2064,
+              "flood_share": 0.0101,
+              "frequency_ratio": 0.049
+            },
+            {
+              "class": "High",
+              "area_share": 0.1981,
+              "flood_share": 0.0457,
+              "frequency_ratio": 0.231
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1811,
+              "flood_share": 0.9424,
+              "frequency_ratio": 5.204
+            }
+          ],
+          "share_in_high_or_very_high": 0.9882
+        },
+        "ndem_2019_outside_2018_envelope": {
+          "flood_km2": 9.05,
+          "auc": 0.7788,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0232,
+              "frequency_ratio": 0.112
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0675,
+              "frequency_ratio": 0.326
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2064,
+              "flood_share": 0.1286,
+              "frequency_ratio": 0.623
+            },
+            {
+              "class": "High",
+              "area_share": 0.1981,
+              "flood_share": 0.2165,
+              "frequency_ratio": 1.093
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1811,
+              "flood_share": 0.5642,
+              "frequency_ratio": 3.115
+            }
+          ],
+          "share_in_high_or_very_high": 0.7807
+        },
+        "training_flood_pool_2018 (success rate, not a test)": {
+          "flood_km2": 12.91,
+          "auc": 0.9947,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2064,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "High",
+              "area_share": 0.1981,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1811,
+              "flood_share": 1.0,
+              "frequency_ratio": 5.522
+            }
+          ],
+          "share_in_high_or_very_high": 1.0
+        }
+      },
+      "no_rainfall": {
+        "ndem_2019": {
+          "flood_km2": 32.68,
+          "auc": 0.8048,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0245,
+              "frequency_ratio": 0.118
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0656,
+              "frequency_ratio": 0.316
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2065,
+              "flood_share": 0.1087,
+              "frequency_ratio": 0.527
+            },
+            {
+              "class": "High",
+              "area_share": 0.1972,
+              "flood_share": 0.1918,
+              "frequency_ratio": 0.972
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1818,
+              "flood_share": 0.6094,
+              "frequency_ratio": 3.352
+            }
+          ],
+          "share_in_high_or_very_high": 0.8012
+        },
+        "otsu_2019": {
+          "flood_km2": 26.79,
+          "auc": 0.9587,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0002,
+              "frequency_ratio": 0.001
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0004,
+              "frequency_ratio": 0.002
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2065,
+              "flood_share": 0.0075,
+              "frequency_ratio": 0.036
+            },
+            {
+              "class": "High",
+              "area_share": 0.1972,
+              "flood_share": 0.0569,
+              "frequency_ratio": 0.288
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1818,
+              "flood_share": 0.935,
+              "frequency_ratio": 5.142
+            }
+          ],
+          "share_in_high_or_very_high": 0.9918
+        },
+        "ndem_2019_outside_2018_envelope": {
+          "flood_km2": 9.05,
+          "auc": 0.7616,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0341,
+              "frequency_ratio": 0.165
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0817,
+              "frequency_ratio": 0.394
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2065,
+              "flood_share": 0.1244,
+              "frequency_ratio": 0.603
+            },
+            {
+              "class": "High",
+              "area_share": 0.1972,
+              "flood_share": 0.2169,
+              "frequency_ratio": 1.1
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1818,
+              "flood_share": 0.5428,
+              "frequency_ratio": 2.985
+            }
+          ],
+          "share_in_high_or_very_high": 0.7597
+        },
+        "training_flood_pool_2018 (success rate, not a test)": {
+          "flood_km2": 12.91,
+          "auc": 0.9916,
+          "per_class": [
+            {
+              "class": "Very Low",
+              "area_share": 0.2073,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Low",
+              "area_share": 0.2072,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Moderate",
+              "area_share": 0.2065,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "High",
+              "area_share": 0.1972,
+              "flood_share": 0.0,
+              "frequency_ratio": 0.0
+            },
+            {
+              "class": "Very High",
+              "area_share": 0.1818,
+              "flood_share": 1.0,
+              "frequency_ratio": 5.5
+            }
+          ],
+          "share_in_high_or_very_high": 1.0
+        }
+      }
+    }
+  },
+  "plausibility_high_ground": {
+    "all": {
+      "elevation_gt_50m": {
+        "share_of_such_land_in_high_or_very_high": 0.2335,
+        "share_of_high_or_very_high_land": 0.0292
+      },
+      "slope_gt_10deg": {
+        "share_of_such_land_in_high_or_very_high": 0.241,
+        "share_of_high_or_very_high_land": 0.0272
+      }
+    },
+    "no_rainfall": {
+      "elevation_gt_50m": {
+        "share_of_such_land_in_high_or_very_high": 0.1343,
+        "share_of_high_or_very_high_land": 0.0168
+      },
+      "slope_gt_10deg": {
+        "share_of_such_land_in_high_or_very_high": 0.139,
+        "share_of_high_or_very_high_land": 0.0157
+      }
+    }
+  },
+  "note_on_probabilities": "trained on balanced 50/50 samples and overconfident (perfect train fit), so the scores are a relative susceptibility index, not real-world flood probabilities",
+  "share_of_land_with_score_below_0.01": {
+    "all": 0.866,
+    "no_rainfall": 0.8255
+  },
+  "outputs": {
+    "all": {
+      "probability": "data/processed/susceptibility/susceptibility_prob_all.tif",
+      "classes": "data/processed/susceptibility/susceptibility_class_all.tif"
+    },
+    "no_rainfall": {
+      "probability": "data/processed/susceptibility/susceptibility_prob_no_rainfall.tif",
+      "classes": "data/processed/susceptibility/susceptibility_class_no_rainfall.tif"
+    }
+  }
+}
