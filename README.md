@@ -27,7 +27,8 @@ BTP/
 │   │   ├── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
 │   │   ├── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
 │   │   ├── susceptibility_map.md           # Step 10 susceptibility map, quantile classes, 2019 validation
-│   │   └── limitations.md                  # Step 11 known limitations of the baseline & Phase 2 remedies
+│   │   ├── limitations.md                  # Step 11 known limitations of the baseline & Phase 2 remedies
+│   │   └── review2_materials.md            # Step 12 Review 2 deck outline, architecture status, panel Q&A
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -46,6 +47,7 @@ BTP/
 │   │   ├── 12_build_training_dataset.py    # Step 8: balanced flood/non-flood samples (NDEM-confirmed) + 11 features + QA
 │   │   ├── 13_train_baseline_lightgbm.py   # Step 9: LightGBM, random 70/30 + spatial-block check, importance, ablation
 │   │   ├── 14_susceptibility_map.py        # Step 10: full-AOI susceptibility, 5 quantile classes, maps, 2019 validation
+│   │   ├── 15_build_review2_deck.py        # Step 12: architecture status diagram, study-area map, Review 2 slide deck
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -61,6 +63,7 @@ BTP/
 │   └── outputs/                            # Output Deliverables, Maps & Trained Models
 │       ├── maps/                           # Publication PNG maps & interactive HTML maps
 │       ├── metrics/                        # Evaluation numbers (JSON), e.g. Step 6 cross-check, Step 7 checkpoint
+│       ├── presentation/                   # Review 2 slide deck (.pptx) + logo asset
 │       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
 └── Phase 2/                                # Phase 2: Feature Extraction & Novel Model Training (Upcoming)
@@ -169,6 +172,12 @@ BTP/
 - **Also included**: a headline-vs-honest numbers table, a limitation → Phase 2 remedy table, and short answers for likely panel questions.
 - Details: `Phase 1/docs/limitations.md`.
 
+### Phase 1 Step 12: Review 2 Materials
+- **Deck**: `Phase 1/outputs/presentation/BTP_Review2_Phase1_Team67.pptx`, 15 slides in the Review 1 style, with speaker notes on every slide. Every number is read from the step metrics JSONs.
+- **Architecture**: the Review 1 system architecture redrawn with every block marked **Done (12) / Partial (4) / Planned for Phase 2 (8)**.
+- **Result slides**: AOI map, flood inventory, metrics table vs base paper (random split, unseen regions, U-Net), feature importance + Table 4-style ablation, and the susceptibility map with 2019 validation.
+- **Panel Q&A**: a backup slide, plus 10 prepared answers in `Phase 1/docs/review2_materials.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -202,6 +211,9 @@ python "Phase 1/scripts/13_train_baseline_lightgbm.py"
 
 # Run Step 10 full-AOI susceptibility map + 2019 validation
 python "Phase 1/scripts/14_susceptibility_map.py"
+
+# Build Step 12 Review 2 slide deck (architecture status, study-area map, slides)
+python "Phase 1/scripts/15_build_review2_deck.py"
 ```
 
 ---
