@@ -25,7 +25,8 @@ BTP/
 │   │   ├── flood_inventory_crosscheck.md   # Step 6 independent cross-check (NDEM) & GTI analogue
 │   │   ├── terrain_hydro_features.md       # Step 7 terrain/hydrology feature stack & 7.5 checkpoint
 │   │   ├── training_dataset.md             # Step 8 balanced training dataset & data-quality pass
-│   │   └── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
+│   │   ├── baseline_model.md               # Step 9 LightGBM baseline: metrics, leakage check, importance, Table 4 ablation
+│   │   └── susceptibility_map.md           # Step 10 susceptibility map, quantile classes, 2019 validation
 │   │
 │   ├── notebooks/                          # Jupyter Notebooks for exploratory data analysis
 │   │
@@ -43,6 +44,7 @@ BTP/
 │   │   ├── 11_build_terrain_hydro_features.py# Step 7: slope/aspect/curvature, TWI, distances, drainage density, rainfall + stack checkpoint
 │   │   ├── 12_build_training_dataset.py    # Step 8: balanced flood/non-flood samples (NDEM-confirmed) + 11 features + QA
 │   │   ├── 13_train_baseline_lightgbm.py   # Step 9: LightGBM, random 70/30 + spatial-block check, importance, ablation
+│   │   ├── 14_susceptibility_map.py        # Step 10: full-AOI susceptibility, 5 quantile classes, maps, 2019 validation
 │   │   ├── test_urban_double_bounce.py     # Dual-criterion SAR detector engine
 │   │   ├── fetch_esa_worldcover.py         # ESA WorldCover 10m LULC & settlement mask loader
 │   │   ├── local_ccd_flood_detection.py    # Change detection & diagnostic evaluation module
@@ -145,6 +147,16 @@ BTP/
   - The base paper's Table 4 is an input ablation, not a feature ranking, so an equivalent ablation is reported.
 - **Output**: `outputs/models/step9_lightgbm_baseline.txt` + `outputs/metrics/step9_baseline_metrics.json` + `outputs/maps/step9_*`. Details: `Phase 1/docs/baseline_model.md`.
 
+### Phase 1 Step 10: Flood Susceptibility Map
+- **Map**: the Step 9 model applied to all 1.64 M land pixels (~30 m), then 5 quantile classes (Very Low → Very High, 20% of land each). The publication map has a legend, scale bar and north arrow, drawn at true scale. A no-rainfall variant is mapped alongside.
+- **Independent validation on the Aug 2019 flood** (never used in training):
+  - **83.8%** of the NDEM 2019 flood falls in High/Very High (40% of land), and Very High holds **3.5×** its area share. AUC **0.83**.
+  - For 2019 floods outside the entire 2018 envelope, AUC is still 0.78.
+- **Findings**:
+  - Scores are a relative index, not probabilities: the model trained on balanced samples, and 87% of land scores < 0.01. Only Very High is strongly predictive; High is at chance.
+  - Rainfall imprints 5.5 km CHIRPS cells: hills in the NE come out as susceptible. Without rainfall, high/steep ground rated High/Very High halves (23% → 13%) at a small cost (2019 AUC 0.83 → 0.80).
+- **Output**: `outputs/maps/step10_*` + `outputs/metrics/step10_susceptibility_summary.json` + `outputs/models/step10_lightgbm_no_rainfall.txt`. Details: `Phase 1/docs/susceptibility_map.md`.
+
 ---
 
 ## 🛠️ Quick Start
@@ -175,6 +187,9 @@ python "Phase 1/scripts/12_build_training_dataset.py"
 
 # Run Step 9 baseline LightGBM model (metrics, spatial check, importance, ablation)
 python "Phase 1/scripts/13_train_baseline_lightgbm.py"
+
+# Run Step 10 full-AOI susceptibility map + 2019 validation
+python "Phase 1/scripts/14_susceptibility_map.py"
 ```
 
 ---
