@@ -276,6 +276,36 @@ Each image went through **exactly the same flood-mapping method as Phase 1.** As
 - **"Why is GTI not close to 100 %?"** The NDEM maps were made at different times and resolutions. Radar also cannot see water under trees or between buildings. The base paper reported 84 %, but for one large, flat area in Miami. What matters is that every kept event is 4–44 times better than random.
 - **"Why are there no floods from 2022 or 2023?"** NDEM did map floods in Aug 2022 and Jul 2023, but no Sentinel-1 image exists within ±3 days, because after S1B failed only one satellite was left.
 
+### Is 30–56 % overlap with NDEM good enough? Why not use NDEM directly?
+
+The panel is likely to ask this, so here is the full answer.
+
+**First, the numbers.** Only the 2020 event is at 30 %. The others are 2018 = 56 %, 2019 = 37 % and 2024 = 50 %. A random map of the same size would score only 1–13 %, so every kept event is **4 to 44 times better than chance.**
+
+**1. We never train on the raw overlap. Our flood labels are the pixels both maps agree on.**
+In Phase 1 Step 8, we labelled a 30 m cell as **flood** only if two things were true:
+
+- our Otsu map shows it flooded, **and**
+- the official NDEM map confirms it within 40 m.
+
+**Non-flood** cells had to lie outside NDEM's flood area. So the part of our map that NDEM does not confirm never becomes a training label. Every flood label is confirmed by two independent maps, which makes the labels stronger than either map alone.
+
+**2. Why two correct maps still overlap only 30–56 %:**
+
+- **Different dates.** For 2018, NDEM combines maps from 17–28 Aug, including the flood peak. Our radar image is from 21 Aug, when the water was already going down. Our map is naturally a smaller part of theirs.
+- **Different detail.** NDEM polygons are simplified outlines; ours are 20 m pixels.
+- **Radar blind spots.** Radar cannot see water under trees or between buildings. This affects both maps, but not in exactly the same places.
+- **The base paper's 84 %** was measured against reported flood *points* in flat, open Miami, which is a much easier comparison than two full maps of tree-covered Kerala.
+
+**3. Why we do not replace our method with NDEM:**
+
+- **We would lose our independent check.** If NDEM were both the labels and the validation, nothing separate would be left to test against.
+- **The Otsu radar method is the base paper's core method.** It is what we are reproducing and improving. A ready-made government map would remove that part of the work.
+- **NDEM is itself made from radar images** (RADARSAT, Sentinel-1) by NRSC, so it has the same blind spots, with thresholds we cannot see or control.
+- **NDEM is not consistent across events.** 2018 has 15,000 polygons, 2022 only 30. It also does not exist for future floods, while our method works on any new radar image.
+
+> **One-line answer for the panel:** "The 30–56 % is the overlap between two independent maps made on different dates, and it is 4–44 times better than chance. We do not train on the raw overlap: our flood labels are only the pixels both maps agree on, so every training label is confirmed by the official NDEM map."
+
 ---
 
 ## What comes next (Week 2)
