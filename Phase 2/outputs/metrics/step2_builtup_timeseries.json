@@ -1,0 +1,328 @@
+{
+  "step": 2,
+  "generated": "2026-11-11 22:04:51",
+  "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "grid": {
+    "h30": 1300,
+    "w30": 1486,
+    "h10": 3900,
+    "w10": 4458,
+    "land_km2": 1444.76
+  },
+  "source_comparison": {
+    "DW": {
+      "vs_worldcover_2021": {
+        "pearson_r": 0.457,
+        "f1_at_0.5": 0.4095,
+        "mae": 0.3562
+      },
+      "built_km2_by_year": {
+        "2017": 570.08,
+        "2018": 620.47,
+        "2019": 677.66,
+        "2020": 686.95,
+        "2021": 700.08,
+        "2022": 706.67,
+        "2023": 745.51,
+        "2024": 730.03,
+        "2025": 722.86
+      },
+      "raw_loss_share_by_pair": {
+        "2017-2018": 0.0224,
+        "2018-2019": 0.017,
+        "2019-2020": 0.0382,
+        "2020-2021": 0.0378,
+        "2021-2022": 0.0415,
+        "2022-2023": 0.0216,
+        "2023-2024": 0.0544,
+        "2024-2025": 0.0487
+      },
+      "mean_raw_loss_share": 0.0352,
+      "nodata_share_by_year": {
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": 0.0,
+        "2020": 0.0,
+        "2021": 0.0,
+        "2022": 0.0,
+        "2023": 0.0,
+        "2024": 0.0,
+        "2025": 0.0
+      },
+      "years": [
+        2017,
+        2025
+      ]
+    },
+    "ESRI": {
+      "vs_worldcover_2021": {
+        "pearson_r": 0.3267,
+        "f1_at_0.5": 0.3253,
+        "mae": 0.5171
+      },
+      "built_km2_by_year": {
+        "2017": 785.55,
+        "2018": 915.37,
+        "2019": 936.2,
+        "2020": 931.92,
+        "2021": 934.84,
+        "2022": 943.47,
+        "2023": 963.19,
+        "2024": 968.39,
+        "2025": 974.07
+      },
+      "raw_loss_share_by_pair": {
+        "2017-2018": 0.0084,
+        "2018-2019": 0.0209,
+        "2019-2020": 0.0309,
+        "2020-2021": 0.0287,
+        "2021-2022": 0.0265,
+        "2022-2023": 0.0233,
+        "2023-2024": 0.0262,
+        "2024-2025": 0.0234
+      },
+      "mean_raw_loss_share": 0.0235,
+      "nodata_share_by_year": {
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": 0.0,
+        "2020": 0.0,
+        "2021": 0.0,
+        "2022": 0.0,
+        "2023": 0.0,
+        "2024": 0.0,
+        "2025": 0.0
+      },
+      "years": [
+        2017,
+        2025
+      ]
+    },
+    "WC": {
+      "built_km2_by_year": {
+        "2020": 139.63,
+        "2021": 190.53
+      }
+    },
+    "GHSL": {
+      "built_km2_by_epoch": {
+        "2015": 140.1,
+        "2020": 146.78,
+        "2025": 152.88,
+        "2030": 155.28
+      },
+      "vs_worldcover_2021_using_2020_epoch": {
+        "pearson_r": 0.744,
+        "f1_at_0.5": 0.3028,
+        "mae": 0.1168
+      }
+    }
+  },
+  "choice": {
+    "chosen": "DW",
+    "mean_rank": {
+      "DW": 0.333,
+      "ESRI": 0.667
+    },
+    "rule": "mean rank over (r vs WC2021, F1 vs WC2021, mean raw yearly loss); both cover 2017-2025",
+    "ghsl_role": "post-development scenario source (Step 9): 2025/2030 projections, 100 m",
+    "decision": "Option A (hybrid) chosen at the Step 2 checkpoint",
+    "reason": "DW/ESRI built = settlement extent (40-67 % of land); GHSL/WorldCover = impervious surface (10-13 %)",
+    "final_layer": "impervious_fraction_30m.tif"
+  },
+  "cleaning": {
+    "source": "DW",
+    "gap_px_share_by_year": {
+      "2017": 0.0,
+      "2018": 0.0,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0
+    },
+    "never_observed_px_set_to_not_built": 0,
+    "single_year_built_flickers_removed_km2": {
+      "2017": 0.0,
+      "2018": 7.11,
+      "2019": 17.21,
+      "2020": 11.15,
+      "2021": 13.57,
+      "2022": 7.71,
+      "2023": 21.17,
+      "2024": 11.14,
+      "2025": 0.0
+    },
+    "single_year_gaps_filled_km2": {
+      "2017": 0.0,
+      "2018": 7.64,
+      "2019": 4.27,
+      "2020": 10.55,
+      "2021": 9.96,
+      "2022": 15.36,
+      "2023": 4.42,
+      "2024": 11.63,
+      "2025": 0.0
+    },
+    "loss_share_after_cleaning": {
+      "2017-2018": 0.009,
+      "2018-2019": 0.0057,
+      "2019-2020": 0.0084,
+      "2020-2021": 0.0167,
+      "2021-2022": 0.0117,
+      "2022-2023": 0.0142,
+      "2023-2024": 0.0194,
+      "2024-2025": 0.0335
+    },
+    "mean_loss_share_raw": 0.0352,
+    "mean_loss_share_after_cleaning": 0.0148,
+    "endpoint_note": "2017 and 2025 have one neighbour only and are not filtered"
+  },
+  "growth": {
+    "built_km2_by_year": {
+      "2017": 570.08,
+      "2018": 620.98,
+      "2019": 664.76,
+      "2020": 686.36,
+      "2021": 696.47,
+      "2022": 714.32,
+      "2023": 728.79,
+      "2024": 730.52,
+      "2025": 722.86
+    },
+    "built_share_of_land_by_year": {
+      "2017": 0.3946,
+      "2018": 0.4298,
+      "2019": 0.4601,
+      "2020": 0.4751,
+      "2021": 0.4821,
+      "2022": 0.4944,
+      "2023": 0.5044,
+      "2024": 0.5056,
+      "2025": 0.5003
+    },
+    "yearly_growth_pct": {
+      "2017-2018": 8.93,
+      "2018-2019": 7.05,
+      "2019-2020": 3.25,
+      "2020-2021": 1.47,
+      "2021-2022": 2.56,
+      "2022-2023": 2.03,
+      "2023-2024": 0.24,
+      "2024-2025": -1.05
+    },
+    "cagr_pct": 3.01,
+    "net_change_km2": 152.78,
+    "new_built_10m_px_km2": 170.26
+  },
+  "validation_sites": [
+    {
+      "site": "Kakkanad - Infopark",
+      "why": "IT park + housing growth since 2017",
+      "built_share_2017": 0.5298,
+      "built_share_2025": 0.6347,
+      "change_pts": 10.49
+    },
+    {
+      "site": "Cochin Airport",
+      "why": "airport expansion and surroundings",
+      "built_share_2017": 0.4697,
+      "built_share_2025": 0.5728,
+      "change_pts": 10.31
+    },
+    {
+      "site": "Kalamassery",
+      "why": "Aluva-Kalamassery corridor, KINFRA / HMT",
+      "built_share_2017": 0.7318,
+      "built_share_2025": 0.7624,
+      "change_pts": 3.06
+    },
+    {
+      "site": "Aluva fringe",
+      "why": "peri-urban growth east of Aluva",
+      "built_share_2017": 0.5947,
+      "built_share_2025": 0.6428,
+      "change_pts": 4.81
+    }
+  ],
+  "hybrid_impervious": {
+    "formula": "imp_y = clip(GHSL2020 + k * (DW_y - DW_2020), 0, 1)",
+    "k": 0.2138,
+    "impervious_km2_by_year": {
+      "2017": 137.84,
+      "2018": 142.02,
+      "2019": 145.25,
+      "2020": 146.78,
+      "2021": 150.04,
+      "2022": 154.52,
+      "2023": 158.21,
+      "2024": 159.25,
+      "2025": 158.91
+    },
+    "impervious_share_of_land_by_year": {
+      "2017": 0.0954,
+      "2018": 0.0983,
+      "2019": 0.1005,
+      "2020": 0.1016,
+      "2021": 0.1039,
+      "2022": 0.107,
+      "2023": 0.1095,
+      "2024": 0.1102,
+      "2025": 0.11
+    },
+    "net_change_km2": 21.07,
+    "cagr_pct": 1.79,
+    "cells_clipped_at_zero_share": {
+      "2017": 0.1174,
+      "2018": 0.0797,
+      "2019": 0.0374,
+      "2020": 0.0,
+      "2021": 0.0168,
+      "2022": 0.0231,
+      "2023": 0.0278,
+      "2024": 0.0325,
+      "2025": 0.042
+    },
+    "vs_worldcover_2021": {
+      "pearson_r": 0.7365,
+      "f1_at_0.5": 0.3029,
+      "mae": 0.1189
+    },
+    "ghsl_epochs_km2_for_reference": {
+      "2015": 140.1,
+      "2020": 146.78,
+      "2025": 152.88,
+      "2030": 155.28
+    },
+    "cells_with_increase_share": 0.1809,
+    "cells_with_decrease_share": 0.0254
+  },
+  "outputs": {
+    "clean": "E:\\Downloads\\SEM 7\\BTP\\Phase 2\\data\\processed\\landcover/builtup_fraction_30m_clean.tif",
+    "ghsl": "E:\\Downloads\\SEM 7\\BTP\\Phase 2\\data\\processed\\landcover/ghsl_builtup_fraction_30m.tif",
+    "impervious_final": "E:\\Downloads\\SEM 7\\BTP\\Phase 2\\data\\processed\\landcover/impervious_fraction_30m.tif",
+    "raw": {
+      "DW": "E:\\Downloads\\SEM 7\\BTP\\Phase 2\\data\\processed\\landcover/builtup_fraction_30m_DW.tif",
+      "ESRI": "E:\\Downloads\\SEM 7\\BTP\\Phase 2\\data\\processed\\landcover/builtup_fraction_30m_ESRI.tif"
+    },
+    "maps": [
+      "step2_source_comparison.png",
+      "step2_builtup_first_last.png",
+      "step2_growth_sites.png",
+      "step2_impervious_hybrid.png"
+    ]
+  },
+  "runtime_s": 27.1
+}
