@@ -1,0 +1,70 @@
+{
+  "step": 1,
+  "generated": "2026-11-11 21:16:13",
+  "checks": {
+    "A1_land_domain_identical": {
+      "pass": true,
+      "land_cells": 1640815
+    },
+    "A2_flow_accumulation_matches": {
+      "pass": true,
+      "max_rel_diff": 0.0,
+      "interior_sinks": 0
+    },
+    "A3_twi_matches": {
+      "pass": true,
+      "max_abs_diff": 0.0
+    },
+    "B1_area_conserved": {
+      "pass": true,
+      "abs_err_subpixels": 0.0
+    },
+    "B2_sample_fractions_match_csv": {
+      "pass": true,
+      "n_samples": 30568,
+      "max_abs_diff": 4.441795349119371e-05
+    },
+    "C1_gti_40m_2018": {
+      "pass": true,
+      "GTI_px_40m": 0.5844,
+      "lift": 4.3844,
+      "n_polygons": 15000
+    },
+    "D1_boosting_rounds": {
+      "pass": true,
+      "rounds": 648,
+      "phase1": 648
+    },
+    "D2_test_metrics_identical": {
+      "pass": true,
+      "auc": 0.9993,
+      "accuracy": 0.9906,
+      "f1": 0.9907,
+      "confusion": {
+        "TN": 4516,
+        "FP": 70,
+        "FN": 16,
+        "TP": 4569
+      }
+    },
+    "D3_every_test_prediction_identical": {
+      "pass": true,
+      "same_test_ids": true,
+      "max_abs_diff": 0.0
+    },
+    "D4_spatial_10km_identical": {
+      "pass": true,
+      "auc_mean": 0.9788,
+      "accuracy_mean": 0.8849
+    }
+  },
+  "all_pass": true,
+  "runtime_s": 29.9,
+  "baseline_reference": {
+    "git_tag": "phase1-final",
+    "test_auc": 0.9993,
+    "spatial_10km_auc": 0.9788,
+    "spatial_10km_accuracy": 0.8849,
+    "gti_40m_2018": 0.5844
+  }
+}
