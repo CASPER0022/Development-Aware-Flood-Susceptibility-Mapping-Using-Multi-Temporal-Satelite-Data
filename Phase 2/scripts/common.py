@@ -300,6 +300,66 @@ def _fd8_core(zf, land, order, acc, dx, dy):
     return acc, to_water, stranded, n_interior_sinks
 
 
+@njit(cache=True)
+def d8_receiver(zf, land, dx, dy):
+    """Flat index of the steepest-descent neighbour on the filled DEM, or -1."""
+    H, W = zf.shape
+    rec = np.full(H * W, -1, np.int64)
+    for r in range(H):
+        diag = np.sqrt(dx[r] ** 2 + dy[r] ** 2)
+        for c in range(W):
+            if not land[r, c]:
+                continue
+            best = 0.0
+            for k in range(8):
+                nr = r + DR[k]
+                nc = c + DC[k]
+                if nr < 0 or nc < 0 or nr >= H or nc >= W:
+                    continue
+                if DR[k] != 0 and DC[k] != 0:
+                    dist = diag
+                elif DR[k] == 0:
+                    dist = dx[r]
+                else:
+                    dist = dy[r]
+                g = (zf[r, c] - zf[nr, nc]) / dist
+                if g > best:
+                    best = g
+                    rec[r * W + c] = nr * W + nc
+    return rec
+
+
+@njit(cache=True)
+def hand_from_receivers(dem, land, drain, rec, order_asc):
+    """HAND (Renno et al. 2008; Nobre et al. 2011): height of each land cell
+    above the drainage cell its D8 steepest-descent path reaches first.
+    drain: boolean drainage mask (channels and open water). order_asc: flat
+    indices of land cells by ascending filled elevation (receivers first).
+    Returns HAND (m, NaN off land / for paths leaving the grid) and the
+    elevation of the drainage cell each cell reaches."""
+    H, W = dem.shape
+    dz = np.full(H * W, np.nan)
+    hand = np.full(H * W, np.nan)
+    flat_dem = dem.ravel()
+    flat_drain = drain.ravel()
+    flat_land = land.ravel()
+    for i in range(H * W):
+        if not flat_land[i]:
+            dz[i] = flat_dem[i]          # open water is drainage at its own level
+    for k in range(order_asc.shape[0]):
+        i = order_asc[k]
+        if flat_drain[i]:
+            dz[i] = flat_dem[i]
+        else:
+            j = rec[i]
+            if j >= 0:
+                dz[i] = dz[j]
+        if not np.isnan(dz[i]):
+            h = flat_dem[i] - dz[i]
+            hand[i] = h if h > 0 else 0.0
+    return hand.reshape(H, W), dz.reshape(H, W)
+
+
 def route_flow(z, land, dx, dy, cell_area, eps=FILL_EPS_M):
     """Fill + FD8 upslope-area accumulation exactly as Phase 1 Step 7."""
     zf, n_raised = priority_flood_eps(z, ~land, eps)
@@ -613,46 +673,59 @@ def ee_init():
     return ee
 
 
-def ee_download_grid(img, transform, width, height, out_path, tiles=(1, 1), timeout=900, retries=3):
+def ee_download_grid(img, transform, width, height, out_path, tiles=(1, 1), timeout=900, retries=3,
+                     workers=1):
     """Download an ee.Image onto an exact (EPSG:4326) pixel grid, optionally in
     row x col tiles (GEE's per-request size / compute limits), and mosaic the
-    tiles into one GeoTIFF that has exactly `transform` and (height, width)."""
+    tiles into one GeoTIFF that has exactly `transform` and (height, width).
+    workers > 1 fetches tiles in parallel threads."""
     import io
     import requests
     import rasterio
     from rasterio.transform import Affine
+    from concurrent.futures import ThreadPoolExecutor
     nty, ntx = tiles
     rows = np.linspace(0, height, nty + 1).astype(int)
     cols = np.linspace(0, width, ntx + 1).astype(int)
+
+    def fetch(ij):
+        i, j = ij
+        r0, r1, c0, c1 = rows[i], rows[i + 1], cols[j], cols[j + 1]
+        t = transform * Affine.translation(c0, r0)
+        params = {"crs": "EPSG:4326", "crs_transform": [t.a, t.b, t.c, t.d, t.e, t.f],
+                  "dimensions": f"{c1 - c0}x{r1 - r0}", "format": "GEO_TIFF"}
+        last = None
+        for attempt in range(retries):
+            try:
+                url = img.getDownloadURL(params)
+                resp = requests.get(url, timeout=timeout)
+                resp.raise_for_status()
+                break
+            except Exception as e:      # transient GEE / network errors
+                last = e
+                print(f"      [!] tile {i},{j} attempt {attempt + 1} failed: {str(e)[:160]}")
+                time.sleep(min(30 * (attempt + 1), 180))
+        else:
+            raise RuntimeError(f"download failed for tile {i},{j}: {last}")
+        with rasterio.open(io.BytesIO(resp.content)) as src:
+            arr = src.read()
+            assert src.width == c1 - c0 and src.height == r1 - r0, (src.shape, r1 - r0, c1 - c0)
+            assert all(abs(x - y) < 1e-9 for x, y in zip(src.transform[:6], t[:6])), (src.transform, t)
+            return (r0, r1, c0, c1), arr, src.descriptions
+
+    jobs = [(i, j) for i in range(nty) for j in range(ntx)]
+    if workers > 1:
+        with ThreadPoolExecutor(workers) as ex:
+            results = list(ex.map(fetch, jobs))
+    else:
+        results = [fetch(ij) for ij in jobs]
     out = None
     names = None
-    for i in range(nty):
-        for j in range(ntx):
-            r0, r1, c0, c1 = rows[i], rows[i + 1], cols[j], cols[j + 1]
-            t = transform * Affine.translation(c0, r0)
-            params = {"crs": "EPSG:4326", "crs_transform": [t.a, t.b, t.c, t.d, t.e, t.f],
-                      "dimensions": f"{c1 - c0}x{r1 - r0}", "format": "GEO_TIFF"}
-            last = None
-            for attempt in range(retries):
-                try:
-                    url = img.getDownloadURL(params)
-                    resp = requests.get(url, timeout=timeout)
-                    resp.raise_for_status()
-                    break
-                except Exception as e:      # transient GEE / network errors
-                    last = e
-                    print(f"      [!] tile {i},{j} attempt {attempt + 1} failed: {str(e)[:160]}")
-                    time.sleep(5 * (attempt + 1))
-            else:
-                raise RuntimeError(f"download failed for tile {i},{j}: {last}")
-            with rasterio.open(io.BytesIO(resp.content)) as src:
-                arr = src.read()
-                assert src.width == c1 - c0 and src.height == r1 - r0, (src.shape, r1 - r0, c1 - c0)
-                assert all(abs(x - y) < 1e-9 for x, y in zip(src.transform[:6], t[:6])), (src.transform, t)
-                if out is None:
-                    out = np.zeros((arr.shape[0], height, width), arr.dtype)
-                    names = src.descriptions
-            out[:, r0:r1, c0:c1] = arr
+    for (r0, r1, c0, c1), arr, desc in results:
+        if out is None:
+            out = np.zeros((arr.shape[0], height, width), arr.dtype)
+            names = desc
+        out[:, r0:r1, c0:c1] = arr
     prof = {"driver": "GTiff", "height": height, "width": width, "count": out.shape[0],
             "dtype": out.dtype, "crs": "EPSG:4326", "transform": transform, "compress": "lzw"}
     with rasterio.open(out_path, "w", **prof) as dst:

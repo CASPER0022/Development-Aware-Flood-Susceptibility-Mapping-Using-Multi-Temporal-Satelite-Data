@@ -11,7 +11,7 @@ Script: `scripts/02_built_up_timeseries.py` · numbers: `outputs/metrics/step2_b
   - Esri 10 m annual LULC (ESRI): class "built area".
   - ESA WorldCover (WC): 2020 (v100) and 2021 (v200), fetched for the whole AOI. The Phase 1 tile stopped at 10.008° N.
   - GHSL GHS-BUILT-S P2023A: built surface per 100 m cell for 2015 and 2020, plus the 2025 and 2030 projections.
-- **Grid.** Every 10 m source is sampled onto a 1/3″ grid, which nests exactly 3 × 3 inside the Phase 1 FABDEM 1″ grid. The 30 m built-up fraction is therefore an exact mean of 9 sub-pixels, the same idea as the Step 8 label aggregation. GHSL is sampled directly at 30 m.
+- **Grid.** Every 10 m source is sampled onto a ~10 m grid (one third of the Phase 1 cell, 0.0000898°), which nests exactly 3 × 3 inside the Phase 1 30 m grid (0.000269494585°, i.e. 30 m at the equator). The 30 m built-up fraction is therefore an exact mean of 9 sub-pixels, the same idea as the Step 8 label aggregation. GHSL is sampled directly at 30 m.
 - **Cleaning (DW).**
   - Years with no observation take the nearest valid year.
   - A width-3 temporal majority filter is applied at 10 m.

@@ -19,8 +19,8 @@ Phase 2 Step 2 - Multi-year land-cover / imperviousness record.
     Score = mean rank over a, b; ties broken by c.
 
 2.2 Yearly built-up fraction (0-1) on the Phase 1 30 m grid. Every source is
-    sampled (nearest) onto a 1/3" grid (~10 m) that nests exactly 3 x 3 inside
-    the FABDEM 1" grid, so the 30 m fraction is an exact area-weighted mean of
+    sampled (nearest) onto a ~10 m grid (1/3 of the Phase 1 cell) that nests exactly 3 x 3 inside
+    the Phase 1 30 m grid, so the 30 m fraction is an exact area-weighted mean of
     nine sub-pixels (same idea as the Step 8 label aggregation).
 
 2.3 Cleaning of the chosen source, per 10 m pixel over the years:

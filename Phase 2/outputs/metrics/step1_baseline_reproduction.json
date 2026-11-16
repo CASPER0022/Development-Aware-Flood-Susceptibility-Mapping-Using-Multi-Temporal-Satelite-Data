@@ -1,6 +1,6 @@
 {
   "step": 1,
-  "generated": "2026-11-11 21:16:13",
+  "generated": "2026-11-16 15:19:40",
   "checks": {
     "A1_land_domain_identical": {
       "pass": true,
@@ -59,7 +59,7 @@
     }
   },
   "all_pass": true,
-  "runtime_s": 29.9,
+  "runtime_s": 18.1,
   "baseline_reference": {
     "git_tag": "phase1-final",
     "test_auc": 0.9993,
