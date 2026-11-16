@@ -1,0 +1,276 @@
+{
+  "step": 4,
+  "generated": "2026-11-16 15:22:43",
+  "catchment": {
+    "hybas_level": 10,
+    "n_basins_touching_aoi": 19,
+    "n_basins_total": 61,
+    "area_km2_hydrobasins": 9129.8,
+    "bounds": [
+      76.0208,
+      9.2792,
+      77.4,
+      10.5542
+    ]
+  },
+  "ext_grid": {
+    "height": 4881,
+    "width": 5267,
+    "transform": [
+      0.00026949458523585647,
+      0.0,
+      76.00070697153436,
+      0.0,
+      -0.00026949458523585647,
+      10.574428535484536
+    ],
+    "aoi_row0": 1203,
+    "aoi_col0": 553
+  },
+  "imperviousness_ext": {
+    "aoi_gee_vs_step2_r_2018": 0.9996,
+    "aoi_gee_vs_step2_r_2025": 0.9991,
+    "k_from_step2": 0.2138,
+    "aoi_cells_use_step2_layer": true,
+    "impervious_km2_outside_aoi_by_year": {
+      "2017": 336.81,
+      "2018": 345.62,
+      "2019": 354.92,
+      "2020": 361.06,
+      "2021": 378.9,
+      "2022": 404.61,
+      "2023": 428.74,
+      "2024": 443.2,
+      "2025": 447.53
+    }
+  },
+  "routing": {
+    "cells": 25708227,
+    "land_km2": 18810.2,
+    "n_interior_sinks": 0,
+    "mass_balance_rel_err": 7.706371097270328e-15,
+    "aoi_land_mask_identical": true,
+    "max_upslope_area_in_aoi_km2": 6378.1,
+    "periyar_inflow_at_east_edge_km2": 4103.2,
+    "hydrorivers_reference_km2": 4081,
+    "periyar_inflow_vs_hydrorivers_rel_diff": 0.0054,
+    "edge_inflows_km2": {
+      "east": [
+        {
+          "cells": 5,
+          "inflow_km2": 4103.2,
+          "position_index": 208
+        },
+        {
+          "cells": 1,
+          "inflow_km2": 1060.3,
+          "position_index": 1091
+        }
+      ],
+      "north": [
+        {
+          "cells": 3,
+          "inflow_km2": 1346.4,
+          "position_index": 645
+        }
+      ],
+      "south": [
+        {
+          "cells": 1,
+          "inflow_km2": 1340.5,
+          "position_index": 1213
+        },
+        {
+          "cells": 1,
+          "inflow_km2": 83.2,
+          "position_index": 1284
+        }
+      ]
+    },
+    "aoi_cells_with_more_upslope_area_than_phase1_share": 0.0524,
+    "aoi_cells_with_10x_more_share": 0.011
+  },
+  "uica": {
+    "units": "km2 of impervious area draining to the cell (incl. the cell itself)",
+    "aoi_summary_by_year": {
+      "2017": {
+        "median_km2": 0.00034,
+        "p99_km2": 1.025,
+        "max_km2": 114.58,
+        "ratio_median": 0.0573,
+        "ratio_p90": 0.3223
+      },
+      "2018": {
+        "median_km2": 0.00036,
+        "p99_km2": 1.063,
+        "max_km2": 118.92,
+        "ratio_median": 0.0639,
+        "ratio_p90": 0.3232
+      },
+      "2019": {
+        "median_km2": 0.00038,
+        "p99_km2": 1.093,
+        "max_km2": 122.58,
+        "ratio_median": 0.0686,
+        "ratio_p90": 0.3238
+      },
+      "2020": {
+        "median_km2": 0.00038,
+        "p99_km2": 1.11,
+        "max_km2": 123.64,
+        "ratio_median": 0.0711,
+        "ratio_p90": 0.3238
+      },
+      "2021": {
+        "median_km2": 0.0004,
+        "p99_km2": 1.139,
+        "max_km2": 125.85,
+        "ratio_median": 0.0763,
+        "ratio_p90": 0.324
+      },
+      "2022": {
+        "median_km2": 0.00043,
+        "p99_km2": 1.183,
+        "max_km2": 130.68,
+        "ratio_median": 0.0832,
+        "ratio_p90": 0.3244
+      },
+      "2023": {
+        "median_km2": 0.00045,
+        "p99_km2": 1.221,
+        "max_km2": 135.25,
+        "ratio_median": 0.0886,
+        "ratio_p90": 0.3248
+      },
+      "2024": {
+        "median_km2": 0.00046,
+        "p99_km2": 1.23,
+        "max_km2": 135.5,
+        "ratio_median": 0.0902,
+        "ratio_p90": 0.3248
+      },
+      "2025": {
+        "median_km2": 0.00045,
+        "p99_km2": 1.223,
+        "max_km2": 132.85,
+        "ratio_median": 0.0894,
+        "ratio_p90": 0.3249
+      }
+    },
+    "duica": {
+      "2018-2025": {
+        "median_km2": 1e-05,
+        "p99_km2": 0.149,
+        "max_km2": 15.064,
+        "min_km2": -0.015,
+        "share_cells_increase": 0.5494
+      },
+      "2017-2025": {
+        "median_km2": 2e-05,
+        "p99_km2": 0.188,
+        "max_km2": 18.276,
+        "min_km2": -0.013,
+        "share_cells_increase": 0.6069
+      },
+      "2018-2024": {
+        "median_km2": 1e-05,
+        "p99_km2": 0.156,
+        "max_km2": 16.585,
+        "min_km2": -0.012,
+        "share_cells_increase": 0.5674
+      }
+    }
+  },
+  "self_tests": {
+    "T1_weighted_equals_plain_accumulation": {
+      "max_abs_diff_m2": 0.0,
+      "pass": true
+    },
+    "T2_inclined_plane_analytic": {
+      "max_rel_error": 6.315935428978668e-17,
+      "mass_error": 2.5263741715914673e-16,
+      "pass": true
+    },
+    "T3_bounds": {
+      "2017": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2018": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2019": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2020": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2021": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2022": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2023": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2024": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      },
+      "2025": {
+        "cells_above_upslope_area": 0,
+        "cells_negative": 0,
+        "pass": true
+      }
+    },
+    "T4_zero_without_upstream_imperviousness": {
+      "2018": {
+        "cells_without_upstream_imperviousness": 8395548,
+        "of_which_uica_nonzero": 0,
+        "pass": true
+      },
+      "2025": {
+        "cells_without_upstream_imperviousness": 8324620,
+        "of_which_uica_nonzero": 0,
+        "pass": true
+      }
+    },
+    "T5_monotonic_downstream_along_channels": {
+      "definition": "FD8 invariant: UICA(receiver) >= f x UICA(cell), f = share of the cell's FD8 outflow sent to its steepest receiver; and UICA never decreases where the flow is not split (f >= 0.999)",
+      "channel_threshold_km2": 10.0,
+      "channel_steps": 179693,
+      "steps_with_unsplit_flow": 63374,
+      "upslope_area_raw_decrease_share": 0.3066,
+      "2018": {
+        "invariant_violations": 0,
+        "decreases_where_flow_unsplit": 0,
+        "raw_decrease_share_all_steps": 0.2963,
+        "pass": true
+      },
+      "2025": {
+        "invariant_violations": 0,
+        "decreases_where_flow_unsplit": 0,
+        "raw_decrease_share_all_steps": 0.2963,
+        "pass": true
+      },
+      "pass": true
+    }
+  },
+  "all_tests_pass": true,
+  "runtime_s": 116.1
+}
