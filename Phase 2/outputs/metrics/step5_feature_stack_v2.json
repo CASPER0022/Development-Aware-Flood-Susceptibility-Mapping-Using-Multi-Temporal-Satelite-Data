@@ -1,0 +1,331 @@
+{
+  "step": 5,
+  "generated": "2026-11-16 15:11:22",
+  "hand_channel_km2": 1.0,
+  "twi_full": {
+    "cells_changed_share": 0.0575,
+    "cells_increase_gt_1_share": 0.0155,
+    "max_increase": 15.239,
+    "median_land": 9.143,
+    "phase1_median_land": 9.134
+  },
+  "single_feature_auc_2018_samples": {
+    "elevation_m": 0.9152,
+    "twi_phase1": 0.896,
+    "twi_full": 0.896,
+    "hand_0.25km2": 0.9344,
+    "hand_1km2": 0.9512,
+    "hand_5km2": 0.9654,
+    "hand_25km2": 0.9595
+  },
+  "single_feature_auc_2018_floodplain_subset": {
+    "elevation_m": 0.7639,
+    "hand_1km2": 0.9072,
+    "twi_full": 0.8101
+  },
+  "hand_land_cells_without_drainage_set_to_0": 0,
+  "rainfall": {
+    "2018-08_ndem": {
+      "s1_date": "2018-08-21",
+      "event_window": [
+        "2018-08-17",
+        "2018-08-21"
+      ],
+      "antecedent_window": [
+        "2018-07-18",
+        "2018-08-16"
+      ],
+      "event_mm_aoi_mean": 155.3,
+      "event_mm_range": [
+        126.7,
+        177.3
+      ],
+      "antecedent_mm_aoi_mean": 971.2,
+      "antecedent_mm_range": [
+        817.5,
+        1132.0
+      ]
+    },
+    "2019-08_ndem": {
+      "s1_date": "2019-08-10",
+      "event_window": [
+        "2019-08-06",
+        "2019-08-10"
+      ],
+      "antecedent_window": [
+        "2019-07-07",
+        "2019-08-05"
+      ],
+      "event_mm_aoi_mean": 517.1,
+      "event_mm_range": [
+        444.5,
+        611.5
+      ],
+      "antecedent_mm_aoi_mean": 571.6,
+      "antecedent_mm_range": [
+        501.9,
+        609.1
+      ]
+    },
+    "2020-08_ndem": {
+      "s1_date": "2020-08-10",
+      "event_window": [
+        "2020-08-06",
+        "2020-08-10"
+      ],
+      "antecedent_window": [
+        "2020-07-07",
+        "2020-08-05"
+      ],
+      "event_mm_aoi_mean": 206.3,
+      "event_mm_range": [
+        165.5,
+        238.6
+      ],
+      "antecedent_mm_aoi_mean": 886.7,
+      "antecedent_mm_range": [
+        812.2,
+        949.9
+      ]
+    },
+    "2024-08_ndem": {
+      "s1_date": "2024-08-01",
+      "event_window": [
+        "2024-07-28",
+        "2024-08-01"
+      ],
+      "antecedent_window": [
+        "2024-06-28",
+        "2024-07-27"
+      ],
+      "event_mm_aoi_mean": 221.1,
+      "event_mm_range": [
+        137.7,
+        306.6
+      ],
+      "antecedent_mm_aoi_mean": 754.4,
+      "antecedent_mm_range": [
+        692.6,
+        844.0
+      ]
+    }
+  },
+  "landcover_share_on_land": {
+    "2018": {
+      "water": 0.0662,
+      "trees": 0.4512,
+      "grass": 0.0097,
+      "flooded_vegetation": 0.009,
+      "crops": 0.026,
+      "shrub_and_scrub": 0.0078,
+      "built": 0.4294,
+      "bare": 0.0007,
+      "snow_and_ice": 0.0
+    },
+    "2019": {
+      "water": 0.0666,
+      "trees": 0.4069,
+      "grass": 0.0145,
+      "flooded_vegetation": 0.0117,
+      "crops": 0.024,
+      "shrub_and_scrub": 0.006,
+      "built": 0.4694,
+      "bare": 0.0009,
+      "snow_and_ice": 0.0
+    },
+    "2020": {
+      "water": 0.0657,
+      "trees": 0.3983,
+      "grass": 0.0124,
+      "flooded_vegetation": 0.0108,
+      "crops": 0.0284,
+      "shrub_and_scrub": 0.0073,
+      "built": 0.476,
+      "bare": 0.0012,
+      "snow_and_ice": 0.0
+    },
+    "2024": {
+      "water": 0.0642,
+      "trees": 0.3785,
+      "grass": 0.0133,
+      "flooded_vegetation": 0.0087,
+      "crops": 0.0252,
+      "shrub_and_scrub": 0.0036,
+      "built": 0.5059,
+      "bare": 0.0006,
+      "snow_and_ice": 0.0
+    }
+  },
+  "stack_v2": {
+    "features": [
+      "elevation_m",
+      "slope_deg",
+      "aspect_deg",
+      "curvature_plan",
+      "curvature_profile",
+      "dist_to_river_m",
+      "dist_to_major_river_m",
+      "dist_to_road_m",
+      "drainage_density_km_km2",
+      "twi_full",
+      "hand_m",
+      "rain_event_5d_mm",
+      "rain_antecedent_30d_mm",
+      "impervious_frac",
+      "uica_km2",
+      "uica_ratio",
+      "duica_since_2017_km2",
+      "landcover_class"
+    ],
+    "groups": {
+      "terrain/hydrology (Phase 1)": [
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature_plan",
+        "curvature_profile",
+        "dist_to_river_m",
+        "dist_to_major_river_m",
+        "dist_to_road_m",
+        "drainage_density_km_km2"
+      ],
+      "terrain/hydrology (new)": [
+        "twi_full",
+        "hand_m"
+      ],
+      "event rainfall (new)": [
+        "rain_event_5d_mm",
+        "rain_antecedent_30d_mm"
+      ],
+      "development (new)": [
+        "impervious_frac",
+        "uica_km2",
+        "uica_ratio",
+        "duica_since_2017_km2",
+        "landcover_class"
+      ]
+    },
+    "events": [
+      "2018-08_ndem",
+      "2019-08_ndem",
+      "2020-08_ndem",
+      "2024-08_ndem"
+    ],
+    "checks": {
+      "2018-08_ndem": {
+        "same_grid_as_phase1": true,
+        "land_gaps": {},
+        "out_of_range": {},
+        "pass": true
+      },
+      "2019-08_ndem": {
+        "same_grid_as_phase1": true,
+        "land_gaps": {},
+        "out_of_range": {},
+        "pass": true
+      },
+      "2020-08_ndem": {
+        "same_grid_as_phase1": true,
+        "land_gaps": {},
+        "out_of_range": {},
+        "pass": true
+      },
+      "2024-08_ndem": {
+        "same_grid_as_phase1": true,
+        "land_gaps": {},
+        "out_of_range": {},
+        "pass": true
+      }
+    },
+    "replaced": {
+      "twi": "twi_full",
+      "rainfall_mean_annual_mm": "rain_event_5d_mm + rain_antecedent_30d_mm"
+    },
+    "categorical": [
+      "landcover_class"
+    ],
+    "landcover_codes": {
+      "0": "water",
+      "1": "trees",
+      "2": "grass",
+      "3": "flooded_vegetation",
+      "4": "crops",
+      "5": "shrub_and_scrub",
+      "6": "built",
+      "7": "bare",
+      "8": "snow_and_ice"
+    }
+  },
+  "vif": {
+    "elevation_m": 9.53,
+    "slope_deg": 2.56,
+    "aspect_deg": 1.02,
+    "curvature_plan": 1.5,
+    "curvature_profile": 1.54,
+    "dist_to_river_m": 1.69,
+    "dist_to_major_river_m": 1.47,
+    "dist_to_road_m": 1.48,
+    "drainage_density_km_km2": 1.76,
+    "twi_full": 3.98,
+    "hand_m": 8.8,
+    "rain_event_5d_mm": 5.05,
+    "rain_antecedent_30d_mm": 5.09,
+    "impervious_frac": 4.63,
+    "uica_km2": 3.97,
+    "uica_ratio": 5.7,
+    "duica_since_2017_km2": 1.07
+  },
+  "max_vif": 9.53,
+  "high_correlation_pairs_abs_ge_0.7": [
+    [
+      "elevation_m",
+      "hand_m",
+      0.934
+    ],
+    [
+      "twi_full",
+      "uica_km2",
+      0.728
+    ],
+    [
+      "rain_event_5d_mm",
+      "rain_antecedent_30d_mm",
+      -0.889
+    ],
+    [
+      "impervious_frac",
+      "uica_ratio",
+      0.876
+    ]
+  ],
+  "uica_sanity": {
+    "year": 2024,
+    "boxes": {
+      "Kochi city core": {
+        "uica_ratio_median": 0.4485,
+        "uica_km2_p90": 0.026,
+        "impervious_frac_mean": 0.396,
+        "trees_share": 0.036
+      },
+      "Eloor-Kalamassery (below Aluva)": {
+        "uica_ratio_median": 0.2384,
+        "uica_km2_p90": 0.019,
+        "impervious_frac_mean": 0.2137,
+        "trees_share": 0.223
+      },
+      "Eastern forested hills": {
+        "uica_ratio_median": 0.0063,
+        "uica_km2_p90": 0.003,
+        "impervious_frac_mean": 0.0378,
+        "trees_share": 0.753
+      }
+    },
+    "uica_ratio_median_by_landcover": {
+      "trees": 0.0368,
+      "crops": 0.0648,
+      "built": 0.1689
+    }
+  },
+  "all_checks_pass": true,
+  "runtime_s": 462.6
+}
