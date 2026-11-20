@@ -1,0 +1,778 @@
+{
+  "step": 7,
+  "generated": "2026-11-20 13:20:18",
+  "features": [
+    "elevation_m",
+    "slope_deg",
+    "aspect_deg",
+    "curvature_plan",
+    "curvature_profile",
+    "twi",
+    "dist_to_river_m",
+    "dist_to_major_river_m",
+    "dist_to_road_m",
+    "drainage_density_km_km2",
+    "rainfall_mean_annual_mm",
+    "twi_full",
+    "hand_m",
+    "rain_event_5d_mm",
+    "rain_antecedent_30d_mm",
+    "impervious_frac",
+    "landcover_class",
+    "uica_km2",
+    "uica_ratio",
+    "duica_since_2017_km2"
+  ],
+  "rounds": 400,
+  "pu_bags": 25,
+  "models": {
+    "standard": {
+      "spatial": {
+        "accuracy": {
+          "mean": 0.9157,
+          "sd": 0.0932
+        },
+        "precision": {
+          "mean": 0.983,
+          "sd": 0.0097
+        },
+        "recall": {
+          "mean": 0.7912,
+          "sd": 0.2908
+        },
+        "f1": {
+          "mean": 0.8368,
+          "sd": 0.2439
+        },
+        "auc": {
+          "mean": 0.9922,
+          "sd": 0.009
+        },
+        "specificity": {
+          "mean": 0.987,
+          "sd": 0.0108
+        }
+      },
+      "temporal": {
+        "2020": {
+          "accuracy": 0.9721,
+          "precision": 0.9808,
+          "recall": 0.9632,
+          "f1": 0.9719,
+          "auc": 0.9971,
+          "specificity": 0.9811,
+          "confusion": {
+            "TN": 6604,
+            "FP": 127,
+            "FN": 248,
+            "TP": 6483
+          },
+          "auc_pos_vs_neg": 0.9971,
+          "auc_pos_vs_all_land": 0.9866,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.9999,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.001,
+            4.999
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6794,
+          "ndem_only_median_pct": 74.4,
+          "kochi_median_pct": 52.4,
+          "kochi_in_high_vhigh": 0.3986
+        },
+        "2024": {
+          "accuracy": 0.9818,
+          "precision": 0.9715,
+          "recall": 0.9927,
+          "f1": 0.982,
+          "auc": 0.9956,
+          "specificity": 0.9708,
+          "confusion": {
+            "TN": 5325,
+            "FP": 160,
+            "FN": 40,
+            "TP": 5445
+          },
+          "auc_pos_vs_neg": 0.9956,
+          "auc_pos_vs_all_land": 0.9879,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9688,
+          "ndem_only_median_pct": 96.9,
+          "kochi_median_pct": 52.3,
+          "kochi_in_high_vhigh": 0.3865
+        }
+      },
+      "strict": {
+        "2020": {
+          "accuracy": 0.9442,
+          "precision": 0.9799,
+          "recall": 0.907,
+          "f1": 0.9421,
+          "auc": 0.9919,
+          "specificity": 0.9814,
+          "confusion": {
+            "TN": 6606,
+            "FP": 125,
+            "FN": 626,
+            "TP": 6105
+          },
+          "auc_pos_vs_neg": 0.9919,
+          "auc_pos_vs_all_land": 0.9751,
+          "pos_in_high_vhigh": 0.9996,
+          "pos_in_very_high": 0.9905,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.002,
+            0.045,
+            4.952
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6236,
+          "ndem_only_median_pct": 70.8,
+          "kochi_median_pct": 59.9,
+          "kochi_in_high_vhigh": 0.4968
+        },
+        "2024": {
+          "accuracy": 0.9386,
+          "precision": 0.9692,
+          "recall": 0.9059,
+          "f1": 0.9365,
+          "auc": 0.9876,
+          "specificity": 0.9712,
+          "confusion": {
+            "TN": 5327,
+            "FP": 158,
+            "FN": 516,
+            "TP": 4969
+          },
+          "auc_pos_vs_neg": 0.9876,
+          "auc_pos_vs_all_land": 0.975,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.998,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.01,
+            4.99
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9661,
+          "ndem_only_median_pct": 95.7,
+          "kochi_median_pct": 61.0,
+          "kochi_in_high_vhigh": 0.5199
+        }
+      },
+      "headline": {
+        "spatial_auc": 0.9922,
+        "spatial_auc_sd": 0.009,
+        "spatial_f1": 0.8368,
+        "spatial_acc": 0.9157,
+        "temporal_2020_auc_land": 0.9866,
+        "temporal_2020_auc": 0.9971,
+        "temporal_2020_hv": 1.0,
+        "temporal_2020_f1": 0.9719,
+        "temporal_2024_auc_land": 0.9879,
+        "temporal_2024_auc": 0.9956,
+        "temporal_2024_hv": 1.0,
+        "temporal_2024_f1": 0.982,
+        "strict_2020_auc_land": 0.9751,
+        "strict_2020_auc": 0.9919,
+        "strict_2020_hv": 0.9996,
+        "strict_2020_f1": 0.9421,
+        "strict_2024_auc_land": 0.975,
+        "strict_2024_auc": 0.9876,
+        "strict_2024_hv": 1.0,
+        "strict_2024_f1": 0.9365
+      }
+    },
+    "pu_naive": {
+      "spatial": {
+        "accuracy": {
+          "mean": 0.8608,
+          "sd": 0.0873
+        },
+        "precision": {
+          "mean": 0.9919,
+          "sd": 0.0063
+        },
+        "recall": {
+          "mean": 0.6586,
+          "sd": 0.2846
+        },
+        "f1": {
+          "mean": 0.7444,
+          "sd": 0.2717
+        },
+        "auc": {
+          "mean": 0.9916,
+          "sd": 0.0076
+        },
+        "specificity": {
+          "mean": 0.9934,
+          "sd": 0.0065
+        }
+      },
+      "temporal": {
+        "2020": {
+          "accuracy": 0.9618,
+          "precision": 0.9895,
+          "recall": 0.9336,
+          "f1": 0.9607,
+          "auc": 0.9973,
+          "specificity": 0.99,
+          "confusion": {
+            "TN": 6664,
+            "FP": 67,
+            "FN": 447,
+            "TP": 6284
+          },
+          "auc_pos_vs_neg": 0.9973,
+          "auc_pos_vs_all_land": 0.9923,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6926,
+          "ndem_only_median_pct": 74.8,
+          "kochi_median_pct": 48.3,
+          "kochi_in_high_vhigh": 0.3622
+        },
+        "2024": {
+          "accuracy": 0.9656,
+          "precision": 0.981,
+          "recall": 0.9497,
+          "f1": 0.9651,
+          "auc": 0.9948,
+          "specificity": 0.9816,
+          "confusion": {
+            "TN": 5384,
+            "FP": 101,
+            "FN": 276,
+            "TP": 5209
+          },
+          "auc_pos_vs_neg": 0.9948,
+          "auc_pos_vs_all_land": 0.9923,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9688,
+          "ndem_only_median_pct": 98.3,
+          "kochi_median_pct": 49.4,
+          "kochi_in_high_vhigh": 0.3666
+        }
+      },
+      "strict": {
+        "2020": {
+          "accuracy": 0.9037,
+          "precision": 0.9852,
+          "recall": 0.8198,
+          "f1": 0.8949,
+          "auc": 0.9905,
+          "specificity": 0.9877,
+          "confusion": {
+            "TN": 6648,
+            "FP": 83,
+            "FN": 1213,
+            "TP": 5518
+          },
+          "auc_pos_vs_neg": 0.9905,
+          "auc_pos_vs_all_land": 0.9814,
+          "pos_in_high_vhigh": 0.9999,
+          "pos_in_very_high": 0.9932,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.001,
+            0.033,
+            4.966
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6667,
+          "ndem_only_median_pct": 73.2,
+          "kochi_median_pct": 45.6,
+          "kochi_in_high_vhigh": 0.3648
+        },
+        "2024": {
+          "accuracy": 0.8761,
+          "precision": 0.9782,
+          "recall": 0.7694,
+          "f1": 0.8613,
+          "auc": 0.9859,
+          "specificity": 0.9829,
+          "confusion": {
+            "TN": 5391,
+            "FP": 94,
+            "FN": 1265,
+            "TP": 4220
+          },
+          "auc_pos_vs_neg": 0.9859,
+          "auc_pos_vs_all_land": 0.9816,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.9978,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.011,
+            4.989
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9688,
+          "ndem_only_median_pct": 97.5,
+          "kochi_median_pct": 45.3,
+          "kochi_in_high_vhigh": 0.3592
+        }
+      },
+      "headline": {
+        "spatial_auc": 0.9916,
+        "spatial_auc_sd": 0.0076,
+        "spatial_f1": 0.7444,
+        "spatial_acc": 0.8608,
+        "temporal_2020_auc_land": 0.9923,
+        "temporal_2020_auc": 0.9973,
+        "temporal_2020_hv": 1.0,
+        "temporal_2020_f1": 0.9607,
+        "temporal_2024_auc_land": 0.9923,
+        "temporal_2024_auc": 0.9948,
+        "temporal_2024_hv": 1.0,
+        "temporal_2024_f1": 0.9651,
+        "strict_2020_auc_land": 0.9814,
+        "strict_2020_auc": 0.9905,
+        "strict_2020_hv": 0.9999,
+        "strict_2020_f1": 0.8949,
+        "strict_2024_auc_land": 0.9816,
+        "strict_2024_auc": 0.9859,
+        "strict_2024_hv": 1.0,
+        "strict_2024_f1": 0.8613
+      }
+    },
+    "pu_elkan": {
+      "spatial": {
+        "accuracy": {
+          "mean": 0.9047,
+          "sd": 0.0675
+        },
+        "precision": {
+          "mean": 0.9785,
+          "sd": 0.0182
+        },
+        "recall": {
+          "mean": 0.7781,
+          "sd": 0.2237
+        },
+        "f1": {
+          "mean": 0.8449,
+          "sd": 0.1662
+        },
+        "auc": {
+          "mean": 0.9891,
+          "sd": 0.0054
+        },
+        "specificity": {
+          "mean": 0.9844,
+          "sd": 0.0138
+        }
+      },
+      "temporal": {
+        "2020": {
+          "accuracy": 0.9765,
+          "precision": 0.969,
+          "recall": 0.9845,
+          "f1": 0.9767,
+          "auc": 0.9873,
+          "specificity": 0.9685,
+          "confusion": {
+            "TN": 6519,
+            "FP": 212,
+            "FN": 104,
+            "TP": 6627
+          },
+          "auc_pos_vs_neg": 0.9873,
+          "auc_pos_vs_all_land": 0.9745,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.9996,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.002,
+            4.998
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.688,
+          "ndem_only_median_pct": 74.9,
+          "kochi_median_pct": 48.3,
+          "kochi_in_high_vhigh": 0.3559
+        },
+        "2024": {
+          "accuracy": 0.9746,
+          "precision": 0.9588,
+          "recall": 0.9918,
+          "f1": 0.975,
+          "auc": 0.9832,
+          "specificity": 0.9573,
+          "confusion": {
+            "TN": 5251,
+            "FP": 234,
+            "FN": 45,
+            "TP": 5440
+          },
+          "auc_pos_vs_neg": 0.9832,
+          "auc_pos_vs_all_land": 0.9763,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9661,
+          "ndem_only_median_pct": 100.0,
+          "kochi_median_pct": 48.0,
+          "kochi_in_high_vhigh": 0.3524
+        }
+      },
+      "strict": {
+        "2020": {
+          "accuracy": 0.9307,
+          "precision": 0.9706,
+          "recall": 0.8883,
+          "f1": 0.9276,
+          "auc": 0.9795,
+          "specificity": 0.9731,
+          "confusion": {
+            "TN": 6550,
+            "FP": 181,
+            "FN": 752,
+            "TP": 5979
+          },
+          "auc_pos_vs_neg": 0.9795,
+          "auc_pos_vs_all_land": 0.9634,
+          "pos_in_high_vhigh": 0.9997,
+          "pos_in_very_high": 0.9767,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.001,
+            0.115,
+            4.883
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.5685,
+          "ndem_only_median_pct": 67.0,
+          "kochi_median_pct": 46.7,
+          "kochi_in_high_vhigh": 0.3099
+        },
+        "2024": {
+          "accuracy": 0.9325,
+          "precision": 0.9664,
+          "recall": 0.8963,
+          "f1": 0.93,
+          "auc": 0.9778,
+          "specificity": 0.9688,
+          "confusion": {
+            "TN": 5314,
+            "FP": 171,
+            "FN": 569,
+            "TP": 4916
+          },
+          "auc_pos_vs_neg": 0.9778,
+          "auc_pos_vs_all_land": 0.9667,
+          "pos_in_high_vhigh": 0.9998,
+          "pos_in_very_high": 0.9765,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.001,
+            0.117,
+            4.882
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9609,
+          "ndem_only_median_pct": 100.0,
+          "kochi_median_pct": 45.7,
+          "kochi_in_high_vhigh": 0.2854
+        }
+      },
+      "headline": {
+        "spatial_auc": 0.9891,
+        "spatial_auc_sd": 0.0054,
+        "spatial_f1": 0.8449,
+        "spatial_acc": 0.9047,
+        "temporal_2020_auc_land": 0.9745,
+        "temporal_2020_auc": 0.9873,
+        "temporal_2020_hv": 1.0,
+        "temporal_2020_f1": 0.9767,
+        "temporal_2024_auc_land": 0.9763,
+        "temporal_2024_auc": 0.9832,
+        "temporal_2024_hv": 1.0,
+        "temporal_2024_f1": 0.975,
+        "strict_2020_auc_land": 0.9634,
+        "strict_2020_auc": 0.9795,
+        "strict_2020_hv": 0.9997,
+        "strict_2020_f1": 0.9276,
+        "strict_2024_auc_land": 0.9667,
+        "strict_2024_auc": 0.9778,
+        "strict_2024_hv": 0.9998,
+        "strict_2024_f1": 0.93
+      },
+      "c_last_fit": 0.1717
+    },
+    "pu_bagging": {
+      "spatial": {
+        "accuracy": {
+          "mean": 0.9087,
+          "sd": 0.0838
+        },
+        "precision": {
+          "mean": 0.984,
+          "sd": 0.0085
+        },
+        "recall": {
+          "mean": 0.7746,
+          "sd": 0.2657
+        },
+        "f1": {
+          "mean": 0.8337,
+          "sd": 0.2195
+        },
+        "auc": {
+          "mean": 0.992,
+          "sd": 0.0082
+        },
+        "specificity": {
+          "mean": 0.9867,
+          "sd": 0.0126
+        }
+      },
+      "temporal": {
+        "2020": {
+          "accuracy": 0.9689,
+          "precision": 0.9821,
+          "recall": 0.9553,
+          "f1": 0.9685,
+          "auc": 0.9973,
+          "specificity": 0.9826,
+          "confusion": {
+            "TN": 6614,
+            "FP": 117,
+            "FN": 301,
+            "TP": 6430
+          },
+          "auc_pos_vs_neg": 0.9973,
+          "auc_pos_vs_all_land": 0.9925,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6539,
+          "ndem_only_median_pct": 73.3,
+          "kochi_median_pct": 53.9,
+          "kochi_in_high_vhigh": 0.3922
+        },
+        "2024": {
+          "accuracy": 0.9736,
+          "precision": 0.9725,
+          "recall": 0.9747,
+          "f1": 0.9736,
+          "auc": 0.9954,
+          "specificity": 0.9725,
+          "confusion": {
+            "TN": 5334,
+            "FP": 151,
+            "FN": 139,
+            "TP": 5346
+          },
+          "auc_pos_vs_neg": 0.9954,
+          "auc_pos_vs_all_land": 0.9931,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 1.0,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9688,
+          "ndem_only_median_pct": 98.3,
+          "kochi_median_pct": 53.9,
+          "kochi_in_high_vhigh": 0.3871
+        }
+      },
+      "strict": {
+        "2020": {
+          "accuracy": 0.9337,
+          "precision": 0.9809,
+          "recall": 0.8846,
+          "f1": 0.9302,
+          "auc": 0.9922,
+          "specificity": 0.9828,
+          "confusion": {
+            "TN": 6615,
+            "FP": 116,
+            "FN": 777,
+            "TP": 5954
+          },
+          "auc_pos_vs_neg": 0.9922,
+          "auc_pos_vs_all_land": 0.9836,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.9984,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.008,
+            4.992
+          ],
+          "n_pos": 6731,
+          "n_neg": 6731,
+          "ndem_only_in_high_vhigh": 0.6269,
+          "ndem_only_median_pct": 71.3,
+          "kochi_median_pct": 59.6,
+          "kochi_in_high_vhigh": 0.4885
+        },
+        "2024": {
+          "accuracy": 0.9275,
+          "precision": 0.972,
+          "recall": 0.8804,
+          "f1": 0.9239,
+          "auc": 0.9867,
+          "specificity": 0.9747,
+          "confusion": {
+            "TN": 5346,
+            "FP": 139,
+            "FN": 656,
+            "TP": 4829
+          },
+          "auc_pos_vs_neg": 0.9867,
+          "auc_pos_vs_all_land": 0.983,
+          "pos_in_high_vhigh": 1.0,
+          "pos_in_very_high": 0.9993,
+          "frequency_ratio_by_class": [
+            0.0,
+            0.0,
+            0.0,
+            0.004,
+            4.996
+          ],
+          "n_pos": 5485,
+          "n_neg": 5485,
+          "ndem_only_in_high_vhigh": 0.9661,
+          "ndem_only_median_pct": 97.3,
+          "kochi_median_pct": 59.7,
+          "kochi_in_high_vhigh": 0.495
+        }
+      },
+      "headline": {
+        "spatial_auc": 0.992,
+        "spatial_auc_sd": 0.0082,
+        "spatial_f1": 0.8337,
+        "spatial_acc": 0.9087,
+        "temporal_2020_auc_land": 0.9925,
+        "temporal_2020_auc": 0.9973,
+        "temporal_2020_hv": 1.0,
+        "temporal_2020_f1": 0.9685,
+        "temporal_2024_auc_land": 0.9931,
+        "temporal_2024_auc": 0.9954,
+        "temporal_2024_hv": 1.0,
+        "temporal_2024_f1": 0.9736,
+        "strict_2020_auc_land": 0.9836,
+        "strict_2020_auc": 0.9922,
+        "strict_2020_hv": 1.0,
+        "strict_2020_f1": 0.9302,
+        "strict_2024_auc_land": 0.983,
+        "strict_2024_auc": 0.9867,
+        "strict_2024_hv": 1.0,
+        "strict_2024_f1": 0.9239
+      }
+    }
+  },
+  "full_map_2024": {
+    "standard": {
+      "built_in_high_vhigh": 0.2408,
+      "built_share_of_high_vhigh": 0.3045,
+      "elkan_mean_score_land": null
+    },
+    "pu_naive": {
+      "built_in_high_vhigh": 0.2563,
+      "built_share_of_high_vhigh": 0.3242,
+      "elkan_mean_score_land": null
+    },
+    "pu_elkan": {
+      "built_in_high_vhigh": 0.2505,
+      "built_share_of_high_vhigh": 0.3169,
+      "elkan_mean_score_land": 0.0703,
+      "implied_flood_prior": 0.0703
+    },
+    "pu_bagging": {
+      "built_in_high_vhigh": 0.2659,
+      "built_share_of_high_vhigh": 0.3363,
+      "elkan_mean_score_land": null
+    }
+  },
+  "land_built_share": 0.5059,
+  "choice": {
+    "by": "mean strict (new year + new place) AUC flood vs all land, 2020 and 2024",
+    "scores": {
+      "standard": 0.975,
+      "pu_naive": 0.9815,
+      "pu_elkan": 0.965,
+      "pu_bagging": 0.9833
+    },
+    "best": "pu_bagging"
+  },
+  "runtime_s": 329.8
+}
