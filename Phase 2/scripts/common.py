@@ -735,3 +735,265 @@ def ee_download_grid(img, transform, width, height, out_path, tiles=(1, 1), time
                 if n:
                     dst.set_band_description(b, n)
     return out, list(names or [])
+
+
+# ---------------------------------------------------------------------------
+# Week 3: label pools per event, dataset v2, fixed folds, evaluation (Steps 6-8)
+# ---------------------------------------------------------------------------
+EVENTS_V2 = ["2018-08_ndem", "2019-08_ndem", "2020-08_ndem", "2024-08_ndem"]
+TRAIN_EVENTS = ["2018-08_ndem", "2019-08_ndem"]      # temporal split fixed in Step 3
+TEST_EVENTS = ["2020-08_ndem", "2024-08_ndem"]
+EVENT_LABEL = {"2018-08_ndem": "2018", "2019-08_ndem": "2019", "2020-08_ndem": "2020", "2024-08_ndem": "2024"}
+FOLD_BLOCK_M = 10000       # strictest Phase 1 spatial setting
+N_FOLDS = 5
+DATASET_V2 = p2("data", "processed", "training_v2", "samples_v2.parquet")
+FOLDS_JSON = p2("outputs", "metrics", "step6_fold_assignment.json")
+HV_PERCENTILE = 60.0       # High + Very High = top 40 % of land (Phase 1 quantile classes)
+
+FEATURES_A = ["elevation_m", "slope_deg", "aspect_deg", "curvature_plan", "curvature_profile", "twi",
+              "dist_to_river_m", "dist_to_major_river_m", "dist_to_road_m", "drainage_density_km_km2",
+              "rainfall_mean_annual_mm"]
+FEATURES_B = FEATURES_A + ["twi_full", "hand_m", "rain_event_5d_mm", "rain_antecedent_30d_mm"]
+FEATURES_C = FEATURES_B + ["impervious_frac", "landcover_class"]
+FEATURES_D = FEATURES_C + ["uica_km2", "uica_ratio", "duica_since_2017_km2"]
+FEATURE_SETS = {"A": FEATURES_A, "B": FEATURES_B, "C": FEATURES_C, "D": FEATURES_D}
+CATEGORICAL = ["landcover_class"]
+KOCHI_BOX = (76.265, 9.955, 76.32, 10.02)
+
+
+def label_pools(cls20, env20, land30, h30, w30):
+    """Phase 1 Step 8 pool rules for one event (20 m classes -> 30 m cells).
+    pos: >= 50 % confirmed flood (patch >= 10 px, NDEM envelope within 40 m)
+    neg: no Otsu flood within 60 m, outside NDEM envelope (+40 m), > 60 m from reference water
+    ndem_only: >= 50 % inside NDEM, no Otsu flood within 60 m, away from reference water
+               (peak water the radar pass missed; used only for evaluation)"""
+    from scipy import ndimage
+    valid20, flood20, refw20 = cls20 != 255, cls20 == 1, cls20 == 2
+    lab, _ = ndimage.label(flood20, structure=np.ones((3, 3)))
+    sizes = np.bincount(lab.ravel())
+    big = sizes >= MIN_PATCH_EVAL_PX
+    big[0] = False
+    env_tol20 = dilate(env20, TOL_PX)
+    f = {k: to_30m_fraction(m, h30, w30) for k, m in
+         {"valid": valid20, "flood": flood20, "conf": big[lab] & env_tol20, "env": env20,
+          "env_tol": env_tol20, "belt": dilate(refw20, 3), "refw": refw20}.items()}
+    near_flood = ndimage.binary_dilation(f["flood"] > 0, structure=np.ones((3, 3)), iterations=2)
+    full = f["valid"] >= 1 - 1e-6
+    dry_side = land30 & full & ~near_flood & (f["belt"] == 0) & (f["refw"] == 0)
+    pos = land30 & full & (f["conf"] >= 0.5)
+    neg = dry_side & (f["env_tol"] == 0)
+    ndem_only = dry_side & (f["env"] >= 0.5)
+    assert not (pos & neg).any() and not (ndem_only & neg).any()
+    return pos, neg, ndem_only
+
+
+def cell_xy_utm(rows, cols, transform):
+    from pyproj import Transformer
+    lon = transform.c + (cols + 0.5) * transform.a
+    lat = transform.f + (rows + 0.5) * transform.e
+    x, y = Transformer.from_crs("EPSG:4326", UTM, always_xy=True).transform(lon, lat)
+    return lon, lat, np.asarray(x), np.asarray(y)
+
+
+def block10(x, y):
+    return ((np.asarray(x) // FOLD_BLOCK_M).astype(int).astype(str).astype(object) + "_"
+            + (np.asarray(y) // FOLD_BLOCK_M).astype(int).astype(str).astype(object))
+
+
+def load_folds():
+    return json.load(open(FOLDS_JSON, encoding="utf-8"))["block_to_fold"]
+
+
+def land_percentile(scores, ref_scores):
+    """Percentile (0-100) of each score within the event's random land sample."""
+    ref = np.sort(np.asarray(ref_scores))
+    return 100.0 * np.searchsorted(ref, scores, side="right") / len(ref)
+
+
+def event_eval(model_scores, df_event):
+    """Map-level checks for one event, from the random land sample ('rnd'):
+    AUC pos vs confident neg, share of positives in High+Very High (top 40 % of land),
+    frequency ratio per quintile class, NDEM-only and Kochi percentiles."""
+    from sklearn.metrics import roc_auc_score
+    s = df_event["set"].to_numpy()
+    sc = np.asarray(model_scores)
+    ref = sc[s == "rnd"]
+    pct = land_percentile(sc, ref)
+    pos, neg = s == "pos", s == "neg"
+    y = np.r_[np.ones(pos.sum()), np.zeros(neg.sum())]
+    cls_pos = np.clip((pct[pos] // 20).astype(int), 0, 4)
+    fr = [round(float((cls_pos == k).mean() / 0.2), 3) for k in range(5)]
+    land_neg = (s == "rnd") & ~df_event["is_pos"].to_numpy()
+    y2 = np.r_[np.ones(pos.sum()), np.zeros(land_neg.sum())]
+    out = {"auc_pos_vs_neg": round(float(roc_auc_score(y, np.r_[sc[pos], sc[neg]])), 4),
+           "auc_pos_vs_all_land": round(float(roc_auc_score(y2, np.r_[sc[pos], sc[land_neg]])), 4),
+           "pos_in_high_vhigh": round(float((pct[pos] >= HV_PERCENTILE).mean()), 4),
+           "pos_in_very_high": round(float((pct[pos] >= 80).mean()), 4),
+           "frequency_ratio_by_class": fr,
+           "n_pos": int(pos.sum()), "n_neg": int(neg.sum())}
+    if (s == "ndem").any():
+        out["ndem_only_in_high_vhigh"] = round(float((pct[s == "ndem"] >= HV_PERCENTILE).mean()), 4)
+        out["ndem_only_median_pct"] = round(float(np.median(pct[s == "ndem"])), 1)
+    kb = (s == "rnd") & df_event["in_kochi"].to_numpy()
+    if kb.any():
+        out["kochi_median_pct"] = round(float(np.median(pct[kb])), 1)
+        out["kochi_in_high_vhigh"] = round(float((pct[kb] >= HV_PERCENTILE).mean()), 4)
+    return out
+
+
+def std_rows(d):
+    """Standard (balanced) rows: confirmed flood vs confident non-flood."""
+    return d[d["set"].isin(["pos", "neg"])]
+
+
+def y_of(d):
+    return d["set"].eq("pos").astype(int).to_numpy()
+
+
+def run_protocols(df, fit_predict, protocols=("spatial", "temporal", "strict")):
+    """Evaluate one model under the Step 6 framework.
+    fit_predict(train_df, test_df) -> scores for every row of test_df; train_df holds all
+    sets (pos/neg/rnd/ndem) of the training rows, so standard and PU models choose their own rows.
+    spatial  pooled 4 events, fixed 10 km folds; metrics on the standard rows of the test fold
+    temporal train 2018+2019 (all blocks) -> test 2020, 2024
+    strict   train 2018+2019 outside fold k -> test 2020, 2024 inside fold k (out-of-fold),
+             i.e. a new year AND a new place"""
+    out = {}
+    if "spatial" in protocols:
+        fm = []
+        for k in range(N_FOLDS):
+            te = std_rows(df[df["fold"] == k])
+            fm.append(metrics(y_of(te), fit_predict(df[df["fold"] != k], te)))
+        out["spatial"] = cv_summary(fm)
+    if "temporal" in protocols:
+        tr, te = df[df["event"].isin(TRAIN_EVENTS)], df[df["event"].isin(TEST_EVENTS)]
+        sc = pd_series(fit_predict(tr, te), te.index)
+        out["temporal"] = _per_event(te, sc)
+    if "strict" in protocols:
+        te_all = df[df["event"].isin(TEST_EVENTS)]
+        sc = pd_series(np.zeros(len(te_all)), te_all.index)
+        for k in range(N_FOLDS):
+            tr = df[df["event"].isin(TRAIN_EVENTS) & (df["fold"] != k)]
+            te = te_all[te_all["fold"] == k]
+            sc.loc[te.index] = fit_predict(tr, te)
+        out["strict"] = _per_event(te_all, sc)
+    return out
+
+
+def pd_series(v, index):
+    import pandas as pd
+    return pd.Series(np.asarray(v, float), index=index)
+
+
+def _per_event(te, sc):
+    res = {}
+    for ev in TEST_EVENTS:
+        de = te[te["event"] == ev]
+        st = std_rows(de)
+        res[EVENT_LABEL[ev]] = {**rounded(metrics(y_of(st), sc.loc[st.index].to_numpy())),
+                                **event_eval(sc.loc[de.index].to_numpy(), de)}
+    return res
+
+
+def headline(r):
+    """Compact numbers for tables: spatial AUC/F1, temporal and strict AUC (pos vs all land) per test event."""
+    h = {}
+    if "spatial" in r:
+        h["spatial_auc"] = r["spatial"]["auc"]["mean"]; h["spatial_auc_sd"] = r["spatial"]["auc"]["sd"]
+        h["spatial_f1"] = r["spatial"]["f1"]["mean"]; h["spatial_acc"] = r["spatial"]["accuracy"]["mean"]
+    for p in ("temporal", "strict"):
+        if p in r:
+            for e, m in r[p].items():
+                h[f"{p}_{e}_auc_land"] = m["auc_pos_vs_all_land"]
+                h[f"{p}_{e}_auc"] = m["auc"]
+                h[f"{p}_{e}_hv"] = m["pos_in_high_vhigh"]
+                h[f"{p}_{e}_f1"] = m["f1"]
+    return h
+
+
+LGB_PARAMS_V2 = {**LGB_PARAMS, "num_threads": 8}
+PU_BAGS = 25
+
+
+def lgb_fit(d, feats, y, params=None, rounds=400, weight=None):
+    import lightgbm as lgb
+    cat = [f for f in feats if f in CATEGORICAL]
+    ds = lgb.Dataset(d[feats], y, weight=weight, categorical_feature=cat or "auto", free_raw_data=False)
+    return lgb.train(params or LGB_PARAMS_V2, ds, num_boost_round=rounds)
+
+
+def make_fit_predict(kind, feats, params=None, rounds=400, n_bags=PU_BAGS):
+    """Model factories for run_protocols.
+    standard  confirmed flood vs confident non-flood (balanced, Phase 1 design)
+    pu_naive  confirmed flood vs unlabelled random land, no correction
+    pu_elkan  Elkan & Noto (2008): g = P(labelled | x) trained on natural proportions,
+              c = mean g on held-out positives (20 % of positive blocks), f = min(g / c, 1)
+    pu_bagging Mordelet & Vert (2014): n_bags models, each all positives + an equal-size
+              random subsample of the unlabelled set, scores averaged"""
+    rng_seed = SEED
+
+    def fp(tr, te):
+        pos = tr[tr["set"] == "pos"]
+        if kind == "standard":
+            d = std_rows(tr)
+            return lgb_fit(d, feats, y_of(d), params, rounds).predict(te[feats])
+        unl = tr[tr["set"] == "rnd"]
+        if kind == "pu_naive":
+            d = pd_concat([pos, unl])
+            y = np.r_[np.ones(len(pos)), np.zeros(len(unl))]
+            w = np.r_[np.full(len(pos), len(unl) / len(pos)), np.ones(len(unl))]
+            return lgb_fit(d, feats, y, params, rounds, weight=w).predict(te[feats])
+        if kind == "pu_elkan":
+            blocks = np.sort(pos["block10"].unique())
+            r = np.random.default_rng(rng_seed)
+            hold = set(r.choice(blocks, size=max(1, len(blocks) // 5), replace=False))
+            ph, pt = pos[pos["block10"].isin(hold)], pos[~pos["block10"].isin(hold)]
+            d = pd_concat([pt, unl])
+            y = np.r_[np.ones(len(pt)), np.zeros(len(unl))]
+            g = lgb_fit(d, feats, y, params, rounds)
+            c = float(np.mean(g.predict(ph[feats])))
+            fp.last_c = c
+            return np.minimum(g.predict(te[feats]) / c, 1.0)
+        if kind == "pu_bagging":
+            r = np.random.default_rng(rng_seed)
+            acc = np.zeros(len(te))
+            for _ in range(n_bags):
+                u = unl.iloc[r.choice(len(unl), size=min(len(pos), len(unl)), replace=False)]
+                d = pd_concat([pos, u])
+                y = np.r_[np.ones(len(pos)), np.zeros(len(u))]
+                acc += lgb_fit(d, feats, y, params, max(rounds // 2, 100)).predict(te[feats])
+            return acc / n_bags
+        raise ValueError(kind)
+    fp.last_c = None
+    return fp
+
+
+def pd_concat(parts):
+    import pandas as pd
+    return pd.concat(parts, ignore_index=False)
+
+
+def land_matrix(event):
+    """All land cells of one event's stack v2 (+ Phase 1 twi / annual rainfall) as a DataFrame."""
+    import pandas as pd
+    import rasterio
+    meta = json.load(open(p2("data", "processed", "features_v2", "features_v2_metadata.json"), encoding="utf-8"))
+    with rasterio.open(P1_DOMAIN) as src:
+        land = src.read(1).astype(bool)
+    rr, cc = np.nonzero(land)
+    with rasterio.open(p2("data", "processed", "features_v2", meta["files"][event])) as src:
+        d = pd.DataFrame({n: src.read(i + 1)[rr, cc] for i, n in enumerate(src.descriptions)})
+    with rasterio.open(P1_STACK) as src:
+        names = list(src.descriptions)
+        for n in ("twi", "rainfall_mean_annual_mm"):
+            d[n] = src.read(names.index(n) + 1)[rr, cc]
+    d["landcover_class"] = d["landcover_class"].astype(int)
+    return d, rr, cc, land
+
+
+def percentile_map(scores, rr, cc, land):
+    """Land percentile (0-100) of every land cell; NaN elsewhere."""
+    out = np.full(land.shape, np.nan, np.float32)
+    order = np.argsort(np.argsort(scores, kind="stable"), kind="stable")
+    out[rr, cc] = 100.0 * (order + 1) / len(scores)
+    return out
