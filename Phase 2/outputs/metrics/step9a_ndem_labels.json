@@ -1,0 +1,912 @@
+{
+  "step": "9.0a",
+  "generated": "2026-11-20 14:52:39",
+  "detail_rule_vertices_per_km": 50.0,
+  "pu_bags": 15,
+  "label_quality": {
+    "2018-08_ndem": {
+      "polygons": 15000,
+      "detailed_share": 0.98,
+      "median_vertices_per_km": 177.4,
+      "radar_pos_km2": 13.53,
+      "ndem_added_km2": 62.16,
+      "profile": {
+        "radar flood": {
+          "n": 15370,
+          "dw_built": 0.001,
+          "paved_ge_0.2": 0.0,
+          "uica_ratio_ge_0.1": 0.131,
+          "hand_median_m": 0.0
+        },
+        "NDEM-added flood": {
+          "n": 70622,
+          "dw_built": 0.295,
+          "paved_ge_0.2": 0.098,
+          "uica_ratio_ge_0.1": 0.305,
+          "hand_median_m": 1.54
+        },
+        "random land": {
+          "n": 60000,
+          "dw_built": 0.429,
+          "paved_ge_0.2": 0.192,
+          "uica_ratio_ge_0.1": 0.389,
+          "hand_median_m": 3.84
+        }
+      }
+    },
+    "2019-08_ndem": {
+      "polygons": 840,
+      "detailed_share": 0.0,
+      "median_vertices_per_km": 22.6,
+      "radar_pos_km2": 10.53,
+      "ndem_added_km2": 0.0,
+      "profile": {
+        "radar flood": {
+          "n": 11968,
+          "dw_built": 0.001,
+          "paved_ge_0.2": 0.001,
+          "uica_ratio_ge_0.1": 0.134,
+          "hand_median_m": 0.0
+        },
+        "NDEM-added flood": {
+          "n": 0,
+          "dw_built": NaN,
+          "paved_ge_0.2": NaN,
+          "uica_ratio_ge_0.1": NaN,
+          "hand_median_m": NaN
+        },
+        "random land": {
+          "n": 60000,
+          "dw_built": 0.466,
+          "paved_ge_0.2": 0.189,
+          "uica_ratio_ge_0.1": 0.396,
+          "hand_median_m": 3.86
+        }
+      }
+    },
+    "2020-08_ndem": {
+      "polygons": 11038,
+      "detailed_share": 0.997,
+      "median_vertices_per_km": 329.4,
+      "radar_pos_km2": 5.92,
+      "ndem_added_km2": 8.88,
+      "profile": {
+        "radar flood": {
+          "n": 6731,
+          "dw_built": 0.001,
+          "paved_ge_0.2": 0.0,
+          "uica_ratio_ge_0.1": 0.049,
+          "hand_median_m": 0.0
+        },
+        "NDEM-added flood": {
+          "n": 10095,
+          "dw_built": 0.268,
+          "paved_ge_0.2": 0.045,
+          "uica_ratio_ge_0.1": 0.192,
+          "hand_median_m": 0.99
+        },
+        "random land": {
+          "n": 60000,
+          "dw_built": 0.474,
+          "paved_ge_0.2": 0.193,
+          "uica_ratio_ge_0.1": 0.405,
+          "hand_median_m": 3.83
+        }
+      }
+    },
+    "2024-08_ndem": {
+      "polygons": 431,
+      "detailed_share": 0.074,
+      "median_vertices_per_km": 26.5,
+      "radar_pos_km2": 4.83,
+      "ndem_added_km2": 0.0,
+      "profile": {
+        "radar flood": {
+          "n": 5485,
+          "dw_built": 0.0,
+          "paved_ge_0.2": 0.0,
+          "uica_ratio_ge_0.1": 0.094,
+          "hand_median_m": 0.0
+        },
+        "NDEM-added flood": {
+          "n": 1,
+          "dw_built": 0.0,
+          "paved_ge_0.2": 0.0,
+          "uica_ratio_ge_0.1": 0.0,
+          "hand_median_m": 0.0
+        },
+        "random land": {
+          "n": 60000,
+          "dw_built": 0.504,
+          "paved_ge_0.2": 0.22,
+          "uica_ratio_ge_0.1": 0.462,
+          "hand_median_m": 3.83
+        }
+      }
+    }
+  },
+  "dataset": {
+    "rows_by_set_src": {
+      "neg|neg": 120272,
+      "pos|ndem": 80718,
+      "pos|radar": 39554,
+      "rnd|rnd": 240000
+    }
+  },
+  "runs": {
+    "radar|standard|C": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.7748
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.6355
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.6121
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.7094
+        },
+        "ndem_added_in_high_vhigh": 0.652
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8501
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.7094
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6676
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7241
+          },
+          "ndem_added_in_high_vhigh": 0.7795
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9766
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9723
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar|standard|D": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.767
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.6189
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.5931
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.6943
+        },
+        "ndem_added_in_high_vhigh": 0.6346
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8468
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.707
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6771
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7194
+          },
+          "ndem_added_in_high_vhigh": 0.7688
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9746
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9707
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar|pu_bagging|C": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.8051
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.6771
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.6655
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.7425
+        },
+        "ndem_added_in_high_vhigh": 0.681
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8532
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.6936
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6622
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7096
+          },
+          "ndem_added_in_high_vhigh": 0.76
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9848
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9716
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar|pu_bagging|D": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.801
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.6653
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.6459
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.7332
+        },
+        "ndem_added_in_high_vhigh": 0.6722
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8531
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.6978
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6589
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7086
+          },
+          "ndem_added_in_high_vhigh": 0.7622
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9842
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9698
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar+ndem|standard|C": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.9202
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.9334
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.9287
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.9144
+        },
+        "ndem_added_in_high_vhigh": 0.9743
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.861
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.7419
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6948
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7393
+          },
+          "ndem_added_in_high_vhigh": 0.8119
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9782
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9578
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar+ndem|standard|D": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.9211
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.9346
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.9313
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.9175
+        },
+        "ndem_added_in_high_vhigh": 0.9751
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8644
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.7571
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.7321
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7525
+          },
+          "ndem_added_in_high_vhigh": 0.8234
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9796
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9562
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar+ndem|pu_bagging|C": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.9395
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.9411
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.9419
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.9269
+        },
+        "ndem_added_in_high_vhigh": 0.9933
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8478
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.6906
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.6968
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7122
+          },
+          "ndem_added_in_high_vhigh": 0.748
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9835
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9638
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    },
+    "radar+ndem|pu_bagging|D": {
+      "spatial": {
+        "all land": {
+          "n_flood": 120272,
+          "n_land": 235651,
+          "auc": 0.9392
+        },
+        "DW built": {
+          "n_flood": 23591,
+          "n_land": 111470,
+          "auc": 0.9415
+        },
+        "paved >= 20 %": {
+          "n_flood": 7427,
+          "n_land": 47327,
+          "auc": 0.9427
+        },
+        "UICA ratio >= 0.10": {
+          "n_flood": 27968,
+          "n_land": 98071,
+          "auc": 0.9267
+        },
+        "ndem_added_in_high_vhigh": 0.9929
+      },
+      "strict": {
+        "2020": {
+          "all land": {
+            "n_flood": 16826,
+            "n_land": 59371,
+            "auc": 0.8516
+          },
+          "DW built": {
+            "n_flood": 2714,
+            "n_land": 28351,
+            "auc": 0.7023
+          },
+          "paved >= 20 %": {
+            "n_flood": 458,
+            "n_land": 11545,
+            "auc": 0.7072
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 2272,
+            "n_land": 24184,
+            "auc": 0.7201
+          },
+          "ndem_added_in_high_vhigh": 0.7612
+        },
+        "2024": {
+          "all land": {
+            "n_flood": 5486,
+            "n_land": 59797,
+            "auc": 0.9819
+          },
+          "DW built": {
+            "n_flood": 0,
+            "n_land": 30214,
+            "auc": null
+          },
+          "paved >= 20 %": {
+            "n_flood": 2,
+            "n_land": 13179,
+            "auc": null
+          },
+          "UICA ratio >= 0.10": {
+            "n_flood": 518,
+            "n_land": 27702,
+            "auc": 0.9552
+          },
+          "ndem_added_in_high_vhigh": 1.0
+        }
+      }
+    }
+  },
+  "D_minus_C": {
+    "radar|standard": {
+      "spatial|all land": -0.0078,
+      "spatial|DW built": -0.0166,
+      "spatial|paved >= 20 %": -0.019,
+      "spatial|UICA ratio >= 0.10": -0.0151,
+      "strict2020|all land": -0.0033,
+      "strict2020|DW built": -0.0024,
+      "strict2020|paved >= 20 %": 0.0095,
+      "strict2020|UICA ratio >= 0.10": -0.0047
+    },
+    "radar|pu_bagging": {
+      "spatial|all land": -0.0041,
+      "spatial|DW built": -0.0118,
+      "spatial|paved >= 20 %": -0.0196,
+      "spatial|UICA ratio >= 0.10": -0.0093,
+      "strict2020|all land": -0.0001,
+      "strict2020|DW built": 0.0042,
+      "strict2020|paved >= 20 %": -0.0033,
+      "strict2020|UICA ratio >= 0.10": -0.001
+    },
+    "radar+ndem|standard": {
+      "spatial|all land": 0.0009,
+      "spatial|DW built": 0.0012,
+      "spatial|paved >= 20 %": 0.0026,
+      "spatial|UICA ratio >= 0.10": 0.0031,
+      "strict2020|all land": 0.0034,
+      "strict2020|DW built": 0.0152,
+      "strict2020|paved >= 20 %": 0.0373,
+      "strict2020|UICA ratio >= 0.10": 0.0132
+    },
+    "radar+ndem|pu_bagging": {
+      "spatial|all land": -0.0003,
+      "spatial|DW built": 0.0004,
+      "spatial|paved >= 20 %": 0.0008,
+      "spatial|UICA ratio >= 0.10": -0.0002,
+      "strict2020|all land": 0.0038,
+      "strict2020|DW built": 0.0117,
+      "strict2020|paved >= 20 %": 0.0104,
+      "strict2020|UICA ratio >= 0.10": 0.0079
+    }
+  },
+  "bootstrap_strict2020_D_minus_C": {
+    "radar|standard|all land": {
+      "ci95": [
+        -0.0077,
+        -0.0001
+      ],
+      "p_D_better": 0.023,
+      "n_valid": 1000
+    },
+    "radar|standard|DW built": {
+      "ci95": [
+        -0.0183,
+        0.013
+      ],
+      "p_D_better": 0.388,
+      "n_valid": 1000
+    },
+    "radar|standard|paved >= 20 %": {
+      "ci95": [
+        -0.0162,
+        0.0323
+      ],
+      "p_D_better": 0.771,
+      "n_valid": 1000
+    },
+    "radar|standard|UICA ratio >= 0.10": {
+      "ci95": [
+        -0.0167,
+        0.0072
+      ],
+      "p_D_better": 0.231,
+      "n_valid": 1000
+    },
+    "radar|pu_bagging|all land": {
+      "ci95": [
+        -0.0016,
+        0.0013
+      ],
+      "p_D_better": 0.451,
+      "n_valid": 1000
+    },
+    "radar|pu_bagging|DW built": {
+      "ci95": [
+        -0.0019,
+        0.0102
+      ],
+      "p_D_better": 0.892,
+      "n_valid": 1000
+    },
+    "radar|pu_bagging|paved >= 20 %": {
+      "ci95": [
+        -0.0134,
+        0.0074
+      ],
+      "p_D_better": 0.266,
+      "n_valid": 1000
+    },
+    "radar|pu_bagging|UICA ratio >= 0.10": {
+      "ci95": [
+        -0.0057,
+        0.0043
+      ],
+      "p_D_better": 0.335,
+      "n_valid": 1000
+    },
+    "radar+ndem|standard|all land": {
+      "ci95": [
+        -0.001,
+        0.0084
+      ],
+      "p_D_better": 0.937,
+      "n_valid": 1000
+    },
+    "radar+ndem|standard|DW built": {
+      "ci95": [
+        0.0033,
+        0.0269
+      ],
+      "p_D_better": 0.992,
+      "n_valid": 1000
+    },
+    "radar+ndem|standard|paved >= 20 %": {
+      "ci95": [
+        0.0208,
+        0.0575
+      ],
+      "p_D_better": 1.0,
+      "n_valid": 1000
+    },
+    "radar+ndem|standard|UICA ratio >= 0.10": {
+      "ci95": [
+        -0.0037,
+        0.0286
+      ],
+      "p_D_better": 0.941,
+      "n_valid": 1000
+    },
+    "radar+ndem|pu_bagging|all land": {
+      "ci95": [
+        -0.0008,
+        0.007
+      ],
+      "p_D_better": 0.958,
+      "n_valid": 1000
+    },
+    "radar+ndem|pu_bagging|DW built": {
+      "ci95": [
+        0.0019,
+        0.0207
+      ],
+      "p_D_better": 0.989,
+      "n_valid": 1000
+    },
+    "radar+ndem|pu_bagging|paved >= 20 %": {
+      "ci95": [
+        0.0001,
+        0.021
+      ],
+      "p_D_better": 0.976,
+      "n_valid": 1000
+    },
+    "radar+ndem|pu_bagging|UICA ratio >= 0.10": {
+      "ci95": [
+        0.0017,
+        0.0143
+      ],
+      "p_D_better": 0.993,
+      "n_valid": 1000
+    }
+  },
+  "map_2024": {
+    "radar|pu_bagging|C": {
+      "built_in_high_vhigh": 0.2342,
+      "kochi_median_pct": 55.0,
+      "kochi_in_high_vhigh": 0.4198
+    },
+    "radar+ndem|pu_bagging|C": {
+      "built_in_high_vhigh": 0.297,
+      "kochi_median_pct": 45.7,
+      "kochi_in_high_vhigh": 0.3597
+    },
+    "radar+ndem|pu_bagging|D": {
+      "built_in_high_vhigh": 0.2981,
+      "kochi_median_pct": 43.7,
+      "kochi_in_high_vhigh": 0.3377
+    }
+  },
+  "runtime_s": 863.1
+}
