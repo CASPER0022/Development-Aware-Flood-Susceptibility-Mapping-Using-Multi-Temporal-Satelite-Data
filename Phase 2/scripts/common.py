@@ -997,3 +997,83 @@ def percentile_map(scores, rr, cc, land):
     order = np.argsort(np.argsort(scores, kind="stable"), kind="stable")
     out[rr, cc] = 100.0 * (order + 1) / len(scores)
     return out
+
+
+# ---------------------------------------------------------------------------
+# Step 9.0: radar + NDEM label dataset (cached), shared by 9.0b onwards
+# ---------------------------------------------------------------------------
+NDEM_DETAIL_V_PER_KM = 50.0
+DATASET_NDEM = p2("data", "processed", "training_v2", "samples_v2_ndem.parquet")
+
+
+def ndem_label_dataset(rebuild=False):
+    """Step 9.0a labels as a table: pos = radar flood OR >= 50 % inside a detailed NDEM
+    polygon; neg = confident non-flood (equal count); rnd = the Step 6 random land cells
+    re-flagged (is_pos2). Columns as dataset v2 plus 'src' (radar / ndem / neg / rnd)."""
+    import pandas as pd
+    import rasterio
+    from rasterio.features import rasterize
+    if os.path.exists(DATASET_NDEM) and not rebuild:
+        return pd.read_parquet(DATASET_NDEM)
+    rng = np.random.default_rng(SEED)
+    ev_json = json.load(open(f"{METRICS_DIR}/step3_flood_inventory_events.json", encoding="utf-8"))
+    ev_info = {e["event"]: e for e in ev_json["events"] if e["status"] == "kept"}
+    meta = json.load(open(f"{PROC_DIR}/features_v2/features_v2_metadata.json", encoding="utf-8"))
+    old = pd.read_parquet(DATASET_V2)
+    b2f = load_folds()
+    with rasterio.open(P1_STACK) as src:
+        p1s = {n: src.read(i + 1) for i, n in enumerate(src.descriptions)}
+        T30, H30, W30 = src.transform, src.height, src.width
+    with rasterio.open(P1_DOMAIN) as src:
+        land = src.read(1).astype(bool)
+    nd = load_ndem()
+    ndu = nd.to_crs(UTM)
+    nd["v_per_km"] = [sum(len(p.exterior.coords) for p in getattr(g, "geoms", [g])) / max(l / 1000, 1e-6)
+                      for g, l in zip(ndu.geometry, ndu.length)]
+    frames = []
+    for ev in EVENTS_V2:
+        info = ev_info[ev]
+        with rasterio.open(os.path.join(PHASE2_ROOT, info["selected"]["water_classes"])) as src:
+            cls = src.read(1)
+            T20 = src.transform
+        sel = nd[nd["date"].isin(info["ndem_dates"])]
+        env_all, _ = ndem_mask(nd, info["ndem_dates"], cls.shape, T20)
+        det = sel[sel["v_per_km"] >= NDEM_DETAIL_V_PER_KM]
+        env_det = (rasterize([(g, 1) for g in det.geometry], out_shape=cls.shape, transform=T20, fill=0,
+                             dtype="uint8").astype(bool) if len(det) else np.zeros(cls.shape, bool))
+        pos_r, neg, _ = label_pools(cls, env_all, land, H30, W30)
+        f_det = to_30m_fraction(env_det, H30, W30)
+        f_valid = to_30m_fraction(cls != 255, H30, W30)
+        f_belt = to_30m_fraction(dilate(cls == 2, 3), H30, W30)
+        ndem_pos = land & (f_valid >= 1 - 1e-6) & (f_det >= 0.5) & (f_belt == 0) & ~pos_r
+        pos2 = pos_r | ndem_pos
+        with rasterio.open(f"{PROC_DIR}/features_v2/{meta['files'][ev]}") as src:
+            names = list(src.descriptions)
+            stack = src.read()
+        pos_i = np.flatnonzero(pos2.ravel())
+        neg_i = rng.choice(np.flatnonzero(neg.ravel()), size=len(pos_i), replace=False)
+        parts = []
+        for tag, idx in (("pos", pos_i), ("neg", neg_i)):
+            r, c = np.unravel_index(idx, (H30, W30))
+            d = pd.DataFrame({n: stack[k][r, c] for k, n in enumerate(names)})
+            d["twi"] = p1s["twi"][r, c]
+            d["rainfall_mean_annual_mm"] = p1s["rainfall_mean_annual_mm"][r, c]
+            d.insert(0, "set", tag); d.insert(1, "event", ev); d.insert(2, "row", r); d.insert(3, "col", c)
+            d["src"] = np.where(pos_r[r, c], "radar", np.where(ndem_pos[r, c], "ndem", "neg"))
+            parts.append(d)
+        d = pd.concat(parts, ignore_index=True)
+        lon, lat, x, y = cell_xy_utm(d["row"].to_numpy(), d["col"].to_numpy(), T30)
+        d["lon"], d["lat"], d["x_utm"], d["y_utm"] = lon, lat, x, y
+        d["block10"] = block10(x, y)
+        kb = KOCHI_BOX
+        d["in_kochi"] = (lon >= kb[0]) & (lon <= kb[2]) & (lat >= kb[1]) & (lat <= kb[3])
+        d["is_pos2"] = d["set"] == "pos"
+        rnd = old[(old.event == ev) & (old.set == "rnd")].copy()
+        rnd["src"] = "rnd"
+        rnd["is_pos2"] = pos2[rnd["row"], rnd["col"]]
+        frames += [d, rnd.drop(columns=[c for c in ("is_pos", "fold") if c in rnd])]
+    df = pd.concat(frames, ignore_index=True)
+    df["landcover_class"] = df["landcover_class"].astype(int)
+    df["fold"] = df["block10"].map(b2f).astype(int)
+    df.to_parquet(DATASET_NDEM, index=False)
+    return df
