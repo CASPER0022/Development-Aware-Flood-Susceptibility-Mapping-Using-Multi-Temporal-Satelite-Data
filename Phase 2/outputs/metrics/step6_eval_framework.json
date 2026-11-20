@@ -1,0 +1,370 @@
+{
+  "step": 6,
+  "generated": "2026-11-20 13:19:35",
+  "pools": {
+    "2018-08_ndem": {
+      "date": "2018-08-21",
+      "ndem_polygons": 15000,
+      "pos_cells": 15370,
+      "pos_km2": 13.53,
+      "neg_pool_cells": 1245282,
+      "ndem_only_cells": 58625,
+      "ndem_only_km2": 51.6,
+      "pos_built_share": 0.001,
+      "rnd_pos_share": 0.009
+    },
+    "2019-08_ndem": {
+      "date": "2019-08-10",
+      "ndem_polygons": 840,
+      "pos_cells": 11968,
+      "pos_km2": 10.53,
+      "neg_pool_cells": 1373550,
+      "ndem_only_cells": 17791,
+      "ndem_only_km2": 15.66,
+      "pos_built_share": 0.001,
+      "rnd_pos_share": 0.0073
+    },
+    "2020-08_ndem": {
+      "date": "2020-08-10",
+      "ndem_polygons": 11038,
+      "pos_cells": 6731,
+      "pos_km2": 5.92,
+      "neg_pool_cells": 1402561,
+      "ndem_only_cells": 6151,
+      "ndem_only_km2": 5.41,
+      "pos_built_share": 0.001,
+      "rnd_pos_share": 0.004
+    },
+    "2024-08_ndem": {
+      "date": "2024-08-01",
+      "ndem_polygons": 431,
+      "pos_cells": 5485,
+      "pos_km2": 4.83,
+      "neg_pool_cells": 1476723,
+      "ndem_only_cells": 384,
+      "ndem_only_km2": 0.34,
+      "pos_built_share": 0.0,
+      "rnd_pos_share": 0.0034
+    }
+  },
+  "dataset_v2": {
+    "path": "data\\processed\\training_v2\\samples_v2.parquet",
+    "rows": 363434,
+    "rows_by_set_event": {
+      "ndem|2018-08_ndem": 20000,
+      "ndem|2019-08_ndem": 17791,
+      "ndem|2020-08_ndem": 6151,
+      "ndem|2024-08_ndem": 384,
+      "neg|2018-08_ndem": 15370,
+      "neg|2019-08_ndem": 11968,
+      "neg|2020-08_ndem": 6731,
+      "neg|2024-08_ndem": 5485,
+      "pos|2018-08_ndem": 15370,
+      "pos|2019-08_ndem": 11968,
+      "pos|2020-08_ndem": 6731,
+      "pos|2024-08_ndem": 5485,
+      "rnd|2018-08_ndem": 60000,
+      "rnd|2019-08_ndem": 60000,
+      "rnd|2020-08_ndem": 60000,
+      "rnd|2024-08_ndem": 60000
+    },
+    "n_blocks10": 23,
+    "positives_per_fold_event": {
+      "0": {
+        "2018-08_ndem": 8282,
+        "2019-08_ndem": 5411,
+        "2020-08_ndem": 3632,
+        "2024-08_ndem": 2015
+      },
+      "1": {
+        "2018-08_ndem": 2286,
+        "2019-08_ndem": 1825,
+        "2020-08_ndem": 791,
+        "2024-08_ndem": 1081
+      },
+      "2": {
+        "2018-08_ndem": 1220,
+        "2019-08_ndem": 1555,
+        "2020-08_ndem": 1072,
+        "2024-08_ndem": 665
+      },
+      "3": {
+        "2018-08_ndem": 2128,
+        "2019-08_ndem": 1512,
+        "2020-08_ndem": 415,
+        "2024-08_ndem": 387
+      },
+      "4": {
+        "2018-08_ndem": 1454,
+        "2019-08_ndem": 1665,
+        "2020-08_ndem": 821,
+        "2024-08_ndem": 1337
+      }
+    }
+  },
+  "phase1_baseline": {
+    "random_split_2018": {
+      "accuracy": 0.9895,
+      "precision": 0.9819,
+      "recall": 0.9974,
+      "f1": 0.9896,
+      "auc": 0.9994,
+      "specificity": 0.9816,
+      "confusion": {
+        "TN": 4526,
+        "FP": 85,
+        "FN": 12,
+        "TP": 4599
+      }
+    },
+    "spatial_cv_2018": {
+      "accuracy": {
+        "mean": 0.8574,
+        "sd": 0.113
+      },
+      "precision": {
+        "mean": 0.9442,
+        "sd": 0.0637
+      },
+      "recall": {
+        "mean": 0.6978,
+        "sd": 0.2955
+      },
+      "f1": {
+        "mean": 0.7548,
+        "sd": 0.2644
+      },
+      "auc": {
+        "mean": 0.9646,
+        "sd": 0.0411
+      },
+      "specificity": {
+        "mean": 0.9778,
+        "sd": 0.0219
+      }
+    },
+    "spatial": {
+      "accuracy": {
+        "mean": 0.83,
+        "sd": 0.1141
+      },
+      "precision": {
+        "mean": 0.9523,
+        "sd": 0.0424
+      },
+      "recall": {
+        "mean": 0.6333,
+        "sd": 0.3121
+      },
+      "f1": {
+        "mean": 0.706,
+        "sd": 0.2932
+      },
+      "auc": {
+        "mean": 0.9621,
+        "sd": 0.0415
+      },
+      "specificity": {
+        "mean": 0.9797,
+        "sd": 0.0173
+      }
+    },
+    "temporal": {
+      "2020": {
+        "accuracy": 0.9756,
+        "precision": 0.9778,
+        "recall": 0.9733,
+        "f1": 0.9755,
+        "auc": 0.9975,
+        "specificity": 0.9779,
+        "confusion": {
+          "TN": 6582,
+          "FP": 149,
+          "FN": 180,
+          "TP": 6551
+        },
+        "auc_pos_vs_neg": 0.9975,
+        "auc_pos_vs_all_land": 0.9877,
+        "pos_in_high_vhigh": 1.0,
+        "pos_in_very_high": 0.9996,
+        "frequency_ratio_by_class": [
+          0.0,
+          0.0,
+          0.0,
+          0.002,
+          4.998
+        ],
+        "n_pos": 6731,
+        "n_neg": 6731,
+        "ndem_only_in_high_vhigh": 0.7769,
+        "ndem_only_median_pct": 80.5,
+        "kochi_median_pct": 56.2,
+        "kochi_in_high_vhigh": 0.4471
+      },
+      "2024": {
+        "accuracy": 0.976,
+        "precision": 0.9643,
+        "recall": 0.9887,
+        "f1": 0.9763,
+        "auc": 0.9959,
+        "specificity": 0.9634,
+        "confusion": {
+          "TN": 5284,
+          "FP": 201,
+          "FN": 62,
+          "TP": 5423
+        },
+        "auc_pos_vs_neg": 0.9959,
+        "auc_pos_vs_all_land": 0.989,
+        "pos_in_high_vhigh": 1.0,
+        "pos_in_very_high": 1.0,
+        "frequency_ratio_by_class": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          5.0
+        ],
+        "n_pos": 5485,
+        "n_neg": 5485,
+        "ndem_only_in_high_vhigh": 0.9661,
+        "ndem_only_median_pct": 97.4,
+        "kochi_median_pct": 55.7,
+        "kochi_in_high_vhigh": 0.4361
+      }
+    },
+    "strict": {
+      "2020": {
+        "accuracy": 0.8582,
+        "precision": 0.9674,
+        "recall": 0.7413,
+        "f1": 0.8394,
+        "auc": 0.9731,
+        "specificity": 0.975,
+        "confusion": {
+          "TN": 6563,
+          "FP": 168,
+          "FN": 1741,
+          "TP": 4990
+        },
+        "auc_pos_vs_neg": 0.9731,
+        "auc_pos_vs_all_land": 0.9491,
+        "pos_in_high_vhigh": 0.9865,
+        "pos_in_very_high": 0.9698,
+        "frequency_ratio_by_class": [
+          0.002,
+          0.016,
+          0.049,
+          0.083,
+          4.849
+        ],
+        "n_pos": 6731,
+        "n_neg": 6731,
+        "ndem_only_in_high_vhigh": 0.6628,
+        "ndem_only_median_pct": 72.4,
+        "kochi_median_pct": 65.6,
+        "kochi_in_high_vhigh": 0.5619
+      },
+      "2024": {
+        "accuracy": 0.8729,
+        "precision": 0.9563,
+        "recall": 0.7816,
+        "f1": 0.8602,
+        "auc": 0.9687,
+        "specificity": 0.9643,
+        "confusion": {
+          "TN": 5289,
+          "FP": 196,
+          "FN": 1198,
+          "TP": 4287
+        },
+        "auc_pos_vs_neg": 0.9687,
+        "auc_pos_vs_all_land": 0.9536,
+        "pos_in_high_vhigh": 0.9923,
+        "pos_in_very_high": 0.9502,
+        "frequency_ratio_by_class": [
+          0.0,
+          0.005,
+          0.034,
+          0.211,
+          4.751
+        ],
+        "n_pos": 5485,
+        "n_neg": 5485,
+        "ndem_only_in_high_vhigh": 0.9453,
+        "ndem_only_median_pct": 93.1,
+        "kochi_median_pct": 64.8,
+        "kochi_in_high_vhigh": 0.5558
+      }
+    },
+    "headline": {
+      "spatial_auc": 0.9621,
+      "spatial_auc_sd": 0.0415,
+      "spatial_f1": 0.706,
+      "spatial_acc": 0.83,
+      "temporal_2020_auc_land": 0.9877,
+      "temporal_2020_auc": 0.9975,
+      "temporal_2020_hv": 1.0,
+      "temporal_2020_f1": 0.9755,
+      "temporal_2024_auc_land": 0.989,
+      "temporal_2024_auc": 0.9959,
+      "temporal_2024_hv": 1.0,
+      "temporal_2024_f1": 0.9763,
+      "strict_2020_auc_land": 0.9491,
+      "strict_2020_auc": 0.9731,
+      "strict_2020_hv": 0.9865,
+      "strict_2020_f1": 0.8394,
+      "strict_2024_auc_land": 0.9536,
+      "strict_2024_auc": 0.9687,
+      "strict_2024_hv": 0.9923,
+      "strict_2024_f1": 0.8602
+    }
+  },
+  "framework": {
+    "spatial": "5-fold StratifiedGroupKFold over 10 km UTM blocks, fixed in step6_fold_assignment.json, same folds for every model",
+    "temporal": {
+      "train": [
+        "2018-08_ndem",
+        "2019-08_ndem"
+      ],
+      "test": [
+        "2020-08_ndem",
+        "2024-08_ndem"
+      ]
+    },
+    "metrics": [
+      "accuracy",
+      "precision",
+      "recall",
+      "f1",
+      "auc",
+      "specificity",
+      "share of held-out flood in High+Very High (top 40 % of land)",
+      "frequency ratio per quintile class"
+    ],
+    "strict": "train 2018+2019 outside fold k, test 2020/2024 inside fold k (new year and new place)",
+    "bar": {
+      "spatial_auc": 0.9621,
+      "spatial_auc_sd": 0.0415,
+      "spatial_f1": 0.706,
+      "spatial_acc": 0.83,
+      "temporal_2020_auc_land": 0.9877,
+      "temporal_2020_auc": 0.9975,
+      "temporal_2020_hv": 1.0,
+      "temporal_2020_f1": 0.9755,
+      "temporal_2024_auc_land": 0.989,
+      "temporal_2024_auc": 0.9959,
+      "temporal_2024_hv": 1.0,
+      "temporal_2024_f1": 0.9763,
+      "strict_2020_auc_land": 0.9491,
+      "strict_2020_auc": 0.9731,
+      "strict_2020_hv": 0.9865,
+      "strict_2020_f1": 0.8394,
+      "strict_2024_auc_land": 0.9536,
+      "strict_2024_auc": 0.9687,
+      "strict_2024_hv": 0.9923,
+      "strict_2024_f1": 0.8602
+    }
+  },
+  "runtime_s": 41.0
+}
