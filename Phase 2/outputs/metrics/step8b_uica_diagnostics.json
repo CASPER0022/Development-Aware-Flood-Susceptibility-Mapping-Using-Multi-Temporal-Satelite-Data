@@ -1,0 +1,61 @@
+{
+  "step": "8b",
+  "generated": "2026-11-20 13:58:53",
+  "label_reach": {
+    "flood (pos)": {
+      "median_uica_ratio": 0.0498,
+      "share_uica_ratio_ge_0.10": 0.1127,
+      "share_duica_gt_0.01km2": 0.1197,
+      "median_impervious": 0.0
+    },
+    "random land": {
+      "median_uica_ratio": 0.0732,
+      "share_uica_ratio_ge_0.10": 0.413,
+      "share_duica_gt_0.01km2": 0.027,
+      "median_impervious": 0.0331
+    },
+    "Kochi core (random land)": {
+      "median_uica_ratio": 0.45,
+      "share_uica_ratio_ge_0.10": 0.9565,
+      "share_duica_gt_0.01km2": 0.0002,
+      "median_impervious": 0.4287
+    }
+  },
+  "positives_on_urban_influenced_land": 4458,
+  "gain_share_D": {
+    "hand_m": 0.4441,
+    "landcover_class": 0.2291,
+    "elevation_m": 0.1281,
+    "impervious_frac": 0.0438,
+    "dist_to_major_river_m": 0.0315,
+    "rainfall_mean_annual_mm": 0.0308,
+    "rain_event_5d_mm": 0.0156,
+    "twi_full": 0.0144,
+    "dist_to_road_m": 0.0117,
+    "drainage_density_km_km2": 0.0116,
+    "rain_antecedent_30d_mm": 0.0113,
+    "dist_to_river_m": 0.0065,
+    "twi": 0.0048,
+    "uica_ratio": 0.0047,
+    "curvature_profile": 0.0033,
+    "aspect_deg": 0.003,
+    "slope_deg": 0.0019,
+    "duica_since_2017_km2": 0.0015,
+    "uica_km2": 0.0014,
+    "curvature_plan": 0.0007
+  },
+  "gain_share_uica_total": 0.0076,
+  "strict_urban_influenced": {
+    "C": {
+      "n_cells": 52865,
+      "n_flood": 890,
+      "auc_flood_vs_land": 0.9621
+    },
+    "D": {
+      "n_cells": 52865,
+      "n_flood": 890,
+      "auc_flood_vs_land": 0.9626
+    }
+  },
+  "runtime_s": 7.7
+}
