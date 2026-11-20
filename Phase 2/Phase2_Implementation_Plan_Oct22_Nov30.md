@@ -136,34 +136,90 @@ If D does not beat C on the held-out tests, say so honestly and investigate (res
 
 **[CHECKPOINT]** Share the A–D table (spatial CV + temporal hold-out), the PU vs standard comparison, and the calibration curve. I will check that the gain from UICA is real, and not a location effect like Phase 1's rainfall. Rule of thumb: if a feature helps on the random split but not on held-out blocks, it is a location proxy.
 
+### Week 3 outcome (checkpoint reviewed 20 Nov) — what changes for Week 4
+Full numbers in `docs/step6`–`step8*.md` and `docs/week3explanation.pdf`.
+
+**Model and test results:**
+- **A strict test was added.** It uses a new year *and* a new place: train on 2018 + 2019 outside fold *k*, test on 2020 / 2024 inside fold *k*.
+  - The temporal-only test is too easy (about 0.99), because the same floodplain floods every year.
+  - The Phase 1 bar on the strict test is **0.949 / 0.954**.
+- **Chosen model:** PU bagging on feature set C, strict AUC **0.985 / 0.985**.
+  - Hydrology (B) and land cover (C) give real gains.
+  - Tuning is flat (0.993–0.994); XGBoost is no better.
+  - Prior-corrected calibration works.
+
+**The problem found: development is not yet measured.**
+- **D = C:** UICA / ΔUICA add no measurable skill, and only 0.8 % of model D's gain.
+- **Cause: a label limitation.** Radar flood labels are **0.1 % built-up**, against 47 % of land. Their median UICA ratio is 0.05; Kochi's is 0.45. A feature cannot earn skill on labels that never vary with it.
+- **Side effect: the model has learned "built = dry".** Built land in High + Very High falls from 29 % (A) to 23 % (chosen).
+- A post-development map from this model would show paving *lowering* risk. **Step 9 must not be run as originally written.**
+- **Evidence for a fix that is already in hand:** of the NDEM-only flood (inside NDEM, missed by the radar pass), **39 % is built-up**. NDEM saw the urban flooding the radar cannot.
+
+So the question changes. Steps 6–8 answered *"do development features improve prediction of radar-visible floods?"* Week 4 must answer *"what is the effect of development on flooding?"* It uses three lines of evidence that do not depend on radar labels alone: NDEM-based labels (9.0a), a physically constrained model (9.0b) and a physics effect size (9.0c), plus the natural experiment (Step 10) as the main causal test.
+
+**Schedule.** Week 3 finished on 20 Nov, so Weeks 4–5 are compressed:
+- Week 4: **Nov 21 – Nov 25**.
+- Week 5: **Nov 26 – Nov 29**.
+- End-of-Phase-2 checkpoint: **Nov 28**.
+
 ---
 
-## WEEK 4 (Nov 16 – Nov 22): Dual prediction, validation and explanation
+## WEEK 4 (Nov 21 – Nov 25, revised; originally Nov 16 – 22): Development effect, dual prediction, validation and explanation
+
+### 9.0 Fix the development blind spot first (new, from the Week 3 outcome)
+Do this before any scenario map. Each part is a few hours and reuses the Step 6 framework (same folds, same strict test).
+
+9.0a. **NDEM-based labels (urban positives).**
+- Add a second label design, **"radar + NDEM"**: positives = confirmed radar flood ∪ NDEM-mapped flood cells (≥ 50 % of the cell inside an NDEM polygon), with the same exclusions as before.
+- Re-run C vs D (PU bagging, strict test). Report the result **separately on built-up land** and on cells with a UICA ratio ≥ 0.10. This is the fairest test UICA can get with the data we have.
+- **Check the label quality first.** NDEM polygons are generalised, so compare the built share of NDEM flood against the 2018 high-detail polygons. Drop polygons that are obviously coarse (e.g. whole-ward blocks) and state the rule.
+- Decision: if D beats C on built-up land, D becomes the scenario model. If not, report it and go on to 9.0b / 9.0c.
+
+9.0b. **Physically constrained model.**
+- Retrain the scenario model with LightGBM `monotone_constraints`: susceptibility must be **non-decreasing** in `impervious_frac`, `uica_km2`, `uica_ratio` and `duica_since_2017_km2`.
+- Remove `landcover_class == built` as a free signal: drop land cover, or merge "built" into impervious_frac, for the scenario model.
+- Report the strict-test cost of the constraints (expected to be small). Show that a paving-only scenario can no longer lower risk anywhere.
+- This is a standard, defensible choice: the physics says paving cannot reduce runoff.
+
+9.0c. **Physics effect size (label-free).**
+- Convert the paving change into **extra runoff** with the SCS curve-number method: CN by land cover / impervious fraction, soil group from the Phase 1 soil data, the 5-day event rainfall from Step 5.
+- Route the extra runoff with the Step 4 FD8 accumulation to get **extra upstream runoff volume per cell** (m³) for 2017 → 2025 and for each scenario.
+- This gives "how much more water arrives" independent of flood labels. Final framing: *ML says where floods happen; physics says how much development adds.*
+
+**[CHECKPOINT 9.0]**
+- Share: the C vs D table on built-up land with radar + NDEM labels, the constrained-model cost, and the extra-runoff map.
+- I will check that the NDEM labels are not just coarse polygons, and that no scenario lowers risk because of label bias.
 
 ### 9. Current vs post-development susceptibility
-9.1. **Current map**: model D with the latest land cover and UICA.
+9.1. **Current map**: the scenario model chosen in 9.0. This is D with radar + NDEM labels if 9.0a passes, otherwise the constrained model of 9.0b. Use the latest land cover and UICA. Keep the Week 3 chosen model (PU bagging, C) as the "radar-visible flood" map and label it as such.
 9.2. **Post-development scenario**: define it explicitly and document it. Use at least one of:
 - GHSL 2030 built-up projection;
 - your own trend extrapolation of the 2018 → latest built-up growth;
 - a planner-style scenario (e.g. specific corridors converted to built-up).
-Recompute UICA for the scenario, predict again.
+Recompute UICA **and the 9.0c extra runoff** for the scenario, predict again.
 9.3. **Δ susceptibility map** = post − current. Report the area moving up one or more classes, the top hotspots (named places), and how much of the change comes from *upstream* development (ΔUICA) versus local building.
+9.4. **Report both views side by side:** Δ susceptibility (constrained ML) and Δ extra runoff (physics). Where they disagree, explain why. State on every map: *"radar labels under-represent urban flooding; built-up risk is a lower bound."*
 
-### 10. Natural-experiment and temporal validation
+### 10. Natural-experiment and temporal validation (now the main test of the development effect)
+10.0. **Design (difference-in-differences).**
+- *Treated* cells: ΔUICA grew between the earlier events (2018/2019) and the later ones (2020/2024).
+- *Control* cells: matched cells with no growth, matched on HAND, TWI, distance to river and event rainfall.
+- Outcome: flooded or not in each event. Use **radar + NDEM** labels (9.0a), so urban cells can be flooded at all.
+- Effect = change in flood rate (treated) − change in flood rate (control), with a bootstrap confidence interval by 2 km block.
 10.1. Use the observed urban growth between events: where ΔUICA grew most between an earlier and a later event, did observed flooding increase compared with similar places where it did not? Compare carefully matched areas (similar HAND and TWI).
-10.2. Report it as supporting evidence with its limits (few events, rainfall differs between years). It is not proof of cause.
+10.2. Report it as supporting evidence with its limits (few events, rainfall differs between years). It is not proof of cause. Growth is only about 1.8 %/yr, so a **small or undetectable effect is a valid result**. Report it with its confidence interval and the minimum effect the design could detect.
 10.3. Report the temporal hold-out results from Step 6.2 for the Phase 2 model next to Phase 1's 2019 check (AUC 0.83).
 
 ### 11. Explanations
-11.1. **SHAP** (TreeExplainer) for the Phase 2 model: a global summary plot, and dependence plots for UICA, ΔUICA and HAND. Check that the directions make physical sense.
+11.1. **SHAP** (TreeExplainer) for the Phase 2 model: a global summary plot, and dependence plots for UICA, ΔUICA and HAND. Check that the directions make physical sense. Specifically, show the "built = dry" effect in the unconstrained model, and its removal in the constrained model (9.0b). Also check how the mean-annual-rainfall location proxy is used (removing it cost 0.007 on the strict test).
 11.2. Local explanations for 3–4 named places (e.g. Aluva, Paravur, a Kochi ward, a growth site): why is each one high or low?
 11.3. *Stretch (otherwise Phase 3):* counterfactual what-ifs, e.g. how much upstream impervious area would have to be avoided to drop a site by one class.
 
-**[CHECKPOINT]** Share the current, post-development and Δ maps, the natural-experiment table, and the SHAP plots.
+**[CHECKPOINT]** Share the current, post-development and Δ maps (ML and physics), the natural-experiment table, and the SHAP plots.
 
 ---
 
-## WEEK 5 (Nov 23 – Nov 29): Consolidation and handover to Phase 3
+## WEEK 5 (Nov 26 – Nov 29, revised; originally Nov 23 – 29): Consolidation and handover to Phase 3
 
 ### 12. Phase 2 maps and review materials
 12.1. Maps with legend, scale bar and north arrow (Phase 1 style): current, post-development, Δ susceptibility, and a Phase 1 vs Phase 2 comparison.
@@ -174,16 +230,17 @@ Recompute UICA for the scenario, predict again.
 ### 13. Phase 2 write-up, limitations and the Phase 3 list
 13.1. One doc per step (as in Phase 1), plus a Phase 2 summary: what was built, the headline numbers, and what they mean.
 13.2. A **limitations note** in the same style as Phase 1 Step 11: each limitation with its measured effect.
-13.3. A **Phase 3 candidate list**: each item with the Phase 2 evidence that motivates it and a rough effort estimate. Likely candidates: counterfactual recommendations (if not done in 11.3), a planner / citizen dashboard, U-Net or another spatial model if the inventory grew enough, more scenarios, finer rainfall, and the full project report.
+13.3. A **Phase 3 candidate list**: each item with the Phase 2 evidence that motivates it and a rough effort estimate. **Top candidate (from Week 3): urban flood labels.** Options: Sentinel-1 **coherence drop** and **double-bounce** detection of flooding between buildings (the skipped Step 3.4), and a list of known Kochi waterlogging spots from news and corporation reports (e.g. MG Road, Kaloor, KSRTC stand) as an independent urban check. Other likely candidates: counterfactual recommendations (if not done in 11.3), a planner / citizen dashboard, U-Net or another spatial model if the inventory grew enough, more scenarios, finer rainfall, and the full project report.
 13.4. Keep the report material ready to reuse: step docs, figures, and one merged numbered IEEE reference list (Review 1 [1]–[13], References 14–15, and the data/method references from the Review 2 deck).
 13.5. Prepare answers for the likely panel questions:
-- "What exactly does UICA add over imperviousness?" → the ablation C vs D.
-- "Is the development effect real or a location effect?" → spatial and temporal hold-out gains, SHAP directions.
+- "What exactly does UICA add over imperviousness?" → the ablation C vs D: nothing with radar labels, explained by the 8b diagnosis; then C vs D on built-up land with radar + NDEM labels (9.0a).
+- "Why does your map rate the city low?" → radar label bias (0.1 % built-up positives); constrained model (9.0b); the lower-bound statement on every map.
+- "Is the development effect real or a location effect?" → the strict test, the natural experiment (10.0) and the physics effect size (9.0c), not the ML gain alone.
 - "How do you know the post-development map is realistic?" → scenario definition and its assumptions.
 - "Why not U-Net?" → Step 0 of this plan, and the Phase 3 decision in 13.3.
 - "What is left for Phase 3?" → the candidate list in 13.3.
 
-**[CHECKPOINT — END OF PHASE 2]** Send me the complete set: event table, UICA maps, A–D ablation, PU comparison, dual maps, SHAP, Phase 2 deck, limitations note and Phase 3 list, by **Nov 26–27** at the latest, so there is buffer for fixes before November 30.
+**[CHECKPOINT — END OF PHASE 2]** Send me the complete set: event table, UICA maps, A–D ablation, PU comparison, dual maps, SHAP, Phase 2 deck, limitations note and Phase 3 list, by **Nov 28** at the latest (revised), so there is buffer for fixes before November 30.
 
 ---
 
@@ -199,13 +256,15 @@ Recompute UICA for the scenario, predict again.
 | 6 | PU-learning vs standard comparison | Yes |
 | 7 | A–D ablation proving (or honestly testing) development awareness | Yes |
 | 8 | Calibrated Phase 2 model | Yes |
+| 8a | Development blind spot fixed: radar + NDEM labels, monotone-constrained scenario model, SCS extra-runoff effect size (9.0) | Yes (added 20 Nov) |
 | 9 | Current, post-development and Δ susceptibility maps | Yes |
-| 10 | Natural-experiment / temporal validation | Yes |
+| 10 | Natural-experiment (difference-in-differences) / temporal validation | Yes |
 | 11 | SHAP explanations | Yes |
 | 12 | Phase 2 deck, study notebook update, step docs | Yes |
 | 13 | Limitations note + Phase 3 candidate list | Yes |
 | 14 | Counterfactual recommendations | Stretch (else Phase 3) |
 | 15 | Planner / citizen dashboard | No: Phase 3 candidate |
+| 15a | Urban flood labels (SAR coherence / double-bounce, waterlogging points) | No: top Phase 3 candidate |
 | 16 | U-Net / spatial deep model | No: decided for Phase 3 in Step 13 |
 | 17 | Full project report | No: Phase 3 (material collected in 13.4) |
 
