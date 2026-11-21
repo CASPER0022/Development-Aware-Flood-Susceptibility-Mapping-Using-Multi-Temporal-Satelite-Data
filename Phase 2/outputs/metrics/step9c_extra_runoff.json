@@ -1,0 +1,312 @@
+{
+  "step": "9.0c",
+  "generated": "2026-11-21 11:57:49",
+  "soil_group": "C",
+  "cases": {
+    "monsoon": {
+      "storm_mm": 200.0,
+      "amc": "III"
+    },
+    "frequent": {
+      "storm_mm": 50.0,
+      "amc": "II"
+    }
+  },
+  "cn_pervious": {
+    "B": 65.0,
+    "C": 76.0,
+    "D": 82.0
+  },
+  "cn_impervious": 98.0,
+  "catchment_land_km2": 8972.6,
+  "paved_km2": {
+    "2017": 263.1,
+    "2025": 328.8
+  },
+  "catchment_totals": {
+    "monsoon": {
+      "runoff_Mm3_2017": 1476.68,
+      "runoff_Mm3_2025": 1479.14,
+      "extra_Mm3": 2.455,
+      "extra_pct": 0.166,
+      "runoff_coefficient_2017": 0.823,
+      "runoff_coefficient_unpaved": 0.817,
+      "runoff_coefficient_fully_paved": 0.987
+    },
+    "frequent": {
+      "runoff_Mm3_2017": 96.23,
+      "runoff_Mm3_2025": 97.6,
+      "extra_Mm3": 1.363,
+      "extra_pct": 1.416,
+      "runoff_coefficient_2017": 0.215,
+      "runoff_coefficient_unpaved": 0.202,
+      "runoff_coefficient_fully_paved": 0.886
+    }
+  },
+  "aoi": {
+    "monsoon": {
+      "median_pct_all_land": 0.075,
+      "p99_pct": 3.73,
+      "max_pct": 4.91,
+      "median_pct_uica_ratio_ge_0.10": 0.052,
+      "median_pct_top1pct_duica_cells": 0.15,
+      "share_land_pct_ge_1": 0.1181,
+      "share_land_pct_ge_5": 0.0,
+      "local_extra_mm_max": 8.0,
+      "local_extra_mm_p99": 7.95,
+      "places": {
+        "Kochi city core": {
+          "median_pct": 0.0,
+          "p90_pct": 0.0,
+          "local_extra_mm_p90": 0.0
+        },
+        "Eloor-Kalamassery (below Aluva)": {
+          "median_pct": 0.0,
+          "p90_pct": 0.53,
+          "local_extra_mm_p90": 0.76
+        },
+        "Eastern forested hills": {
+          "median_pct": 0.0,
+          "p90_pct": 0.91,
+          "local_extra_mm_p90": 0.94
+        },
+        "Periyar main stem (largest catchment in AOI)": {
+          "upslope_km2": 6378.0,
+          "pct": 0.065
+        }
+      }
+    },
+    "frequent": {
+      "median_pct_all_land": 0.554,
+      "p99_pct": 32.65,
+      "max_pct": 44.18,
+      "median_pct_uica_ratio_ge_0.10": 0.335,
+      "median_pct_top1pct_duica_cells": 0.98,
+      "share_land_pct_ge_1": 0.4487,
+      "share_land_pct_ge_5": 0.1937,
+      "local_extra_mm_max": 10.1,
+      "local_extra_mm_p99": 4.56,
+      "places": {
+        "Kochi city core": {
+          "median_pct": 0.0,
+          "p90_pct": 0.02,
+          "local_extra_mm_p90": 0.0
+        },
+        "Eloor-Kalamassery (below Aluva)": {
+          "median_pct": 0.0,
+          "p90_pct": 3.81,
+          "local_extra_mm_p90": 0.42
+        },
+        "Eastern forested hills": {
+          "median_pct": 0.0,
+          "p90_pct": 7.37,
+          "local_extra_mm_p90": 0.47
+        },
+        "Periyar main stem (largest catchment in AOI)": {
+          "upslope_km2": 6378.0,
+          "pct": 0.564
+        }
+      }
+    }
+  },
+  "local_growth_cells": {
+    "n": 20356,
+    "paved_2017_mean": 0.032,
+    "paved_2025_mean": 0.247
+  },
+  "sensitivity": [
+    {
+      "soil_group": "B",
+      "storm_mm": 50.0,
+      "amc": "III",
+      "basin_extra_pct": 1.202,
+      "growth_cells_runoff_coef_2017": 0.314,
+      "growth_cells_local_extra_pct": 35.93
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 50.0,
+      "amc": "II",
+      "basin_extra_pct": 3.541,
+      "growth_cells_runoff_coef_2017": 0.075,
+      "growth_cells_local_extra_pct": 112.28
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 100.0,
+      "amc": "III",
+      "basin_extra_pct": 0.614,
+      "growth_cells_runoff_coef_2017": 0.541,
+      "growth_cells_local_extra_pct": 17.97
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 100.0,
+      "amc": "II",
+      "basin_extra_pct": 1.392,
+      "growth_cells_runoff_coef_2017": 0.268,
+      "growth_cells_local_extra_pct": 41.85
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 200.0,
+      "amc": "III",
+      "basin_extra_pct": 0.32,
+      "growth_cells_runoff_coef_2017": 0.725,
+      "growth_cells_local_extra_pct": 9.25
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 200.0,
+      "amc": "II",
+      "basin_extra_pct": 0.7,
+      "growth_cells_runoff_coef_2017": 0.497,
+      "growth_cells_local_extra_pct": 20.57
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 400.0,
+      "amc": "III",
+      "basin_extra_pct": 0.165,
+      "growth_cells_runoff_coef_2017": 0.848,
+      "growth_cells_local_extra_pct": 4.73
+    },
+    {
+      "soil_group": "B",
+      "storm_mm": 400.0,
+      "amc": "II",
+      "basin_extra_pct": 0.365,
+      "growth_cells_runoff_coef_2017": 0.693,
+      "growth_cells_local_extra_pct": 10.57
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 50.0,
+      "amc": "III",
+      "basin_extra_pct": 0.612,
+      "growth_cells_runoff_coef_2017": 0.488,
+      "growth_cells_local_extra_pct": 18.16
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 50.0,
+      "amc": "II",
+      "basin_extra_pct": 1.416,
+      "growth_cells_runoff_coef_2017": 0.215,
+      "growth_cells_local_extra_pct": 43.17
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 100.0,
+      "amc": "III",
+      "basin_extra_pct": 0.32,
+      "growth_cells_runoff_coef_2017": 0.686,
+      "growth_cells_local_extra_pct": 9.39
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 100.0,
+      "amc": "II",
+      "basin_extra_pct": 0.698,
+      "growth_cells_runoff_coef_2017": 0.443,
+      "growth_cells_local_extra_pct": 20.79
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 200.0,
+      "amc": "III",
+      "basin_extra_pct": 0.166,
+      "growth_cells_runoff_coef_2017": 0.824,
+      "growth_cells_local_extra_pct": 4.83
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 200.0,
+      "amc": "II",
+      "basin_extra_pct": 0.365,
+      "growth_cells_runoff_coef_2017": 0.651,
+      "growth_cells_local_extra_pct": 10.72
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 400.0,
+      "amc": "III",
+      "basin_extra_pct": 0.085,
+      "growth_cells_runoff_coef_2017": 0.906,
+      "growth_cells_local_extra_pct": 2.46
+    },
+    {
+      "soil_group": "C",
+      "storm_mm": 400.0,
+      "amc": "II",
+      "basin_extra_pct": 0.19,
+      "growth_cells_runoff_coef_2017": 0.801,
+      "growth_cells_local_extra_pct": 5.53
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 50.0,
+      "amc": "III",
+      "basin_extra_pct": 0.397,
+      "growth_cells_runoff_coef_2017": 0.598,
+      "growth_cells_local_extra_pct": 11.75
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 50.0,
+      "amc": "II",
+      "basin_extra_pct": 0.873,
+      "growth_cells_runoff_coef_2017": 0.331,
+      "growth_cells_local_extra_pct": 26.33
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 100.0,
+      "amc": "III",
+      "basin_extra_pct": 0.208,
+      "growth_cells_runoff_coef_2017": 0.765,
+      "growth_cells_local_extra_pct": 6.09
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 100.0,
+      "amc": "II",
+      "basin_extra_pct": 0.452,
+      "growth_cells_runoff_coef_2017": 0.557,
+      "growth_cells_local_extra_pct": 13.41
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 200.0,
+      "amc": "III",
+      "basin_extra_pct": 0.107,
+      "growth_cells_runoff_coef_2017": 0.872,
+      "growth_cells_local_extra_pct": 3.12
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 200.0,
+      "amc": "II",
+      "basin_extra_pct": 0.237,
+      "growth_cells_runoff_coef_2017": 0.737,
+      "growth_cells_local_extra_pct": 6.96
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 400.0,
+      "amc": "III",
+      "basin_extra_pct": 0.054,
+      "growth_cells_runoff_coef_2017": 0.933,
+      "growth_cells_local_extra_pct": 1.58
+    },
+    {
+      "soil_group": "D",
+      "storm_mm": 400.0,
+      "amc": "II",
+      "basin_extra_pct": 0.123,
+      "growth_cells_runoff_coef_2017": 0.855,
+      "growth_cells_local_extra_pct": 3.57
+    }
+  ],
+  "runtime_s": 49.7
+}
