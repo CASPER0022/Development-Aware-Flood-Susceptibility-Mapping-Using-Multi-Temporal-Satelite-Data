@@ -1,0 +1,340 @@
+{
+  "step": 9,
+  "generated": "2026-11-21 12:24:20",
+  "scenarios": [
+    "2017",
+    "2025",
+    "2030 trend",
+    "2030 GHSL"
+  ],
+  "more_water_threshold_pct": 5.0,
+  "storms": {
+    "frequent": {
+      "mm": 50.0,
+      "amc": "II"
+    },
+    "monsoon": {
+      "mm": 200.0,
+      "amc": "III"
+    }
+  },
+  "paved_km2_full_grid": {
+    "2017": 473.5,
+    "2025": 605.3,
+    "2030 trend": 700.8,
+    "2030 GHSL": 627.8
+  },
+  "paved_km2_aoi": {
+    "2017": 137.8,
+    "2025": 158.9,
+    "2030 trend": 173.5,
+    "2030 GHSL": 161.3
+  },
+  "check_uica_2025_vs_step4_max_abs_km2": 0.071152,
+  "catchment_storm_runoff_change_pct_vs_2017": {
+    "frequent": {
+      "2025": 1.365,
+      "2030 trend": 2.495,
+      "2030 GHSL": 1.588
+    },
+    "monsoon": {
+      "2025": 0.159,
+      "2030 trend": 0.271,
+      "2030 GHSL": 0.187
+    }
+  },
+  "aoi_land_km2": 1444.8,
+  "layer_A_riverine_susceptibility": {
+    "reference_flood": "2018-08 (static + rainfall features)",
+    "classes": "fixed quintile breaks of the 2025 map",
+    "change": {
+      "2025": {
+        "share_land_up_one_class_or_more_vs_2017": 0.01109,
+        "share_land_down_vs_2017": 0.0006,
+        "high_vhigh_km2": 577.9,
+        "mean_prob_change_vs_2017": 0.00167,
+        "max_prob_change_vs_2017": 0.1014
+      },
+      "2030 trend": {
+        "share_land_up_one_class_or_more_vs_2017": 0.01176,
+        "share_land_down_vs_2017": 0.00059,
+        "high_vhigh_km2": 578.1,
+        "mean_prob_change_vs_2017": 0.00178,
+        "max_prob_change_vs_2017": 0.1125
+      },
+      "2030 GHSL": {
+        "share_land_up_one_class_or_more_vs_2017": 0.01283,
+        "share_land_down_vs_2017": 0.00042,
+        "high_vhigh_km2": 578.7,
+        "mean_prob_change_vs_2017": 0.00197,
+        "max_prob_change_vs_2017": 0.1842
+      }
+    }
+  },
+  "layer_B_waterlogging_pressure": {
+    "2025": {
+      "aoi_km2_more_water": 279.9,
+      "aoi_share_more_water": 0.1937,
+      "median_pct_more_water_cells": 9.6,
+      "upstream_share_of_extra_water_median_in_more_water_cells": 0.874,
+      "km2_hotspot": 113.2,
+      "km2_emerging": 166.7,
+      "km2_existing_flood_prone": 464.7,
+      "extra_mm_over_upslope_median_more_water_cells": 1.06,
+      "extra_mm_over_upslope_p90_more_water_cells": 2.77,
+      "extra_mm_over_upslope_median_hotspots": 1.0,
+      "threshold_sensitivity": {
+        "2%": {
+          "km2_more_water": 520.7,
+          "km2_hotspot": 234.3
+        },
+        "5%": {
+          "km2_more_water": 279.9,
+          "km2_hotspot": 113.2
+        },
+        "10%": {
+          "km2_more_water": 133.2,
+          "km2_hotspot": 49.6
+        }
+      }
+    },
+    "2030 trend": {
+      "aoi_km2_more_water": 433.8,
+      "aoi_share_more_water": 0.3003,
+      "median_pct_more_water_cells": 11.1,
+      "upstream_share_of_extra_water_median_in_more_water_cells": 1.0,
+      "km2_hotspot": 189.6,
+      "km2_emerging": 244.2,
+      "km2_existing_flood_prone": 388.5,
+      "extra_mm_over_upslope_median_more_water_cells": 1.25,
+      "extra_mm_over_upslope_p90_more_water_cells": 3.88,
+      "extra_mm_over_upslope_median_hotspots": 1.14,
+      "threshold_sensitivity": {
+        "2%": {
+          "km2_more_water": 631.6,
+          "km2_hotspot": 289.8
+        },
+        "5%": {
+          "km2_more_water": 433.8,
+          "km2_hotspot": 189.6
+        },
+        "10%": {
+          "km2_more_water": 242.2,
+          "km2_hotspot": 95.8
+        }
+      }
+    },
+    "2030 GHSL": {
+      "aoi_km2_more_water": 298.5,
+      "aoi_share_more_water": 0.2066,
+      "median_pct_more_water_cells": 9.5,
+      "upstream_share_of_extra_water_median_in_more_water_cells": 0.878,
+      "km2_hotspot": 122.4,
+      "km2_emerging": 176.1,
+      "km2_existing_flood_prone": 456.2,
+      "extra_mm_over_upslope_median_more_water_cells": 1.05,
+      "extra_mm_over_upslope_p90_more_water_cells": 2.76,
+      "extra_mm_over_upslope_median_hotspots": 0.99,
+      "threshold_sensitivity": {
+        "2%": {
+          "km2_more_water": 560.4,
+          "km2_hotspot": 254.1
+        },
+        "5%": {
+          "km2_more_water": 298.5,
+          "km2_hotspot": 122.4
+        },
+        "10%": {
+          "km2_more_water": 139.7,
+          "km2_hotspot": 52.3
+        }
+      }
+    }
+  },
+  "top_hotspot_blocks": [
+    {
+      "block": "331_549",
+      "place": "near Kolenchery (4.9 km)",
+      "lon": 76.487,
+      "lat": 9.939,
+      "land_km2": 4.034,
+      "hotspot_km2_2025": 1.673,
+      "hotspot_km2_2030_trend": 2.513,
+      "hotspot_km2_2030_ghsl": 1.757,
+      "median_more_water_pct_2030": 6.7210001945495605,
+      "paved_2017": 0.028999999165534973,
+      "paved_2030_trend": 0.07400000095367432
+    },
+    {
+      "block": "326_554",
+      "place": "near Pallikkara (1.2 km)",
+      "lon": 76.396,
+      "lat": 10.03,
+      "land_km2": 4.034,
+      "hotspot_km2_2025": 0.928,
+      "hotspot_km2_2030_trend": 2.141,
+      "hotspot_km2_2030_ghsl": 0.935,
+      "median_more_water_pct_2030": 6.980999946594238,
+      "paved_2017": 0.06400000303983688,
+      "paved_2030_trend": 0.10400000214576721
+    },
+    {
+      "block": "325_554",
+      "place": "near Pallikkara (2.7 km)",
+      "lon": 76.378,
+      "lat": 10.03,
+      "land_km2": 4.007,
+      "hotspot_km2_2025": 1.284,
+      "hotspot_km2_2030_trend": 2.137,
+      "hotspot_km2_2030_ghsl": 1.337,
+      "median_more_water_pct_2030": 6.446000099182129,
+      "paved_2017": 0.0560000017285347,
+      "paved_2030_trend": 0.09799999743700027
+    },
+    {
+      "block": "331_552",
+      "place": "near Kolenchery (2.4 km)",
+      "lon": 76.487,
+      "lat": 9.993,
+      "land_km2": 4.013,
+      "hotspot_km2_2025": 1.211,
+      "hotspot_km2_2030_trend": 2.127,
+      "hotspot_km2_2030_ghsl": 1.474,
+      "median_more_water_pct_2030": 5.9070000648498535,
+      "paved_2017": 0.019999999552965164,
+      "paved_2030_trend": 0.052000001072883606
+    },
+    {
+      "block": "324_563",
+      "place": "near Angamaly (2.9 km)",
+      "lon": 76.36,
+      "lat": 10.192,
+      "land_km2": 4.01,
+      "hotspot_km2_2025": 1.273,
+      "hotspot_km2_2030_trend": 2.047,
+      "hotspot_km2_2030_ghsl": 1.371,
+      "median_more_water_pct_2030": 5.205999851226807,
+      "paved_2017": 0.032999999821186066,
+      "paved_2030_trend": 0.061000000685453415
+    },
+    {
+      "block": "332_551",
+      "place": "near Kolenchery (3.9 km)",
+      "lon": 76.505,
+      "lat": 9.975,
+      "land_km2": 4.03,
+      "hotspot_km2_2025": 1.275,
+      "hotspot_km2_2030_trend": 1.955,
+      "hotspot_km2_2030_ghsl": 1.474,
+      "median_more_water_pct_2030": 4.645999908447266,
+      "paved_2017": 0.02800000086426735,
+      "paved_2030_trend": 0.06300000101327896
+    },
+    {
+      "block": "332_552",
+      "place": "near Kolenchery (4.1 km)",
+      "lon": 76.505,
+      "lat": 9.993,
+      "land_km2": 3.976,
+      "hotspot_km2_2025": 0.875,
+      "hotspot_km2_2030_trend": 1.94,
+      "hotspot_km2_2030_ghsl": 0.932,
+      "median_more_water_pct_2030": 4.568999767303467,
+      "paved_2017": 0.013000000268220901,
+      "paved_2030_trend": 0.03200000151991844
+    },
+    {
+      "block": "328_564",
+      "place": "near Kalady (4.9 km)",
+      "lon": 76.433,
+      "lat": 10.21,
+      "land_km2": 3.992,
+      "hotspot_km2_2025": 0.704,
+      "hotspot_km2_2030_trend": 1.823,
+      "hotspot_km2_2030_ghsl": 0.782,
+      "median_more_water_pct_2030": 5.28000020980835,
+      "paved_2017": 0.0430000014603138,
+      "paved_2030_trend": 0.06800000369548798
+    },
+    {
+      "block": "334_559",
+      "place": "10.119 N, 76.542 E",
+      "lon": 76.542,
+      "lat": 10.119,
+      "land_km2": 3.734,
+      "hotspot_km2_2025": 0.991,
+      "hotspot_km2_2030_trend": 1.816,
+      "hotspot_km2_2030_ghsl": 1.11,
+      "median_more_water_pct_2030": 6.9679999351501465,
+      "paved_2017": 0.03799999877810478,
+      "paved_2030_trend": 0.07900000363588333
+    },
+    {
+      "block": "330_550",
+      "place": "near Kolenchery (2.6 km)",
+      "lon": 76.469,
+      "lat": 9.957,
+      "land_km2": 3.959,
+      "hotspot_km2_2025": 1.063,
+      "hotspot_km2_2030_trend": 1.804,
+      "hotspot_km2_2030_ghsl": 1.103,
+      "median_more_water_pct_2030": 4.979000091552734,
+      "paved_2017": 0.028999999165534973,
+      "paved_2030_trend": 0.06199999898672104
+    },
+    {
+      "block": "324_554",
+      "place": "near Kakkanad (2.5 km)",
+      "lon": 76.36,
+      "lat": 10.03,
+      "land_km2": 3.959,
+      "hotspot_km2_2025": 1.48,
+      "hotspot_km2_2030_trend": 1.796,
+      "hotspot_km2_2030_ghsl": 1.536,
+      "median_more_water_pct_2030": 5.9720001220703125,
+      "paved_2017": 0.10300000011920929,
+      "paved_2030_trend": 0.15199999511241913
+    },
+    {
+      "block": "333_551",
+      "place": "9.975 N, 76.524 E",
+      "lon": 76.524,
+      "lat": 9.975,
+      "land_km2": 4.013,
+      "hotspot_km2_2025": 1.386,
+      "hotspot_km2_2030_trend": 1.747,
+      "hotspot_km2_2030_ghsl": 1.548,
+      "median_more_water_pct_2030": 5.406000137329102,
+      "paved_2017": 0.029999999329447746,
+      "paved_2030_trend": 0.0729999989271164
+    }
+  ],
+  "headline": {
+    "frequent_storm_runoff_change_pct": {
+      "2025": 1.365,
+      "2030 trend": 2.495,
+      "2030 GHSL": 1.588
+    },
+    "monsoon_storm_runoff_change_pct": {
+      "2025": 0.159,
+      "2030 trend": 0.271,
+      "2030 GHSL": 0.187
+    },
+    "aoi_km2_with_5pct_more_water": {
+      "2025": 279.9,
+      "2030 trend": 433.8,
+      "2030 GHSL": 298.5
+    },
+    "hotspot_km2": {
+      "2025": 113.2,
+      "2030 trend": 189.6,
+      "2030 GHSL": 122.4
+    },
+    "riverine_share_land_up_a_class": {
+      "2025": 0.01109,
+      "2030 trend": 0.01176,
+      "2030 GHSL": 0.01283
+    }
+  },
+  "runtime_s": 63.8
+}
