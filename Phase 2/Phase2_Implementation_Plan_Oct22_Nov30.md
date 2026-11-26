@@ -210,9 +210,29 @@ Recompute UICA **and the 9.0c extra runoff** for the scenario, predict again.
 10.2. Report it as supporting evidence with its limits (few events, rainfall differs between years). It is not proof of cause. Growth is only about 1.8 %/yr, so a **small or undetectable effect is a valid result**. Report it with its confidence interval and the minimum effect the design could detect.
 10.3. Report the temporal hold-out results from Step 6.2 for the Phase 2 model next to Phase 1's 2019 check (AUC 0.83).
 
+### Week 4 outcome (Steps 9.0–10, reviewed 26 Nov): where the development effect stands
+Full numbers in `docs/step9a`–`step10*.md`.
+
+| Evidence | Big riverine floods (2018-type) | Frequent heavy storms (urban waterlogging) |
+|---|---|---|
+| ML with radar labels (8) | UICA adds nothing (labels 0.1 % built-up) | not observable |
+| ML with radar + NDEM labels (9.0a) | small gain on built-up land (paved +0.037 AUC, CI > 0), **one test event** | not observable |
+| Physics, SCS-CN (9.0c, 9) | +0.2 % runoff, negligible | **large**: land with ≥ 5 % more water 280 → 434 km² (2025 → 2030); flood-prone hotspots 113 → 190 km²; 87 % of extra water from upstream paving |
+| Natural experiment (10) | **no detectable effect**: placebo-corrected −0.05 pp [−0.71, +0.58], MDE about 0.5 pp | cannot be tested (no records) |
+
+**What this means for a "development-aware" project:**
+- The development effect is real in the physics, and the model and scenario layers now handle it correctly (9.0b).
+- But **it is not yet shown in observed flood data**, because the data we have (radar, NDEM) only records the big riverine floods, where development hardly matters. The flooding that development causes (frequent, short urban waterlogging) is not recorded by any source we use.
+- So Phase 2 can claim: *development-aware modelling and scenarios, with a physically based effect size and an honest null for big floods*. It cannot yet claim *observed* proof.
+- **Proving the development effect from observations is the main job of Phase 3** (Work Package 1 in 13.3).
+- Steps 11–13 below are adjusted so that development stays central.
+
 ### 11. Explanations
 11.1. **SHAP** (TreeExplainer) for the Phase 2 model: a global summary plot, and dependence plots for UICA, ΔUICA and HAND. Check that the directions make physical sense. Specifically, show the "built = dry" effect in the unconstrained model, and its removal in the constrained model (9.0b). Also check how the mean-annual-rainfall location proxy is used (removing it cost 0.007 on the strict test).
-11.2. Local explanations for 3–4 named places (e.g. Aluva, Paravur, a Kochi ward, a growth site): why is each one high or low?
+- **Development focus:** for the scenario model (9.0b), report the SHAP share of the development features (paved fraction, UICA, UICA ratio, ΔUICA), overall and in the Step 9 hotspot blocks.
+- For the 2017 → 2030 change at the hotspots, split it into local paving vs upstream paving (UICA).
+
+11.2. Local explanations for 3–4 named places, including at least two **Step 9 hotspot blocks** (e.g. near Kolenchery, near Pallikkara / Kakkanad) and one riverine place (Aluva or Paravur): why is each one high or low, and how much of it is development?
 11.3. *Stretch (otherwise Phase 3):* counterfactual what-ifs, e.g. how much upstream impervious area would have to be avoided to drop a site by one class.
 
 **[CHECKPOINT]** Share the current, post-development and Δ maps (ML and physics), the natural-experiment table, and the SHAP plots.
@@ -223,20 +243,41 @@ Recompute UICA **and the 9.0c extra runoff** for the scenario, predict again.
 
 ### 12. Phase 2 maps and review materials
 12.1. Maps with legend, scale bar and north arrow (Phase 1 style): current, post-development, Δ susceptibility, and a Phase 1 vs Phase 2 comparison.
+- **Lead with the development result:** the Step 9 development-effect figure (new paving → extra water → hotspots, 2025 vs 2030) as the main Phase 2 map.
+
 12.2. One headline table: Phase 1 baseline vs the Phase 2 model, under the same spatial and temporal tests.
+- Add a second table, **"Effect of development"**: the Week 4 outcome table above (ML / physics / natural experiment × big floods / frequent storms).
 12.3. Update the architecture diagram: mark each block done in Phase 1, done in Phase 2, or planned for Phase 3.
 12.4. A Phase 2 deck (reuse the Phase 1 deck builder, `15_build_review2_deck.py`) and an updated study notebook covering Phase 2.
 
 ### 13. Phase 2 write-up, limitations and the Phase 3 list
 13.1. One doc per step (as in Phase 1), plus a Phase 2 summary: what was built, the headline numbers, and what they mean.
 13.2. A **limitations note** in the same style as Phase 1 Step 11: each limitation with its measured effect.
-13.3. A **Phase 3 candidate list**: each item with the Phase 2 evidence that motivates it and a rough effort estimate. **Top candidate (from Week 3): urban flood labels.** Options: Sentinel-1 **coherence drop** and **double-bounce** detection of flooding between buildings (the skipped Step 3.4), and a list of known Kochi waterlogging spots from news and corporation reports (e.g. MG Road, Kaloor, KSRTC stand) as an independent urban check. Other likely candidates: counterfactual recommendations (if not done in 11.3), a planner / citizen dashboard, U-Net or another spatial model if the inventory grew enough, more scenarios, finer rainfall, and the full project report.
+13.3. A **Phase 3 candidate list**: each item with the Phase 2 evidence that motivates it and a rough effort estimate.
+
+**Phase 3 Work Package 1 (top priority): prove the development effect from observations.** The project title is development-aware, and Phase 2 could show the effect only by physics (Week 4 outcome). Items:
+- **(a) Urban waterlogging records for Kochi / Ernakulam:** news reports, Kochi Corporation and KSDMA complaint or incident logs, and citizen apps. Turn them into dated waterlogging points (e.g. MG Road, Kaloor, KSRTC stand, Edappally). Use them as urban labels and to validate the Step 9 frequent-storm layer directly.
+- **(b) Urban flood detection from radar:** Sentinel-1 **coherence drop** and **double-bounce** increase between buildings (the skipped Step 3.4).
+- **(c) Paddy-field and wetland loss:** map the conversion since 2017 and add the lost flood storage to the runoff model (SCS-CN ignores it, so Phase 2 probably under-estimates the lowland effect).
+- **(d) More events for the natural experiment:** the 2025–2026 monsoons (Sentinel-1C now in orbit), and frequent-storm events, not only extreme ones, to raise the detection power above the Phase 2 limit of about 0.5 pp.
+- **(e) Optional:** a simple drainage / hydraulic model for one fast-growing catchment (e.g. Kakkanad), to turn extra runoff into flood depth.
+- **Success test for WP1:** places with more modelled extra water (Step 9) show more observed waterlogging (rank correlation or DiD with CI > 0).
+
+**Title framing.** Keep "development-aware". Justify it in the report by the three things that are done:
+- UICA / ΔUICA in the model;
+- current vs post-development scenarios with a physically constrained model;
+- the physics effect size.
+
+State plainly that observational confirmation is WP1 of Phase 3. Do not claim an observed effect before WP1 shows one.
+
+Other likely candidates: counterfactual recommendations (if not done in 11.3), a planner / citizen dashboard, U-Net or another spatial model if the inventory grew enough, more scenarios, finer rainfall, and the full project report.
 13.4. Keep the report material ready to reuse: step docs, figures, and one merged numbered IEEE reference list (Review 1 [1]–[13], References 14–15, and the data/method references from the Review 2 deck).
 13.5. Prepare answers for the likely panel questions:
 - "What exactly does UICA add over imperviousness?" → the ablation C vs D: nothing with radar labels, explained by the 8b diagnosis; then C vs D on built-up land with radar + NDEM labels (9.0a).
 - "Why does your map rate the city low?" → radar label bias (0.1 % built-up positives); constrained model (9.0b); the lower-bound statement on every map.
 - "Is the development effect real or a location effect?" → the strict test, the natural experiment (10.0) and the physics effect size (9.0c), not the ML gain alone.
 - "How do you know the post-development map is realistic?" → scenario definition and its assumptions.
+- "Your title says development-aware. Where is the evidence that development increases flooding?" → physics effect size and hotspots (Step 9); the model handles development correctly (9.0b, 9.0a); the natural experiment shows no change in big floods, as the physics predicts (Step 10); observed proof for waterlogging is Phase 3 WP1.
 - "Why not U-Net?" → Step 0 of this plan, and the Phase 3 decision in 13.3.
 - "What is left for Phase 3?" → the candidate list in 13.3.
 
@@ -264,7 +305,8 @@ Recompute UICA **and the 9.0c extra runoff** for the scenario, predict again.
 | 13 | Limitations note + Phase 3 candidate list | Yes |
 | 14 | Counterfactual recommendations | Stretch (else Phase 3) |
 | 15 | Planner / citizen dashboard | No: Phase 3 candidate |
-| 15a | Urban flood labels (SAR coherence / double-bounce, waterlogging points) | No: top Phase 3 candidate |
+| 10a | Development effect: physics effect size + hotspots (done); observed effect in big floods tested (none detected) | Yes (done 26 Nov) |
+| 15a | **Observed proof of the development effect** (Phase 3 WP1): waterlogging records, urban radar detection, paddy / wetland loss, more events | No: top Phase 3 work package |
 | 16 | U-Net / spatial deep model | No: decided for Phase 3 in Step 13 |
 | 17 | Full project report | No: Phase 3 (material collected in 13.4) |
 
