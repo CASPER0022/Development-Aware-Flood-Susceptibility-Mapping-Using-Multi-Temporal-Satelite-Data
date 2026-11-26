@@ -1,0 +1,478 @@
+{
+  "step": 10,
+  "generated": "2026-11-26 14:07:51",
+  "design": {
+    "universe": "HAND <= 5.0 m floodplain",
+    "treated": "top 10 % growth",
+    "control": "bottom 25 % growth",
+    "bootstrap": "2 km blocks, 500 reps"
+  },
+  "placebo_corrected": {
+    "HAND<=5 | T1 upstream paving (UICA ratio)": {
+      "did_minus_placebo_pp": -0.047,
+      "ci95_pp": [
+        -0.706,
+        0.584
+      ],
+      "placebo_significant": true,
+      "floor_effect": false,
+      "invalid": false
+    },
+    "HAND<=5 | T2 local paving": {
+      "did_minus_placebo_pp": 1.29,
+      "ci95_pp": [
+        1.043,
+        1.596
+      ],
+      "placebo_significant": true,
+      "floor_effect": true,
+      "invalid": true
+    },
+    "HAND<=5 | T3 modelled extra water (Step 9)": {
+      "did_minus_placebo_pp": 0.192,
+      "ci95_pp": [
+        -0.175,
+        0.561
+      ],
+      "placebo_significant": false,
+      "floor_effect": false,
+      "invalid": false
+    },
+    "HAND<=10 | T1 upstream paving (UICA ratio)": {
+      "did_minus_placebo_pp": 0.072,
+      "ci95_pp": [
+        -0.22,
+        0.414
+      ],
+      "placebo_significant": false,
+      "floor_effect": false,
+      "invalid": false
+    },
+    "HAND<=10 | T2 local paving": {
+      "did_minus_placebo_pp": 0.845,
+      "ci95_pp": [
+        0.675,
+        1.031
+      ],
+      "placebo_significant": true,
+      "floor_effect": true,
+      "invalid": true
+    },
+    "HAND<=10 | T3 modelled extra water (Step 9)": {
+      "did_minus_placebo_pp": 0.068,
+      "ci95_pp": [
+        -0.113,
+        0.241
+      ],
+      "placebo_significant": false,
+      "floor_effect": false,
+      "invalid": false
+    }
+  },
+  "estimates": {
+    "HAND<=5 | D1 radar, 4 events | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.424,
+      "ci95_pp": [
+        0.073,
+        0.802
+      ],
+      "mde_pp": 0.497,
+      "ratio_of_ratios": 2.043,
+      "growth_threshold_treated": 0.03183,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.767,
+      "after_T": 0.645,
+      "before_C": 0.928,
+      "after_C": 0.382,
+      "treated_cells_matched": 78339,
+      "control_cells_matched": 266255,
+      "strata_used": 407,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=5 | D1 radar, 4 events | T2 local paving": {
+      "did_pp": 0.839,
+      "ci95_pp": [
+        0.596,
+        1.085
+      ],
+      "mde_pp": 0.352,
+      "ratio_of_ratios": 0.591,
+      "growth_threshold_treated": 0.02376,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.044,
+      "after_T": 0.014,
+      "before_C": 1.923,
+      "after_C": 1.054,
+      "treated_cells_matched": 80229,
+      "control_cells_matched": 681910,
+      "strata_used": 415,
+      "floor_effect": true,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=5 | D1 radar, 4 events | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.333,
+      "ci95_pp": [
+        0.064,
+        0.561
+      ],
+      "mde_pp": 0.353,
+      "ratio_of_ratios": 1.587,
+      "growth_threshold_treated": 7.06618,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.631,
+      "after_T": 0.453,
+      "before_C": 0.934,
+      "after_C": 0.422,
+      "treated_cells_matched": 78334,
+      "control_cells_matched": 229476,
+      "strata_used": 410,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=5 | D2 radar + NDEM, 2018 vs 2020 | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.66,
+      "ci95_pp": [
+        -0.142,
+        1.49
+      ],
+      "mde_pp": 1.124,
+      "ratio_of_ratios": 1.116,
+      "growth_threshold_treated": 0.01073,
+      "growth_threshold_control": 0.0,
+      "before_T": 5.959,
+      "after_T": 1.345,
+      "before_C": 6.611,
+      "after_C": 1.338,
+      "treated_cells_matched": 78340,
+      "control_cells_matched": 277319,
+      "strata_used": 415,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=5 | D2 radar + NDEM, 2018 vs 2020 | T2 local paving": {
+      "did_pp": 1.05,
+      "ci95_pp": [
+        0.577,
+        1.457
+      ],
+      "mde_pp": 0.639,
+      "ratio_of_ratios": 0.545,
+      "growth_threshold_treated": 0.0018,
+      "growth_threshold_control": 0.0,
+      "before_T": 5.523,
+      "after_T": 0.908,
+      "before_C": 8.115,
+      "after_C": 2.45,
+      "treated_cells_matched": 78515,
+      "control_cells_matched": 699363,
+      "strata_used": 413,
+      "floor_effect": false,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=5 | D2 radar + NDEM, 2018 vs 2020 | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.536,
+      "ci95_pp": [
+        -0.571,
+        1.511
+      ],
+      "mde_pp": 1.511,
+      "ratio_of_ratios": 1.144,
+      "growth_threshold_treated": 7.06618,
+      "growth_threshold_control": 0.0,
+      "before_T": 6.674,
+      "after_T": 1.527,
+      "before_C": 7.104,
+      "after_C": 1.421,
+      "treated_cells_matched": 78334,
+      "control_cells_matched": 229476,
+      "strata_used": 410,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=5 | P placebo, 2018 vs 2019 | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.471,
+      "ci95_pp": [
+        0.026,
+        0.994
+      ],
+      "mde_pp": 0.725,
+      "ratio_of_ratios": 1.5,
+      "growth_threshold_treated": 0.02623,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.933,
+      "after_T": 1.607,
+      "before_C": 1.368,
+      "after_C": 1.571,
+      "treated_cells_matched": 78345,
+      "control_cells_matched": 323153,
+      "strata_used": 406,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=5 | P placebo, 2018 vs 2019 | T2 local paving": {
+      "did_pp": -0.451,
+      "ci95_pp": [
+        -0.644,
+        -0.309
+      ],
+      "mde_pp": 0.246,
+      "ratio_of_ratios": 1.666,
+      "growth_threshold_treated": 0.0,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.038,
+      "after_T": 0.08,
+      "before_C": 1.743,
+      "after_C": 2.236,
+      "treated_cells_matched": 77119,
+      "control_cells_matched": 706192,
+      "strata_used": 417,
+      "floor_effect": true,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=5 | P placebo, 2018 vs 2019 | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.141,
+      "ci95_pp": [
+        -0.123,
+        0.397
+      ],
+      "mde_pp": 0.383,
+      "ratio_of_ratios": 1.37,
+      "growth_threshold_treated": 7.06618,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.48,
+      "after_T": 0.783,
+      "before_C": 0.853,
+      "after_C": 1.015,
+      "treated_cells_matched": 78334,
+      "control_cells_matched": 229476,
+      "strata_used": 410,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | D1 radar, 4 events | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.191,
+      "ci95_pp": [
+        -0.015,
+        0.447
+      ],
+      "mde_pp": 0.323,
+      "ratio_of_ratios": 1.959,
+      "growth_threshold_treated": 0.03725,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.364,
+      "after_T": 0.306,
+      "before_C": 0.436,
+      "after_C": 0.187,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 348406,
+      "strata_used": 524,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | D1 radar, 4 events | T2 local paving": {
+      "did_pp": 0.546,
+      "ci95_pp": [
+        0.386,
+        0.703
+      ],
+      "mde_pp": 0.232,
+      "ratio_of_ratios": 0.563,
+      "growth_threshold_treated": 0.04026,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.027,
+      "after_T": 0.008,
+      "before_C": 1.25,
+      "after_C": 0.686,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 882511,
+      "strata_used": 523,
+      "floor_effect": true,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=10 | D1 radar, 4 events | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.147,
+      "ci95_pp": [
+        0.024,
+        0.257
+      ],
+      "mde_pp": 0.172,
+      "ratio_of_ratios": 1.485,
+      "growth_threshold_treated": 8.35607,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.282,
+      "after_T": 0.195,
+      "before_C": 0.437,
+      "after_C": 0.203,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 301200,
+      "strata_used": 525,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | D2 radar + NDEM, 2018 vs 2020 | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.486,
+      "ci95_pp": [
+        -0.215,
+        1.14
+      ],
+      "mde_pp": 0.958,
+      "ratio_of_ratios": 1.107,
+      "growth_threshold_treated": 0.01232,
+      "growth_threshold_control": 0.0,
+      "before_T": 5.401,
+      "after_T": 1.036,
+      "before_C": 5.869,
+      "after_C": 1.016,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 370550,
+      "strata_used": 524,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | D2 radar + NDEM, 2018 vs 2020 | T2 local paving": {
+      "did_pp": 0.812,
+      "ci95_pp": [
+        0.423,
+        1.145
+      ],
+      "mde_pp": 0.545,
+      "ratio_of_ratios": 0.589,
+      "growth_threshold_treated": 0.0066,
+      "growth_threshold_control": 0.0,
+      "before_T": 5.21,
+      "after_T": 0.802,
+      "before_C": 7.069,
+      "after_C": 1.848,
+      "treated_cells_matched": 103237,
+      "control_cells_matched": 913162,
+      "strata_used": 524,
+      "floor_effect": false,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=10 | D2 radar + NDEM, 2018 vs 2020 | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.144,
+      "ci95_pp": [
+        -0.717,
+        0.948
+      ],
+      "mde_pp": 1.214,
+      "ratio_of_ratios": 1.093,
+      "growth_threshold_treated": 8.35607,
+      "growth_threshold_control": 0.0,
+      "before_T": 5.979,
+      "after_T": 1.058,
+      "before_C": 6.044,
+      "after_C": 0.978,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 301200,
+      "strata_used": 525,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | P placebo, 2018 vs 2019 | T1 upstream paving (UICA ratio)": {
+      "did_pp": 0.119,
+      "ci95_pp": [
+        -0.05,
+        0.313
+      ],
+      "mde_pp": 0.266,
+      "ratio_of_ratios": 1.337,
+      "growth_threshold_treated": 0.03071,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.395,
+      "after_T": 0.619,
+      "before_C": 0.608,
+      "after_C": 0.713,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 422895,
+      "strata_used": 524,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    },
+    "HAND<=10 | P placebo, 2018 vs 2019 | T2 local paving": {
+      "did_pp": -0.299,
+      "ci95_pp": [
+        -0.424,
+        -0.205
+      ],
+      "mde_pp": 0.161,
+      "ratio_of_ratios": 1.712,
+      "growth_threshold_treated": 0.02376,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.023,
+      "after_T": 0.051,
+      "before_C": 1.147,
+      "after_C": 1.474,
+      "treated_cells_matched": 108016,
+      "control_cells_matched": 916135,
+      "strata_used": 524,
+      "floor_effect": true,
+      "ratio_disagrees": true,
+      "invalid": true
+    },
+    "HAND<=10 | P placebo, 2018 vs 2019 | T3 modelled extra water (Step 9)": {
+      "did_pp": 0.079,
+      "ci95_pp": [
+        -0.063,
+        0.235
+      ],
+      "mde_pp": 0.213,
+      "ratio_of_ratios": 1.465,
+      "growth_threshold_treated": 8.35607,
+      "growth_threshold_control": 0.0,
+      "before_T": 0.207,
+      "after_T": 0.356,
+      "before_C": 0.402,
+      "after_C": 0.472,
+      "treated_cells_matched": 103231,
+      "control_cells_matched": 301200,
+      "strata_used": 525,
+      "floor_effect": false,
+      "ratio_disagrees": false,
+      "invalid": false
+    }
+  },
+  "universe_cells": {
+    "HAND<=5": 783489,
+    "HAND<=10": 1032302
+  },
+  "n_blocks": 401,
+  "temporal_holdout_summary": {
+    "phase1_2019_check (Phase 1 Step 10, Otsu flood vs all land)": 0.83,
+    "phase1_model_temporal_2020_2024 (flood vs all land)": [
+      0.9877,
+      0.989
+    ],
+    "phase1_model_strict_2020_2024": [
+      0.9491,
+      0.9536
+    ],
+    "phase2_chosen_pu_bagging_C_temporal_2020_2024": [
+      0.9916,
+      0.9929
+    ],
+    "phase2_chosen_pu_bagging_C_strict_2020_2024": [
+      0.9846,
+      0.9849
+    ],
+    "phase2_scenario_model_strict_2020_vs_radar_plus_ndem": 0.8644
+  },
+  "runtime_s": 457.5
+}
