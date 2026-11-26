@@ -1,0 +1,71 @@
+{
+  "phase1_vs_phase2": [
+    [
+      "Test",
+      "Phase 1 model",
+      "Phase 2 model"
+    ],
+    [
+      "Random 70/30 split (Phase 1 protocol)",
+      "0.999",
+      "0.999"
+    ],
+    [
+      "Unseen 10 km regions (4 events)",
+      "0.962",
+      "0.992"
+    ],
+    [
+      "New year (2020 / 2024), flood vs all land",
+      "0.988 / 0.989",
+      "0.992 / 0.993"
+    ],
+    [
+      "New year + new place (strict), flood vs all land",
+      "0.949 / 0.954",
+      "0.985 / 0.985"
+    ]
+  ],
+  "effect_of_development": [
+    [
+      "Evidence",
+      "Big riverine floods",
+      "Frequent storms / waterlogging"
+    ],
+    [
+      "ML, radar labels (Step 8)",
+      "UICA adds -0.0002 AUC",
+      "not observable"
+    ],
+    [
+      "ML, radar + NDEM labels (9.0a)",
+      "paved land: +0.037 AUC (CI > 0, one test year)",
+      "not observable"
+    ],
+    [
+      "SHAP share of development (11)",
+      "5.3 % (chosen model)",
+      "\u2013"
+    ],
+    [
+      "Physics, SCS-CN (9.0c, 9)",
+      "+0.17 % runoff (monsoon storm)",
+      "+1.4 % runoff; hotspots 113 \u2192 190 km\u00b2"
+    ],
+    [
+      "Natural experiment (10)",
+      "no effect: -0.05 pp [-0.71, +0.58]",
+      "not testable"
+    ],
+    [
+      "Reported waterlogging spots (10b)",
+      "\u2013",
+      "UICA ratio 57th pct of urban land (11/15 above; not significant)"
+    ]
+  ],
+  "map_agreement_phase1_phase2": {
+    "same_class": 0.5301,
+    "within_one_class": 0.9152
+  },
+  "riverine_up_a_class_2025_to_2030": 0.00068
+}
