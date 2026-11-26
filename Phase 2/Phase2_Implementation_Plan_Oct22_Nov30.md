@@ -313,3 +313,22 @@ Other likely candidates: counterfactual recommendations (if not done in 11.3), a
 ---
 
 **Reminder:** send updates after each checkpoint, not just at the end. A noisy land-cover series caught in Week 1 costs an afternoon; caught in Week 4, it invalidates UICA, the ablation and the dual maps.
+
+---
+
+## Phase 2 completion status (26 Nov 2026)
+
+| # | Deliverable | Status | Where |
+|---|---|---|---|
+| 1–4 | Paving record, flood inventory, UICA, feature stack v2 | Done | `docs/step2`–`step5*` |
+| 5–8 | Fair testing, PU-learning, A–D ablation, calibrated model | Done | `docs/step6`–`step8*` |
+| 8a | Development blind spot: NDEM labels, monotone scenario model, SCS-CN effect size | Done | `docs/step9a`–`step9c*` |
+| 9 | Current, post-development and Δ maps; hotspots | Done | `docs/step9_dual_prediction.md` |
+| 10 | Natural experiment + temporal summary; 10b waterlogging check | Done | `docs/step10*.md` |
+| 11 | SHAP | Done | `docs/step11_shap.md` |
+| 12 | Final maps, tables, architecture, deck, study notebook | Done | `docs/step12_final_outputs.md`, `outputs/presentation/` |
+| 13 | Summary, limitations, Phase 3 list, report material, panel answers | Done | `docs/phase2_summary.md`, `phase2_limitations.md`, `phase3_candidates.md`, `report_material.md`, `panel_answers_phase2.md` |
+| 14 | Counterfactual recommendations | Not done → Phase 3 | `docs/phase3_candidates.md` |
+| 15a | Observed proof of the development effect | Phase 3 WP1 | `docs/phase3_candidates.md` |
+
+**[CHECKPOINT — END OF PHASE 2] reached on 26 Nov**, ahead of the 28 Nov target. Open items for the guide: accept the 9.0b accuracy cost (0.011 vs 0.01), and agree the Phase 3 Work Package 1 scope.

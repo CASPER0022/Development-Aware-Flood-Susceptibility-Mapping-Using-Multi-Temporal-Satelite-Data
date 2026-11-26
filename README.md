@@ -65,8 +65,21 @@ BTP/
 │       └── models/                         # Trained model artifacts (.pkl, .txt)
 │
 └── Phase 2/                                # Phase 2: development-aware model (UICA/ΔUICA, PU-learning, dual prediction), Oct 22 – Nov 30
-    └── Phase2_Implementation_Plan_Oct22_Nov30.md # Phase 2 step-by-step plan with checkpoints (Phase 3 follows)
+    ├── Phase2_Implementation_Plan_Oct22_Nov30.md # Phase 2 step-by-step plan with checkpoints (Phase 3 follows)
+    ├── scripts/                            # 01–12: one script per step + common.py (shared code)
+    ├── docs/                               # one doc per step, week 1–4 explanations (md + pdf),
+    │                                       # phase2_summary.md, phase2_limitations.md, phase3_candidates.md,
+    │                                       # report_material.md (merged references), panel_answers_phase2.md
+    ├── outputs/maps/                       # step figures; step12_* = final report maps
+    ├── outputs/metrics/                    # numbers (JSON) behind every result
+    ├── outputs/models/                     # trained LightGBM models (incl. the scenario model)
+    ├── outputs/presentation/               # Phase 2 deck (.pptx) and study notebook (.html)
+    ├── data/raw/waterlogging/              # reported Kochi waterlogging spots with sources
+    └── tools/                              # study-notebook builder
 ```
+
+### Phase 2 in one paragraph
+On a strict new-year-and-new-place test, flood prediction improves from 0.949 / 0.954 (Phase 1 model) to 0.985 / 0.985. Development hardly changes the big monsoon floods (+0.2 % runoff; no change in observed floods). In frequent storms, however, it already sends at least 5 % more water to about a fifth of the study area; flood-prone land receiving more water grows from 113 km² (2025) to 190 km² (2030 trend), mostly from paving upstream (UICA). Fifteen reported waterlogging spots give a first, not yet significant, observed hint. Details: `Phase 2/docs/phase2_summary.md`.
 
 ---
 
